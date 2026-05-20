@@ -1,28 +1,24 @@
 # py -m doctest -v examples.rst
-from greek_inflexion import GreekInflexion
-from yaml import load
-try:
-    from yaml import CLoader as Loader
-except ImportError:
-    from yaml import Loader
+import yaml
+from greek_inflexion_eee.fileformat import load_default
 
-inflexion = GreekInflexion('stemming.yaml', 'STEM_DATA/pratt_lexicon.yaml')
+_inflexion = None
+
+
+def _get_inflexion():
+    global _inflexion
+    if _inflexion is None:
+        _inflexion = load_default()
+    return _inflexion
 
 
 def rotate_lists(xs):
-    len_x0 = len(xs[0])
-    for x in xs:
-        assert len(x) == len_x0
-    out = []
-    for i in range(0, len(xs[0])):
-        out.append([x[i] for x in xs])
-    return out
+    return [list(row) for row in zip(*xs)]
 
 
 def load_labels(fpath, lang):
     with open(fpath, 'r', encoding="UTF-8") as f:
-        labels = load(f, Loader=Loader)
-        return labels[lang]
+        return yaml.safe_load(f)[lang]
 
 
 def layout_merged_imp_paradigm_md(verbs, TVMs, labels):
@@ -109,8 +105,6 @@ def layout_participle_summary_paradigm_md(forms, label, labels):
               f' {labels["masc"]} ',
               f' {labels["fem"]} ',
               f' {labels["neut"]} ']
-    cases = [f' {labels["nom"]} ',
-             f' {labels["gen"]} '] * 2
     row1 = forms[0:3]
     row2 = forms[3:]
     row1.insert(0, f' {labels["nom"]} ')
@@ -119,7 +113,7 @@ def layout_participle_summary_paradigm_md(forms, label, labels):
     row2.insert(0, f' ')
     rows = [row1, row2]
     tcontent = f'| {"|".join(header)} |\n'
-    tcontent += f'|:-----|:-----|:-----|:-----|:-----|\n'
+    tcontent += '|:-----|:-----|:-----|:-----|:-----|\n'
     tcontent += "\n".join([f'| {"|".join(x)} |' for x in rows])
     print(tcontent)
     print()
@@ -127,7 +121,7 @@ def layout_participle_summary_paradigm_md(forms, label, labels):
 
 def conjugate_md(lemma, *TVMs, tags=None, labels="labels.yaml", lang="el", merge_paradigms=True):
     labels = load_labels(labels, lang)
-    forms = inflexion.conjugate_core(lemma, *TVMs, tags=tags)
+    forms = _get_inflexion().conjugate_core(lemma, *TVMs, tags=tags)
     # participles can't be merged with other verb paradigms
     verbs = [(fs[0], list(fs[1].values())) for fs in forms if fs[0][2] in "SOI"]
     imps = [(fs[0], list(fs[1].values())) for fs in forms if fs[0][2] == "D"]
@@ -224,8 +218,6 @@ def layout_participle_summary_paradigm_html(forms, label, labels):
               f'<td class="para-header-cell">{labels["masc"]}</td>',
               f'<td class="para-header-cell">{labels["fem"]}</td>',
               f'<td class="para-header-cell">{labels["neut"]}</td>']
-    cases = [f'<td class="para-row-label">{labels["nom"]}</td>',
-             f'<td class="para-row-label">{labels["gen"]}</td>'] * 2
     row1 = forms[0:3]
     row2 = forms[3:]
     row1.insert(0, f'<td class="para-row-label">{labels["nom"]}</td>')
@@ -274,7 +266,7 @@ def layout_non_merged_verb_paradigm_html(verbs, tvm, labels):
 
 def conjugate_html(lemma, *TVMs, tags=None, labels="labels.yaml", lang="el", merge_paradigms=True):
     labels = load_labels(labels, lang)
-    forms = inflexion.conjugate_core(lemma, *TVMs, tags=tags)
+    forms = _get_inflexion().conjugate_core(lemma, *TVMs, tags=tags)
     # participles can't be merged with other verb paradigms
     verbs = [(fs[0], list(fs[1].values())) for fs in forms if fs[0][2] in "IOS"]
     imps = [(fs[0], list(fs[1].values())) for fs in forms if fs[0][2] == "D"]
@@ -332,7 +324,7 @@ def layout_nouny_paradigm_md(forms, labels):
 
 def decline_md(lemma, TVM, tags=None, labels="labels.yaml", lang="el"):
     labels = load_labels(labels, lang)
-    forms = [list(x.values()) for x in inflexion.decline_core(lemma, TVM, tags=tags)]
+    forms = [list(x.values()) for x in _get_inflexion().decline_core(lemma, TVM, tags=tags)]
     layout_nouny_paradigm_md(forms, labels)
 
 
@@ -361,5 +353,5 @@ def layout_nouny_paradigm_html(forms, labels):
 
 def decline_html(lemma, TVM, tags=None, labels="labels.yaml", lang="el"):
     labels = load_labels(labels, lang)
-    forms = [list(x.values()) for x in inflexion.decline_core(lemma, TVM, tags=tags)]
+    forms = [list(x.values()) for x in _get_inflexion().decline_core(lemma, TVM, tags=tags)]
     layout_nouny_paradigm_html(forms, labels)

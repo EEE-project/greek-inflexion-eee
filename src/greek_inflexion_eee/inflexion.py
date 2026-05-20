@@ -4,8 +4,8 @@ import re
 from inflexion import Inflexion
 from inflexion.lexicon import Lexicon
 
-from accent import calculate_accent, strip_accents, debreath, rebreath
-from fileformat import load_stemming, load_lexicon
+from greek_inflexion_eee.accent import calculate_accent, strip_accents, debreath, rebreath
+from greek_inflexion_eee.fileformat import load_stemming, load_lexicon
 
 
 class GreekInflexion:
@@ -43,15 +43,15 @@ class GreekInflexion:
                 for override in overrides
             }
         generated = defaultdict(list)
+        segmented_lemma = self.segmented_lemmas.get(lemma)
         for orig_form, details in self.inflexion.generate(
                 lemma, key, tags).items():
             for detail in details:
-                segmented_lemma = self.segmented_lemmas.get(lemma)
                 accent_form, accent_notes = calculate_accent(
                     orig_form, key, lemma, segmented_lemma, detail["stem"],
                     self.inflexion, self.accent_override)
-                detail.update({"original_form": orig_form})
-                detail.update({"accent_notes": accent_notes})
+                detail["original_form"] = orig_form
+                detail["accent_notes"] = accent_notes
                 generated[accent_form].append(detail)
         return generated
 

@@ -3,3 +3,8 @@ __pycache__/
 .coverage
 htmlcov/
 *.pyc
+.venv/
+*.egg-info/
+dist/
+.pytest_cache/
+CLAUDE.md
