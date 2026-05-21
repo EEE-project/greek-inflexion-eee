@@ -167,6 +167,17 @@
     stem_overrides:
       - ["AAD.2S", "λαβ{2nd}{enclitic}"]
 
+λέγω:
+    stems:
+        1-: λεγ
+        1+: ἐλεγ
+    forms:
+        FAI.1S: ἐρῶ
+        AAI.1S: εἶπον
+        XAI.1S: εἴρηκα
+        XMI.1S: εἴρημαι
+        API.1S: ἐλέχθην
+
 λύω:
     stems:
         1-: λῡ
