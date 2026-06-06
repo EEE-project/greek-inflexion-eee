@@ -78,5 +78,5 @@ lexica) are the work of James Tauber and contributors; see [AUTHORS](AUTHORS) an
 [LICENSE](LICENSE).
 
 This fork is maintained by
-[Ελληνικά Εκπαιδευτικά Εργαλεία (EEE)](https://codeberg.org/eee) —
+[Ελληνικά Εκπαιδευτικά Εργαλεία (EEE)](https://codeberg.org/EEE-project) —
 Greek Language Educational Tools.
