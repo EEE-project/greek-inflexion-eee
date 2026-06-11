@@ -14,15 +14,32 @@ for the upstream documentation.
 - **Installable package** — `src/` layout; data files bundled via `importlib.resources`
   so the library works correctly when installed (not just run from the source directory).
 
-- **Factory functions** — three ready-to-use entry points that load the bundled Pratt lexica:
+- **Factory functions** — ready-to-use entry points:
 
   ```python
-  from greek_inflexion_eee import load_default, load_noun_default, load_adj_default
+  from greek_inflexion_eee import load_default, load_noun_default, load_adj_default, load_lexicons
 
-  gi = load_default()          # verb inflection
-  gi = load_noun_default()     # noun inflection
-  gi = load_adj_default()      # adjective inflection
+  gi = load_default()                          # verb inflection (Pratt lexicon)
+  gi = load_noun_default()                     # noun inflection
+  gi = load_adj_default()                      # adjective inflection
+  gi = load_lexicons("homer")                  # verb inflection — Homeric corpus
+  gi = load_lexicons(["homer", "lxx"])         # merge two corpora
+  gi = load_lexicons(["pratt", "/my.yaml"])    # Pratt + custom file
   ```
+
+- **Bundled corpus lexicons** — six named verb lexicons covering different periods and authors:
+
+  | Name | Verbs | Source | Period / dialect |
+  |------|------:|--------|-----------------|
+  | `"pratt"` | 20 | Pratt textbook | teaching |
+  | `"dik"` | 10 | Dik textbook | teaching |
+  | `"ltrg"` | 34 | LTRG textbook | teaching |
+  | `"homer"` | 2335 | Homeric corpus | Epic/Ionic, ~800 BCE |
+  | `"lxx"` | 1905 | Septuagint | Biblical κοινή, ~250–100 BCE |
+  | `"morphgnt"` | 1848 | New Testament | κοινή, ~1st c. CE |
+
+  Combined unique coverage: ~5055 verbs. Custom YAML files (same format) are also
+  accepted as absolute paths.
 
 - **Adjective morphology** — `adj_stemming.yaml` + `pratt_adj_lexicon.yaml` covering
   2-1-2 uncontracted/contracted, two-termination, 3-1-3 participial and υ-stem,
@@ -49,24 +66,33 @@ pip install -e .
 ## Quick start
 
 ```python
-from greek_inflexion_eee import load_default, load_noun_default, load_adj_default
+from greek_inflexion_eee import load_default, load_noun_default, load_adj_default, load_lexicons
 
-# Verbs
+# Verbs — Pratt lexicon (20 verbs, teaching vocabulary)
 gi = load_default()
-gi.generate("λύω", "AAN")       # {'λῦσαι': [...]}
+gi.generate("λύω", "AAN")           # {'λῦσαι': [...]}
+
+# Verbs — corpus lexicon by name
+gi = load_lexicons("homer")
+gi.generate("λέγω", "PAD.2S")       # {'λέγε'}
+gi.generate("ἀκούω", "PAD.2S")      # {'ἄκουε'}
+
+# Verbs — merge corpora
+gi = load_lexicons(["homer", "lxx"])
+gi.generate("παύω", "PAD.2P")       # {'παύετε'}
 
 # Nouns (bundled lexicon covers Pratt paradigm words)
 gi = load_noun_default()
-gi.generate("θεός", "NSM")      # {'θεός': [...]}
-gi.generate("θεός", "GSM")      # {'θεοῦ': [...]}
-gi.generate("σοφία", "NSF")     # {'σοφία': [...]}
-gi.generate("βασιλεύς", "NSM")  # {'βασιλεύς': [...]}
+gi.generate("θεός", "NSM")          # {'θεός': [...]}
+gi.generate("θεός", "GSM")          # {'θεοῦ': [...]}
+gi.generate("σοφία", "NSF")         # {'σοφία': [...]}
+gi.generate("βασιλεύς", "NSM")      # {'βασιλεύς': [...]}
 
 # Adjectives
 gi = load_adj_default()
-gi.generate("ἀγαθός", "NSM")    # {'ἀγαθός': [...]}
-gi.generate("ἀγαθός", "NSF")    # {'ἀγαθή': [...]}
-gi.generate("ἀγαθός", "NSN")    # {'ἀγαθόν': [...]}
+gi.generate("ἀγαθός", "NSM")        # {'ἀγαθός': [...]}
+gi.generate("ἀγαθός", "NSF")        # {'ἀγαθή': [...]}
+gi.generate("ἀγαθός", "NSN")        # {'ἀγαθόν': [...]}
 ```
 
 

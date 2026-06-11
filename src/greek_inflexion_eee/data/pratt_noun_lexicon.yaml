@@ -20,6 +20,21 @@
     stems:
         noun: νεανία
 
+λόγος:
+    stems:
+        noun: λογο
+
+ψυχή:
+    stems:
+        noun: ψυχη
+
+σῶμα:
+    stems:
+        noun: σωματ
+    forms:
+        NSN: σῶμα
+        ASN: σῶμα
+
 θεός:
     stems:
         noun: θεο

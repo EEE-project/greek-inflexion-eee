@@ -6,6 +6,7 @@ Lexicon (with form and accent overrides)
 
 from __future__ import annotations
 
+import os
 from collections import defaultdict
 from importlib.resources import files
 from typing import TYPE_CHECKING
@@ -22,6 +23,16 @@ if TYPE_CHECKING:
     from greek_inflexion_eee.inflexion import GreekInflexion
 
 _DATA_PKG = "greek_inflexion_eee.data"
+
+# Named verb lexicons bundled with the package
+_VERB_LEXICONS: dict[str, str] = {
+    "pratt":    "pratt_lexicon.yaml",
+    "dik":      "dik_lexicon.yaml",
+    "ltrg":     "ltrg_lexicon.yaml",
+    "homer":    "homer_lexicon.yaml",
+    "lxx":      "lxx_lexicon.yaml",
+    "morphgnt": "morphgnt_lexicon.yaml",
+}
 
 _PARTNUM_TO_KEY_REGEX = {
     "1-": "P",
@@ -143,6 +154,16 @@ def _load_stemming_resource(
     return _populate_stemming(stemming_dict, ruleset, strip_length_flag)
 
 
+def _load_lexicon_yaml(filename: str) -> dict:
+    """Load a lexicon YAML from a package resource or an absolute file path."""
+    if os.path.isabs(filename):
+        with open(filename, encoding="utf-8") as fh:
+            return yaml.safe_load(fh)
+    resource = files(_DATA_PKG) / filename
+    with resource.open("r", encoding="utf-8") as fh:
+        return yaml.safe_load(fh)
+
+
 def _load_lexicon_resource(
     filename: str,
     pre_processor=lambda x: x,
@@ -152,28 +173,36 @@ def _load_lexicon_resource(
     form_override = {}
     accent_override = defaultdict(list)
     segmented_lemmas = {}
-    resource = files(_DATA_PKG) / filename
-    with resource.open("r", encoding="utf-8") as f:
-        data = yaml.safe_load(f)
+    data = _load_lexicon_yaml(filename)
     _populate_lexicon(data, lexicon, form_override, accent_override,
                       segmented_lemmas, pre_processor)
     return lexicon, form_override, accent_override, segmented_lemmas
 
 
 def _make_gi(
-    stemming_files: str | list[str], lexicon_file: str
+    stemming_files: "str | list[str]", lexicon_files: "str | list[str]"
 ) -> "GreekInflexion":
     from greek_inflexion_eee.accent import debreath
     from greek_inflexion_eee.inflexion import GreekInflexion
 
     if isinstance(stemming_files, str):
         stemming_files = [stemming_files]
+    if isinstance(lexicon_files, str):
+        lexicon_files = [lexicon_files]
+
     ruleset = None
     for f in stemming_files:
         ruleset = _load_stemming_resource(f, ruleset=ruleset)
 
-    lexicon, form_override, accent_override, segmented_lemmas = \
-        _load_lexicon_resource(lexicon_file, pre_processor=debreath)
+    lexicon = Lexicon()
+    form_override: dict = {}
+    accent_override: defaultdict = defaultdict(list)
+    segmented_lemmas: dict = {}
+
+    for lex in lexicon_files:
+        data = _load_lexicon_yaml(lex)
+        _populate_lexicon(data, lexicon, form_override, accent_override,
+                          segmented_lemmas, debreath)
 
     gi = object.__new__(GreekInflexion)
     gi.ruleset = ruleset
@@ -214,3 +243,34 @@ def load_adj_default() -> "GreekInflexion":
     Loads noun_stemming.yaml + adj_stemming.yaml (merged) + pratt_adj_lexicon.yaml.
     """
     return _make_gi(["noun_stemming.yaml", "adj_stemming.yaml"], "pratt_adj_lexicon.yaml")
+
+
+def load_lexicons(names: "str | list[str]") -> "GreekInflexion":
+    """Return a GreekInflexion for verb inflection using one or more lexicons merged.
+
+    Args:
+        names: a lexicon name or list of names / absolute file paths.
+
+    Named lexicons (corpus / period)::
+
+        "pratt"    — Pratt textbook verbs (~20 verbs, teaching)
+        "dik"      — Dik textbook verbs (~10 verbs, teaching)
+        "ltrg"     — LTRG textbook verbs (~34 verbs, teaching)
+        "homer"    — Homeric corpus, Epic/Ionic, ~800 BCE (~2335 verbs)
+        "lxx"      — Septuagint, Biblical koine, ~250–100 BCE (~1905 verbs)
+        "morphgnt" — New Testament, koine, ~1st c. CE (~1848 verbs)
+
+    Absolute file paths load custom YAML lexicon files in the same format.
+    Multiple names are merged additively; later entries add new stems without
+    removing existing ones.
+
+    Examples::
+
+        load_lexicons("homer")
+        load_lexicons(["homer", "lxx"])
+        load_lexicons(["pratt", "/path/to/my_course.yaml"])
+    """
+    if isinstance(names, str):
+        names = [names]
+    filenames = [_VERB_LEXICONS.get(n, n) for n in names]
+    return _make_gi("stemming.yaml", filenames)
