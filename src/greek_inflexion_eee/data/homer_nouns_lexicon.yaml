@@ -1,0 +1,103 @@
+# Homeric noun vocabulary for the Odyssey/Iliad word drill.
+# Fixes: 15 lemmas that appeared in Odyssey IX vocabulary but produced
+# no inflected forms from the Pratt-only base lexicon.
+
+# 2nd declension masculine
+θάνατος:
+    stems:
+        noun: θανατο
+
+μόρος:
+    stems:
+        noun: μορο
+
+ἄνεμος:
+    stems:
+        noun: ανεμο
+
+ἑταῖρος:
+    stems:
+        noun: ἑταιρο
+
+# 2nd declension feminine
+νῆσος:
+    stems:
+        noun: νησο
+
+ἤπειρος:
+    stems:
+        noun: ηπειρο
+
+# 1st declension feminine η-stem (paroxytone — override accent for nom/gen/acc/pl)
+μάχη:
+    stems:
+        noun: μαχη
+    forms:
+        NSF: μάχη
+        GSF: μάχης
+        ASF: μάχην
+        NPF: μάχαι
+        APF: μάχας
+
+# 2nd declension neuter
+μῆλον:
+    stems:
+        noun: μηλο
+
+φύλλον:
+    stems:
+        noun: φυλλο
+
+# 1st declension feminine α-stem
+αἶσα:
+    stems:
+        noun: αισα
+
+# 3rd declension neuter σ-stem
+ἄλγος:
+    stems:
+        noun: αλγεσ
+
+ἄνθος:
+    stems:
+        noun: ανθεσ
+
+# 3rd declension neuter τ-stem
+κτῆμα:
+    stems:
+        noun: κτηματ
+    forms:
+        NSN: κτῆμα
+        ASN: κτῆμα
+
+# 3rd declension ν-stem masculine (no matching stemming rule; all forms explicit)
+γείτων:
+    forms:
+        NSM: γείτων
+        GSM: γείτονος
+        DSM: γείτονι
+        ASM: γείτονα
+        NPM: γείτονες
+        GPM: γειτόνων
+        DPM: γείτοσι(ν)
+        APM: γείτονας
+
+# Highly irregular (athematic; all forms explicit)
+βοῦς:
+    forms:
+        NSM: βοῦς
+        GSM: βοός
+        DSM: βοΐ
+        ASM: βοῦν
+        NSF: βοῦς
+        GSF: βοός
+        DSF: βοΐ
+        ASF: βοῦν
+        NPM: βόες
+        GPM: βοῶν
+        DPM: βουσί(ν)
+        APM: βοῦς
+        NPF: βόες
+        GPF: βοῶν
+        DPF: βουσί(ν)
+        APF: βοῦς

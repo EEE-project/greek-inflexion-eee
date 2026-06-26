@@ -26,12 +26,23 @@ _DATA_PKG = "greek_inflexion_eee.data"
 
 # Named verb lexicons bundled with the package
 _VERB_LEXICONS: dict[str, str] = {
-    "pratt":    "pratt_lexicon.yaml",
-    "dik":      "dik_lexicon.yaml",
-    "ltrg":     "ltrg_lexicon.yaml",
-    "homer":    "homer_lexicon.yaml",
-    "lxx":      "lxx_lexicon.yaml",
-    "morphgnt": "morphgnt_lexicon.yaml",
+    "pratt":    "pratt_verbs_lexicon.yaml",
+    "dik":      "dik_verbs_lexicon.yaml",
+    "ltrg":     "ltrg_verbs_lexicon.yaml",
+    "homer":    "homer_verbs_lexicon.yaml",
+    "lxx":      "lxx_verbs_lexicon.yaml",
+    "morphgnt": "morphgnt_verbs_lexicon.yaml",
+}
+
+# Named noun lexicons bundled with the package
+_NOUN_LEXICONS: dict[str, str] = {
+    "pratt": "pratt_nouns_lexicon.yaml",
+    "homer": "homer_nouns_lexicon.yaml",
+}
+
+# Named adjective lexicons bundled with the package
+_ADJ_LEXICONS: dict[str, str] = {
+    "pratt": "pratt_adjs_lexicon.yaml",
 }
 
 _PARTNUM_TO_KEY_REGEX = {
@@ -219,30 +230,30 @@ def _make_gi(
 def load_default() -> "GreekInflexion":
     """Return a GreekInflexion for verb inflection, loaded with the bundled Pratt lexicon.
 
-    Loads stemming.yaml + pratt_lexicon.yaml from the bundled data directory
+    Loads stemming.yaml + pratt_verbs_lexicon.yaml from the bundled data directory
     via importlib.resources.
 
     Cold-start cost is tenths of a second (YAML parsing). Cache externally
     if calling frequently.
     """
-    return _make_gi("stemming.yaml", "pratt_lexicon.yaml")
+    return _make_gi("stemming.yaml", "pratt_verbs_lexicon.yaml")
 
 
 def load_noun_default() -> "GreekInflexion":
     """Return a GreekInflexion for noun inflection, loaded with the bundled Pratt noun lexicon.
 
-    Loads noun_stemming.yaml + pratt_noun_lexicon.yaml from the bundled data
+    Loads noun_stemming.yaml + pratt_nouns_lexicon.yaml from the bundled data
     directory via importlib.resources.
     """
-    return _make_gi("noun_stemming.yaml", "pratt_noun_lexicon.yaml")
+    return _make_gi("noun_stemming.yaml", "pratt_nouns_lexicon.yaml")
 
 
 def load_adj_default() -> "GreekInflexion":
     """Return a GreekInflexion for adjective inflection, loaded with the bundled Pratt adj lexicon.
 
-    Loads noun_stemming.yaml + adj_stemming.yaml (merged) + pratt_adj_lexicon.yaml.
+    Loads noun_stemming.yaml + adj_stemming.yaml (merged) + pratt_adjs_lexicon.yaml.
     """
-    return _make_gi(["noun_stemming.yaml", "adj_stemming.yaml"], "pratt_adj_lexicon.yaml")
+    return _make_gi(["noun_stemming.yaml", "adj_stemming.yaml"], "pratt_adjs_lexicon.yaml")
 
 
 def load_lexicons(names: "str | list[str]") -> "GreekInflexion":
@@ -274,3 +285,67 @@ def load_lexicons(names: "str | list[str]") -> "GreekInflexion":
         names = [names]
     filenames = [_VERB_LEXICONS.get(n, n) for n in names]
     return _make_gi("stemming.yaml", filenames)
+
+
+def _load_pos_lexicons(
+    stemming_yaml: "str | list[str]",
+    lexicon_map: "dict[str, str]",
+    default_file: str,
+    names: "str | list[str]",
+) -> "GreekInflexion":
+    if isinstance(names, str):
+        names = [names]
+    filenames = [default_file]
+    for n in names:
+        fname = lexicon_map.get(n)
+        if fname and fname not in filenames:
+            filenames.append(fname)
+    return _make_gi(stemming_yaml, filenames)
+
+
+def load_noun_lexicons(names: "str | list[str]") -> "GreekInflexion":
+    """Return a GreekInflexion for noun inflection using one or more lexicons merged.
+
+    Always includes the Pratt base noun lexicon. Additional named lexicons
+    are merged additively when available.
+
+    Args:
+        names: a lexicon name or list of names. Unknown names are silently skipped.
+
+    Named lexicons::
+
+        "pratt" — Pratt teaching nouns (~26 nouns)
+        "homer" — Homeric corpus nouns (~15 nouns, Odyssey/Iliad vocabulary)
+
+    Examples::
+
+        load_noun_lexicons("homer")
+        load_noun_lexicons(["homer", "lxx"])
+    """
+    return _load_pos_lexicons("noun_stemming.yaml", _NOUN_LEXICONS, "pratt_nouns_lexicon.yaml", names)
+
+
+def load_adj_lexicons(names: "str | list[str]") -> "GreekInflexion":
+    """Return a GreekInflexion for adjective inflection using one or more lexicons merged.
+
+    Always includes the Pratt base adjective lexicon. Additional named lexicons
+    are merged additively when available.
+
+    Args:
+        names: a lexicon name or list of names. Unknown names are silently skipped.
+
+    Named lexicons::
+
+        "pratt" — Pratt teaching adjectives
+
+    Examples::
+
+        load_adj_lexicons("pratt")
+        load_adj_lexicons(["pratt"])
+    """
+    return _load_pos_lexicons(
+        ["noun_stemming.yaml", "adj_stemming.yaml"],
+        _ADJ_LEXICONS,
+        "pratt_adjs_lexicon.yaml",
+        names,
+    )

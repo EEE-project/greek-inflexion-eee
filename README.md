@@ -17,17 +17,25 @@ for the upstream documentation.
 - **Factory functions** — ready-to-use entry points:
 
   ```python
-  from greek_inflexion_eee import load_default, load_noun_default, load_adj_default, load_lexicons
+  from greek_inflexion_eee import (
+      load_default, load_noun_default, load_adj_default,
+      load_lexicons, load_noun_lexicons, load_adj_lexicons,
+  )
 
   gi = load_default()                          # verb inflection (Pratt lexicon)
-  gi = load_noun_default()                     # noun inflection
-  gi = load_adj_default()                      # adjective inflection
+  gi = load_noun_default()                     # noun inflection (Pratt lexicon)
+  gi = load_adj_default()                      # adjective inflection (Pratt lexicon)
   gi = load_lexicons("homer")                  # verb inflection — Homeric corpus
   gi = load_lexicons(["homer", "lxx"])         # merge two corpora
   gi = load_lexicons(["pratt", "/my.yaml"])    # Pratt + custom file
+  gi = load_noun_lexicons("homer")             # noun inflection — Homeric corpus
+  gi = load_noun_lexicons(["homer"])           # merge noun lexicons
+  gi = load_adj_lexicons("pratt")              # adjective inflection — Pratt lexicon
   ```
 
-- **Bundled corpus lexicons** — six named verb lexicons covering different periods and authors:
+- **Bundled corpus lexicons** — named lexicons for verbs and nouns:
+
+  **Verbs** (`load_lexicons`):
 
   | Name | Verbs | Source | Period / dialect |
   |------|------:|--------|-----------------|
@@ -41,7 +49,20 @@ for the upstream documentation.
   Combined unique coverage: ~5055 verbs. Custom YAML files (same format) are also
   accepted as absolute paths.
 
-- **Adjective morphology** — `adj_stemming.yaml` + `pratt_adj_lexicon.yaml` covering
+  **Nouns** (`load_noun_lexicons`) — always includes Pratt as base:
+
+  | Name | Nouns | Source |
+  |------|------:|--------|
+  | `"pratt"` | 26 | Pratt textbook paradigm nouns |
+  | `"homer"` | 15 | Homeric Odyssey/Iliad vocabulary |
+
+  **Adjectives** (`load_adj_lexicons`) — always includes Pratt as base:
+
+  | Name | Source |
+  |------|--------|
+  | `"pratt"` | Pratt textbook paradigm adjectives |
+
+- **Adjective morphology** — `adj_stemming.yaml` + `pratt_adjs_lexicon.yaml` covering
   2-1-2 uncontracted/contracted, two-termination, 3-1-3 participial and υ-stem,
   3-3 σ-stem, and comparative adjectives.
 
@@ -66,33 +87,40 @@ pip install -e .
 ## Quick start
 
 ```python
-from greek_inflexion_eee import load_default, load_noun_default, load_adj_default, load_lexicons
+from greek_inflexion_eee import (
+    load_default, load_noun_default, load_adj_default,
+    load_lexicons, load_noun_lexicons, load_adj_lexicons,
+)
 
 # Verbs — Pratt lexicon (20 verbs, teaching vocabulary)
 gi = load_default()
-gi.generate("λύω", "AAN")           # {'λῦσαι': [...]}
+gi.generate("λύω", "AAN")               # {'λῦσαι': [...]}
 
 # Verbs — corpus lexicon by name
 gi = load_lexicons("homer")
-gi.generate("λέγω", "PAD.2S")       # {'λέγε'}
-gi.generate("ἀκούω", "PAD.2S")      # {'ἄκουε'}
+gi.generate("λέγω", "PAD.2S")           # {'λέγε'}
+gi.generate("ἀκούω", "PAD.2S")          # {'ἄκουε'}
 
 # Verbs — merge corpora
 gi = load_lexicons(["homer", "lxx"])
-gi.generate("παύω", "PAD.2P")       # {'παύετε'}
+gi.generate("παύω", "PAD.2P")           # {'παύετε'}
 
-# Nouns (bundled lexicon covers Pratt paradigm words)
+# Nouns — Pratt paradigm words only
 gi = load_noun_default()
-gi.generate("θεός", "NSM")          # {'θεός': [...]}
-gi.generate("θεός", "GSM")          # {'θεοῦ': [...]}
-gi.generate("σοφία", "NSF")         # {'σοφία': [...]}
-gi.generate("βασιλεύς", "NSM")      # {'βασιλεύς': [...]}
+gi.generate("θεός", "NSM")              # {'θεός': [...]}
+gi.generate("βασιλεύς", "NSM")          # {'βασιλεύς': [...]}
+
+# Nouns — Homeric vocabulary (Pratt + Homer merged)
+gi = load_noun_lexicons("homer")
+gi.generate("θάνατος", "NSM")           # {'θάνατος': [...]}
+gi.generate("μάχη", "GSF")              # {'μάχης': [...]}
+gi.generate("βοῦς", "GPM")              # {'βοῶν': [...]}
 
 # Adjectives
 gi = load_adj_default()
-gi.generate("ἀγαθός", "NSM")        # {'ἀγαθός': [...]}
-gi.generate("ἀγαθός", "NSF")        # {'ἀγαθή': [...]}
-gi.generate("ἀγαθός", "NSN")        # {'ἀγαθόν': [...]}
+gi.generate("ἀγαθός", "NSM")            # {'ἀγαθός': [...]}
+gi.generate("ἀγαθός", "NSF")            # {'ἀγαθή': [...]}
+gi.generate("ἀγαθός", "NSN")            # {'ἀγαθόν': [...]}
 ```
 
 
