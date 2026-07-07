@@ -32,12 +32,14 @@ _VERB_LEXICONS: dict[str, str] = {
     "homer":    "homer_verbs_lexicon.yaml",
     "lxx":      "lxx_verbs_lexicon.yaml",
     "morphgnt": "morphgnt_verbs_lexicon.yaml",
+    "lsj":      "lsj_verbs_lexicon.yaml",
 }
 
 # Named noun lexicons bundled with the package
 _NOUN_LEXICONS: dict[str, str] = {
     "pratt": "pratt_nouns_lexicon.yaml",
     "homer": "homer_nouns_lexicon.yaml",
+    "lsj": "lsj_nouns_lexicon.yaml",
 }
 
 # Named adjective lexicons bundled with the package

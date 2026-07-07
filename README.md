@@ -42,11 +42,12 @@ for the upstream documentation.
   | `"pratt"` | 20 | Pratt textbook | teaching |
   | `"dik"` | 10 | Dik textbook | teaching |
   | `"ltrg"` | 34 | LTRG textbook | teaching |
+  | `"lsj"` | 9 | hand-authored | Classical Attic, V–IV c. BCE |
   | `"homer"` | 2335 | Homeric corpus | Epic/Ionic, ~800 BCE |
   | `"lxx"` | 1905 | Septuagint | Biblical κοινή, ~250–100 BCE |
   | `"morphgnt"` | 1848 | New Testament | κοινή, ~1st c. CE |
 
-  Combined unique coverage: ~5055 verbs. Custom YAML files (same format) are also
+  Combined unique coverage: ~5064 verbs. Custom YAML files (same format) are also
   accepted as absolute paths.
 
   **Nouns** (`load_noun_lexicons`) — always includes Pratt as base:
@@ -55,6 +56,7 @@ for the upstream documentation.
   |------|------:|--------|
   | `"pratt"` | 26 | Pratt textbook paradigm nouns |
   | `"homer"` | 15 | Homeric Odyssey/Iliad vocabulary |
+  | `"lsj"` | 18 | Classical Attic (Perseus/LSJ-verified) |
 
   **Adjectives** (`load_adj_lexicons`) — always includes Pratt as base:
 

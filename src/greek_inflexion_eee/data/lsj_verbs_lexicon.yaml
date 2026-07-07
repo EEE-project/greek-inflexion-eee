@@ -1,0 +1,80 @@
+# lsj_verbs_lexicon.yaml — Classical Attic verb stems for the Odyssey diachronic tab.
+#
+# v1 scope: thematic active verbs whose recessive-default accent generates correctly (plan §5).
+# Athematic -μι, deponent/middle-only, and suppletive/defective verbs are deferred (§9).
+# Principal-part slots: 1- present, 1+ imperfect (augmented), 2- future, 3-/3+ aorist
+# (unaugmented/augmented), 4- perfect active. {2nd} = strong (2nd) aorist; {contract} = liquid
+# /contracted future. No macrons in stems (accent-matching policy §5). Keyed to Odyssey vocab
+# lemma. Only high-confidence principal parts are supplied — a missing part omits those forms,
+# it never generates a wrong one.
+#
+# Hand-authored; references Smyth + LSJ. MIT (see eee-project/NOTICE). Independent-form
+# verification pending (plan §5 correctness gate).
+
+μένω:
+    stems:
+        1-: μεν
+        1+: ἐμεν
+        2-: μεν{contract}
+        3-: μειν
+        3+: ἐμειν
+
+κλίνω:
+    stems:
+        1-: κλιν
+        1+: ἐκλιν
+        2-: κλιν{contract}
+        3-: κλιν
+        3+: ἐκλιν
+
+σφάζω:
+    stems:
+        1-: σφαζ
+        1+: ἐσφαζ
+        2-: σφαξ
+        3-: σφαξ
+        3+: ἐσφαξ
+
+δαμάζω:
+    stems:
+        1-: δαμαζ
+        1+: ἐδαμαζ
+        2-: δαμασ
+        3-: δαμασ
+        3+: ἐδαμασ
+
+πελάζω:
+    stems:
+        1-: πελαζ
+        1+: ἐπελαζ
+        2-: πελασ
+        3-: πελασ
+        3+: ἐπελασ
+
+φεύγω:
+    stems:
+        1-: φευγ
+        1+: ἐφευγ
+        3-: φυγ{2nd}
+        3+: ἐφυγ{2nd}
+
+πάσχω:
+    stems:
+        1-: πασχ
+        1+: ἐπασχ
+        3-: παθ{2nd}
+        3+: ἐπαθ{2nd}
+
+πίνω:
+    stems:
+        1-: πιν
+        1+: ἐπιν
+        3-: πι{2nd}
+        3+: ἐπι{2nd}
+
+ἐσθίω:
+    stems:
+        1-: ἐσθι
+        1+: ἠσθι
+        3-: φαγ{2nd}
+        3+: ἐφαγ{2nd}

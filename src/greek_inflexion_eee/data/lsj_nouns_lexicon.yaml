@@ -1,0 +1,84 @@
+# lsj_nouns_lexicon.yaml — Classical Attic noun stems for the Odyssey diachronic tab.
+#
+# v1 scope: 2nd-declension, non-oxytone nouns whose default persistent-from-lemma accent
+# generates correctly (the "easy" bucket, deep-attic-lexicon plan §5). Keyed to the Odyssey
+# vocab lemma so the tab probe matches. Gender/declension is inferred by the engine from the
+# lemma-key ending (-ος masc/fem, -ον neuter); the `noun:` stem is the bare o-stem (accent
+# stripped, breathing kept). No macrons in stems (accent-matching policy §5).
+#
+# Hand-authored; references Smyth + LSJ. MIT (see eee-project/NOTICE). Independent-form
+# verification pending (plan §5 correctness gate).
+
+# --- masculine / feminine 2nd declension (-ος) ---
+δόλος:
+    stems:
+        noun: δολο
+
+ζόφος:
+    stems:
+        noun: ζοφο
+
+θάνατος:
+    stems:
+        noun: θανατο
+
+μόρος:
+    stems:
+        noun: μορο
+
+νόστος:
+    stems:
+        noun: νοστο
+
+νῆσος:
+    stems:
+        noun: νησο
+
+οἶκος:
+    stems:
+        noun: οἰκο
+
+πόλεμος:
+    stems:
+        noun: πολεμο
+
+πόντος:
+    stems:
+        noun: ποντο
+
+ἄλοχος:
+    stems:
+        noun: ἀλοχο
+
+ἄνεμος:
+    stems:
+        noun: ἀνεμο
+
+ἄνθρωπος:
+    stems:
+        noun: ἀνθρωπο
+
+ἑταῖρος:
+    stems:
+        noun: ἑταιρο
+
+ἤπειρος:
+    stems:
+        noun: ἠπειρο
+
+ὄλεθρος:
+    stems:
+        noun: ὀλεθρο
+
+# --- neuter 2nd declension (-ον) ---
+μέγαρον:
+    stems:
+        noun: μεγαρο
+
+μῆλον:
+    stems:
+        noun: μηλο
+
+φύλλον:
+    stems:
+        noun: φυλλο
