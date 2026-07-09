@@ -40,8 +40,11 @@ def gi():
     return load_noun_lexicons("homer")
 
 
-def test_pratt_nouns_still_present(gi):
-    # pratt base lexicon must still be included
+@pytest.mark.parametrize("names", ["pratt", "homer"])
+def test_pratt_nouns_present(names):
+    # pratt's λόγος must be reachable whether "pratt" is loaded alone or as
+    # part of a broader set (e.g. "homer", which composes pratt as a base)
+    gi = load_noun_lexicons(names)
     forms = gi.generate("λόγος", "NSM")
     assert "λόγος" in forms
 
@@ -63,12 +66,6 @@ def test_unknown_lexicon_name_ignored():
     gi = load_noun_lexicons(["homer", "nonexistent"])
     forms = gi.generate("θάνατος", "NSM")
     assert "θάνατος" in forms
-
-
-def test_load_noun_lexicons_default_only():
-    gi = load_noun_lexicons("pratt")
-    forms = gi.generate("λόγος", "NSM")
-    assert "λόγος" in forms
 
 
 def test_absolute_path_custom_lexicon_loaded(tmp_path):
