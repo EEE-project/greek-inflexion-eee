@@ -36,3 +36,13 @@ def test_unknown_lexicon_name_ignored():
 def test_string_and_list_equivalent(names):
     gi = load_adj_lexicons(names)
     assert "ἀγαθός" in gi.generate("ἀγαθός", "NSM")
+
+
+def test_absolute_path_custom_lexicon_loaded(tmp_path):
+    custom_yaml = tmp_path / "custom_adjs.yaml"
+    custom_yaml.write_text(
+        "νεαρός:\n    stems:\n        M: νεαρο\n        F: νεαρα\n        N: νεαρο\n",
+        encoding="utf-8",
+    )
+    gi = load_adj_lexicons(["pratt", str(custom_yaml)])
+    assert "νεαρός" in gi.generate("νεαρός", "NSM")

@@ -299,9 +299,13 @@ def _load_pos_lexicons(
         names = [names]
     filenames = [default_file]
     for n in names:
-        fname = lexicon_map.get(n)
-        if fname and fname not in filenames:
-            filenames.append(fname)
+        if os.path.isabs(n):
+            if n not in filenames:
+                filenames.append(n)
+        else:
+            fname = lexicon_map.get(n)
+            if fname and fname not in filenames:
+                filenames.append(fname)
     return _make_gi(stemming_yaml, filenames)
 
 

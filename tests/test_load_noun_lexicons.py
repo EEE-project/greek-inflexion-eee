@@ -69,3 +69,11 @@ def test_load_noun_lexicons_default_only():
     gi = load_noun_lexicons("pratt")
     forms = gi.generate("λόγος", "NSM")
     assert "λόγος" in forms
+
+
+def test_absolute_path_custom_lexicon_loaded(tmp_path):
+    custom_yaml = tmp_path / "custom_nouns.yaml"
+    custom_yaml.write_text("ἀγρός:\n    stems:\n        noun: ἀγρο\n", encoding="utf-8")
+    gi = load_noun_lexicons(["pratt", str(custom_yaml)])
+    forms = gi.generate("ἀγρός", "NSM")
+    assert "ἀγρός" in forms
