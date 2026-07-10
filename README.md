@@ -46,6 +46,7 @@ for the upstream documentation.
   | `"homer"` | 2335 | Homeric corpus | Epic/Ionic, ~800 BCE |
   | `"lxx"` | 1905 | Septuagint | Biblical κοινή, ~250–100 BCE |
   | `"morphgnt"` | 1848 | New Testament | κοινή, ~1st c. CE |
+  | `"morpheus"` | 46 | Morpheus-confirmed attested forms | Epic/Homeric (mixed) |
 
   Combined unique coverage: ~5064 verbs. Custom YAML files (same format) are also
   accepted as absolute paths.
@@ -57,12 +58,32 @@ for the upstream documentation.
   | `"pratt"` | 26 | Pratt textbook paradigm nouns |
   | `"homer"` | 15 | Homeric Odyssey/Iliad vocabulary |
   | `"lsj"` | 18 | Classical Attic (Perseus/LSJ-verified) |
+  | `"morpheus"` | 62 | Morpheus-confirmed attested forms, Epic/Homeric (mixed) |
 
   **Adjectives** (`load_adj_lexicons`) — always includes Pratt as base:
 
   | Name | Source |
   |------|--------|
   | `"pratt"` | Pratt textbook paradigm adjectives |
+
+- **Morpheus-confirmed attested-form lexicon** (`"morpheus"`) — unlike every other
+  bundled lexicon, every entry is a `forms:` block: a verbatim attested surface
+  form, not a `stems:` entry generated on demand. Built for lemmas the stem-based
+  lexicons can't handle cleanly — athematic `-μι` verbs, contract verbs,
+  compounds, deponents, non-2nd-declension nouns, oxytone nouns, and irregular/
+  suppletive nouns (Ζεύς) — by collecting attested `(form, UD-feats)` pairs from
+  the UD_Ancient_Greek-Perseus and UD_Ancient_Greek-PROIEL treebanks and
+  independently re-confirming each one against the Perseids Morpheus analyzer
+  (matching lemma + tense/aspect + voice, or case + gender). Since `forms:`
+  bypasses stem lookup entirely (`generate()` checks it before any stem-based
+  generation), there's no stem-extraction/re-inflection risk for these
+  irregulars — and an explicit override always wins over a stem-generated guess,
+  which is what makes it safe to merge alongside a stem-based lexicon like
+  `"homer"` for the same lemma. See `ancient_greek_backend_eee`'s own README for
+  the companion fix that makes `.paradigm()` (the full-table view) render this
+  data correctly — restricting a noun's enumerated genders to what it actually
+  has, since the fix and this lexicon were built together to solve the same
+  problem (Ζεύς-style irregulars) from two ends.
 
 - **Adjective morphology** — `adj_stemming.yaml` + `pratt_adjs_lexicon.yaml` covering
   2-1-2 uncontracted/contracted, two-termination, 3-1-3 participial and υ-stem,
@@ -117,6 +138,11 @@ gi = load_noun_lexicons("homer")
 gi.generate("θάνατος", "NSM")           # {'θάνατος': [...]}
 gi.generate("μάχη", "GSF")              # {'μάχης': [...]}
 gi.generate("βοῦς", "GPM")              # {'βοῶν': [...]}
+
+# Nouns — Morpheus-confirmed attested forms (real Epic spellings, not generated)
+gi = load_noun_lexicons("morpheus")
+gi.generate("Ζεύς", "GSM")              # {'Διός': [...]} (suppletive, not a stem+ending)
+gi.generate("θεός", "GSM")              # {'θεοῖο': [...]} (Epic genitive, not Attic -ου)
 
 # Adjectives
 gi = load_adj_default()
