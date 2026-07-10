@@ -1,0 +1,389 @@
+# morpheus_verbs_lexicon.yaml — verbatim attested verb forms, independently
+# confirmed via the Perseids Morpheus analyzer, for lemmas the stem-based
+# lexicons (pratt/ltrg/lsj/homer) can't handle cleanly: athematic -μι verbs,
+# contract verbs, compounds, and deponents. Every entry is a `forms:` block
+# (never `stems:`) — the exact attested surface form, not a reconstruction,
+# so there is no stem-extraction/re-inflection risk for these irregulars.
+#
+# Sourcing: raw (form, UD-feats) pairs collected from the UD_Ancient_Greek-
+# Perseus and UD_Ancient_Greek-PROIEL treebanks for each target lemma, each
+# cell independently re-confirmed by querying Morpheus for that exact form
+# and checking its returned lemma + tense/aspect + voice agree. Content
+# skews Epic/Homeric register (the source treebanks and target vocabulary
+# are Odyssey-derived) — this is deliberately a separate lexicon from lsj
+# (Classical Attic), not merged into it; wire it alongside "homer", not
+# alongside "lsj", when using it for a diachronic tab.
+#
+# Scope note: lemmas already well-covered (70+ cells) by pratt/ltrg's own
+# stem-based generation (δίδωμι, δύναμαι, εἰμί, εἶμι, θνῄσκω, λέγω, χράομαι,
+# ἐπίσταμαι, ἵημι, ἵστημι, ὁράω) are deliberately excluded here — adding
+# overrides for them would be redundant, not a fix.
+#
+# Known limitations: (1) dual-number cells are stored here but won't surface
+# through AncientGreekBackend.paradigm() — its verb-paradigm builder never
+# enumerates dual person/number combinations (a pre-existing limitation, not
+# specific to this lexicon); still directly reachable via
+# GreekInflexion.generate(lemma, "...D") if a caller asks for that key
+# explicitly. (2) Two participle rows (πλέω, ἵστημι) were dropped during
+# generation — the source data didn't carry Case/Gender for them.
+#
+# Machine-generated from grc_paradigm_cache_final.tsv (Morpheus-confirmed
+# treebank attestations) via build_morpheus_lexicon_yaml.py, 2026-07-10.
+
+αἱρέω:
+  forms:
+    IMI.3P: αἱρέοντο
+    IMI.3S: αἱρέετο
+    PAI.3P: αἱρέουσι
+    PAI.3S: αἱρέει
+    PAN: αἱρέειν
+    PAO.3S: αἱρέοι
+    PMI.3S: αἱρέεται
+    PMN: αἱρέεσθαι
+βούλομαι:
+  forms:
+    FMI.1S: βουλήσομαι
+    FMI.3P: βουλήσονται
+    PMD.2S: βούλεο
+    PMI.1P: βουλόμεθα
+    PMI.1S: βούλομαι
+    PMI.2S: βούλεαί
+    PMO.1S: βουλοίμην
+γίγνομαι:
+  forms:
+    AMI.2S: γένευ
+    AMI.3P: γένοντο
+    AMI.3S: γένετο
+    AMO.2P: γένοισθε
+    AMO.2S: γένοιο
+    AMO.3S: γένοιτο
+    AMS.3S: γένηταί
+    PMD.2P: γίνεσθε
+δατέομαι:
+  forms:
+    AMI.3P: δάσσαντο
+    AMI.3S: δασάσκετο
+    AMN: δάσασθαι
+    AMS.1P: δατεώμεθα
+    FMI.3P: δάσονται
+    IMI.3P: δατέοντο
+    PMI.3P: δατέονται
+δηϊόω:
+  forms:
+    IAI.3P: ἐδηίουν
+διασχίζω:
+  forms:
+    API.3S: διεσχίσθη
+κέλομαι:
+  forms:
+    AMI.3P: κέκλοντο
+    AMI.3S: κέκλετο
+    IMI.3S: κέλετο
+    PMD.2P: κέλεσθε
+    PMI.1S: κέλομαι
+    PMI.2S: κέλεαι
+    PMI.3P: κέλονται
+    PMI.3S: κέλεται
+καθίζω:
+  forms:
+    AAD.2S: κάθισον
+    AAI.3P: κάθισαν
+    IAI.3P: κάθιζον
+    PAI.2P: καθίζετε
+    PAI.3P: καθίζουσιν
+    PAN: καθίζειν
+    PAO.2S: καθίζοις
+    PAO.3P: καθίζοιεν
+καθίημι:
+  forms:
+    AAI.1S: καθέηκα
+    AAI.3S: καθῆκεν
+    IMI.3S: κατίετο
+    PAI.2P: καθίετε
+    PAI.3P: κατιεῖσι
+    PAI.3S: κατιεῖ
+κεῖμαι:
+  forms:
+    FMI.2S: κείσεαι
+    FMI.3S: κείσεταί
+    IMI.3P: κέατο
+    PMD.3S: κείσθω
+    PMI.1P: κείμεθα
+    PMI.3P: κέαται
+    PMI.3S: κέεται
+    PMO.3S: κέοιτο
+λανθάνω:
+  forms:
+    AAI.3S: λάθε
+    AAO.3S: λάθοι
+    AMD.2P: λάθεσθε
+    AMI.3P: λάθοντο
+    AMS.1S: λάθωμαι
+    IMI.3P: λάθοντο
+    PAI.3S: λάθει
+    PMI.3S: λάθεται
+λιλαίομαι:
+  forms:
+    IMI.3S: λιλαίετο
+    PMI.1S: λιλαίομαι
+    PMI.2S: λιλαίεαι
+    PMN: λιλαίεσθαι
+μάρναμαι:
+  forms:
+    IMI.3D: ἐμαρνάσθην
+    IMI.3P: μάρναντο
+    IMI.3S: μάρνατο
+    PMD.2S: μάρναο
+    PMN: μάρνασθαι
+μάχομαι:
+  forms:
+    IMI.3P: μάχοντο
+    PMD.2D: μάχεσθον
+    PMI.2P: μάχεσθε
+    PMI.2S: μάχεαι
+    PMI.3P: μάχονται
+    PMN: μάχεσθαι
+    PMO.3S: μάχοιτο
+    PMS.3S: μάχηται
+μήδομαι:
+  forms:
+    AMI.2S: μήσαο
+    AMI.3S: μήσατο
+    FMI.1S: μήσομαι
+    IMI.3S: μήδετο
+    PMD.2S: μήδεο
+    PMI.3S: μήδεται
+μίγνυμι:
+  forms:
+    API.3S: μίγη
+    APN: μιγήμεναι
+    APS.3S: μιχθῇ
+    FPN: μιγήσεσθαι
+    IAI.3P: μίσγον
+    IMI.3S: μίσγετο
+    PMI.3P: μίσγονται
+    PMI.3S: μίσγεται
+μετανίσομαι:
+  forms:
+    AMI.3S: μετενίσετο
+νέομαι:
+  forms:
+    IMI.3P: νέοντο
+    PMD.3D: νεέσθων
+    PMD.3S: νεέσθω
+    PMI.1S: νέομαί
+    PMI.3P: νέονται
+    PMN: νέεσθαι
+    PMO.1S: νεοίμην
+    PMS.1P: νεώμεθα
+ναιετάω:
+  forms:
+    IAI.3P: ναιετάασκον
+    PAI.3P: ναιετάουσι
+οἴχομαι:
+  forms:
+    IMI.3P: οἴχοντο
+    IMI.3S: οἴχετο
+    PMI.1S: οἴχομαι
+    PMI.2P: οἴχεσθε
+    PMI.3D: οἴχεσθον
+    PMI.3P: οἴχονται
+    PMI.3S: οἴχεταί
+    PMN: οἴχεσθαι
+παρίστημι:
+  forms:
+    AAD.2P: πάρστητε
+    AAI.2S: παρέστης
+    AAI.3P: παρέσταν
+    AAI.3S: παρέστη
+    IAI.3P: παρίστασαν
+    PMD.2S: παρίσταο
+    PMI.2S: παρίστασαι
+    PMI.3S: παρίσταται
+παραπλάζω:
+  forms:
+    API.3S: παρεπλάγχθη
+πατέομαι:
+  forms:
+    AMI.1S: πασάμην
+    AMI.3P: ἐπάσαντο
+    AMN: πάσασθαι
+    PMN: πατέεσθαι
+πεύθομαι:
+  forms:
+    IMI.1P: ἐπευθόμεθα
+    IMI.3S: πεύθετο
+    PMD.2S: πεύθου
+πλέω:
+  forms:
+    PAD.3S: πλεέτω
+    PAI.1P: πλέομεν
+    PAI.3P: πλέουσιν
+    PAN: πλέειν
+    PAO.3P: πλέοιεν
+    PAS.3P: πλέωσι
+    PAS.3S: πλέῃ
+προερέσσω:
+  forms:
+    AAI.3P: προέρεσσαν
+σπέρχω:
+  forms:
+    IMI.3S: ἐσπέρχετο
+τελέω:
+  forms:
+    AAI.3P: τέλεσαν
+    AAI.3S: τέλεσεν
+    AAN: τελέσαι
+    FMN: τελέεσθαι
+    IAI.3P: τέλεον
+    PAI.3P: τελέουσι
+    PAN: τελέειν
+    PMN: τελέεσθαι
+ἀπαγγέλλω:
+  forms:
+    FAI.3S: ἀπαγγελεῖ
+    IAI.1S: ἀπήγγελλον
+    IAI.3P: ἀπήγγελλον
+    IAI.3S: ἀπήγγελλε
+    PAI.3P: ἀπαγγέλλουσιν
+    PAI.3S: ἀπαγγέλλει
+    PAN: ἀπαγγέλλειν
+    PMI.2S: ἀπαγγέλλει
+ἀπωθέω:
+  forms:
+    AMI.1P: ἀπεωσάμεθα
+    AMI.3S: ἀπώσατο
+    AMN: ἀπώσασθαι
+    APN: ἀπωσθῆναι
+    FAI.3S: ἀπώσει
+    FMI.2S: ἀπώσει
+    PAI.3S: ἀπωθεῖ
+    PMI.2P: ἀπωθεῖσθε
+ἀπόλλυμι:
+  forms:
+    AAN: ἀπολέσαι
+    AMD.3S: ἀπολέσθω
+    AMN: ἀπολέσθαι
+    FAI.2S: ἀπολεῖς
+    FAI.3S: ἀπολέει
+    FMI.2P: ἀπολεῖσθε
+    FMI.3S: ἀπολέεται
+    FMN: ἀπολέεσθαί
+ἀτέμβω:
+  forms:
+    PMI.3P: ἀτέμβονται
+ἀφαιρέω:
+  forms:
+    AMI.2P: ἀφέλεσθέ
+    AMO.3P: ἀπελοίατο
+    APO.3P: ἀπαιρεθείησαν
+    FMI.2S: ἀπαιρήσεαι
+    FPN: ἀπαιρεθήσεσθαι
+    IAI.3P: ἀπαιρέεσκον
+    PMI.3P: ἀπαιρέονται
+    PMN: ἀποαιρεῖσθαι
+ἀφύσσω:
+  forms:
+    AMI.3S: ἀφύσσατο
+ἀχεύω:
+  forms:
+    AAI.3S: ἀκάχησε
+    AMO.1P: ἀκαχοίμεθα
+    AMO.3S: ἀκάχοιτο
+    IPI.3S: ἄχνυτο
+    PMD.2S: ἀκαχίζεο
+    PPI.3S: ἄχνυται
+    PPN: ἀκάχησθαι
+ἄρνυμαι:
+  forms:
+    IMI.3D: ἀρνύσθην
+    PMI.1S: ἄρνυμαι
+ἐννέπω:
+  forms:
+    AAD.2S: ἐνίσπες
+    AAI.2S: ἔνισπες
+    IAI.3S: ἔννεπε
+    PAI.1S: ἐννέπω
+    PAI.2S: ἐννέπεις
+    PAI.3S: ἐννέπει
+    PAN: ἐννέπειν
+    PAO.2S: ἐννέποις
+ἐπιβαίνω:
+  forms:
+    AAI.2S: ἐπέβας
+    AAI.3P: ἐπέβησαν
+    AAI.3S: ἐπέβη
+    AAN: ἐπιβήμεναι
+    AMI.3S: ἐπεβήσετο
+    FMI.2S: ἐπιβήσεαι
+    FMN: ἐπιβήσεσθαι
+    IAI.3P: ἐπέβαινον
+ἐπικλώθω:
+  forms:
+    AMI.3P: ἐπεκλώσαντο
+ἐφίημι:
+  forms:
+    AAI.1S: ἐφέηκα
+    AAN: ἐπεῖναί
+    FAI.1P: ἐπήσομεν
+    FAI.1S: ἐφήσω
+    FMI.1S: ἐφήσομαι
+    IAI.3S: ἐφίει
+    PMI.1S: ἐφίεμαι
+    PMI.2S: ἐφίεσαι
+ἔδω:
+  forms:
+    FMI.2S: ἔδεαι
+    FMI.3P: ἔδονται
+    PAI.3P: ἔδουσι
+    PAI.3S: ἔδει
+    PAO.3P: ἔδοιεν
+    PAO.3S: ἔδοι
+ἕζομαι:
+  forms:
+    AMI.3P: ἕζοντο
+    AMI.3S: ἕζετο
+    IMI.3D: ἑζέσθην
+    IMI.3S: ἕζετο
+    PMD.2S: ἕζευ
+    PMN: ἕζεσθαι
+ἱκνέομαι:
+  forms:
+    AMD.3S: ἱκέσθω
+    AMI.3D: ἱκέσθην
+    AMN: ἱκέσθαι
+    AMO.1S: ἱκοίμην
+    AMO.3P: ἱκοίατο
+    PMI.1S: ἱκνοῦμαι
+    PMI.3S: ἱκνέεται
+    PMN: ἱκνεῖσθαι
+ὄλλυμι:
+  forms:
+    AAN: ὀλέσαι
+    AAO.3S: ὀλέσειε
+    AAS.3S: ὀλέσσῃ
+    AMN: ὀλέσθαι
+    FAI.2S: ὀλέσσεις
+    FAI.3S: ὀλέσει
+    FMI.2P: ὀλέεσθε
+    FMN: ὀλέεσθαι
+ὄρνυμι:
+  forms:
+    AAI.3S: ὄρσασκεν
+    AMI.3P: ὀρέοντο
+    AMN: ὄρθαι
+    IMI.3S: ὄρνυτο
+    PAD.2S: ὄρνυθι
+    PAN: ὀρνύμεναι
+    PMI.3S: ὄρνυται
+    PMS.3S: ὀρώρηται
+ῥύομαι:
+  forms:
+    AMI.1S: ῥυσάμην
+    AMI.2S: ἔρυσο
+    AMI.3D: ῥυσάσθην
+    AMI.3S: ἐρρύσατο
+    AMO.1S: ῥυσαίμην
+    FMI.1P: ῥυσόμεθα
+    IMI.3S: ἐρύετο
+    PMI.3S: ῥύεταί

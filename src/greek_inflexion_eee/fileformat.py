@@ -33,6 +33,7 @@ _VERB_LEXICONS: dict[str, str] = {
     "lxx":      "lxx_verbs_lexicon.yaml",
     "morphgnt": "morphgnt_verbs_lexicon.yaml",
     "lsj":      "lsj_verbs_lexicon.yaml",
+    "morpheus": "morpheus_verbs_lexicon.yaml",
 }
 
 # Named noun lexicons bundled with the package
@@ -40,6 +41,7 @@ _NOUN_LEXICONS: dict[str, str] = {
     "pratt": "pratt_nouns_lexicon.yaml",
     "homer": "homer_nouns_lexicon.yaml",
     "lsj": "lsj_nouns_lexicon.yaml",
+    "morpheus": "morpheus_nouns_lexicon.yaml",
 }
 
 # Named adjective lexicons bundled with the package
@@ -272,6 +274,10 @@ def load_lexicons(names: "str | list[str]") -> "GreekInflexion":
         "homer"    — Homeric corpus, Epic/Ionic, ~800 BCE (~2335 verbs)
         "lxx"      — Septuagint, Biblical koine, ~250–100 BCE (~1905 verbs)
         "morphgnt" — New Testament, koine, ~1st c. CE (~1848 verbs)
+        "lsj"      — Classical Attic, hand-authored from LSJ (small, curated)
+        "morpheus" — Morpheus-confirmed attested forms for lemmas the other
+                     lexicons can't handle cleanly (athematic/contract/
+                     compound/deponent verbs); Epic/Homeric register
 
     Absolute file paths load custom YAML lexicon files in the same format.
     Multiple names are merged additively; later entries add new stems without
@@ -320,8 +326,12 @@ def load_noun_lexicons(names: "str | list[str]") -> "GreekInflexion":
 
     Named lexicons::
 
-        "pratt" — Pratt teaching nouns (~26 nouns)
-        "homer" — Homeric corpus nouns (~15 nouns, Odyssey/Iliad vocabulary)
+        "pratt"    — Pratt teaching nouns (~26 nouns)
+        "homer"    — Homeric corpus nouns (~15 nouns, Odyssey/Iliad vocabulary)
+        "lsj"      — Classical Attic, hand-authored from LSJ (small, curated)
+        "morpheus" — Morpheus-confirmed attested forms for lemmas the other
+                     lexicons can't handle cleanly (non-2nd-declension,
+                     oxytone, irregular); Epic/Homeric register
 
     Examples::
 

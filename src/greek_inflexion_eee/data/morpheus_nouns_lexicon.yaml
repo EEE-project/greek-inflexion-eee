@@ -1,0 +1,473 @@
+# morpheus_nouns_lexicon.yaml — verbatim attested noun forms, independently
+# confirmed via the Perseids Morpheus analyzer, for lemmas the stem-based
+# lexicons (pratt/lsj) can't handle cleanly: non-2nd-declension nouns,
+# oxytone nouns, and irregular/suppletive nouns (Ζεύς). Every entry is a
+# `forms:` block (never `stems:`) — the exact attested surface form, not a
+# reconstruction. Requires ancient-greek-backend-eee's gender-restriction
+# fix (AncientGreekBackend._noun_genders) to render cleanly: that fix always
+# trusts an explicit `forms:` override regardless of its own gender guess,
+# which is what lets genuinely dual-gender nouns here (γείτων "neighbor",
+# ἅλς "salt"/"sea", both real, documented homographs) show all their
+# confirmed cells rather than being pruned to one guessed gender.
+#
+# Sourcing: same methodology as morpheus_verbs_lexicon.yaml (see its header)
+# — UD_Ancient_Greek-Perseus + UD_Ancient_Greek-PROIEL treebanks, each cell
+# independently re-confirmed against Morpheus. Content skews Epic/Homeric
+# register; wire alongside "homer", not "lsj" (Classical Attic) — e.g.
+# πόλις here is πολίων/πολίεσσιν (Epic), not lsj/pratt's πόλεως/πόλεσι(ν)
+# (Attic).
+#
+# One row was dropped as a treebank annotation error, not a real dual-
+# gender reading: γυνή ("woman", unambiguously feminine) had the identical
+# surface form γυναικῶν tagged Gender=Fem in one treebank occurrence and
+# Gender=Masc in another; the Masc tag doesn't correspond to any real usage.
+#
+# Machine-generated from grc_paradigm_cache_final.tsv (Morpheus-confirmed
+# treebank attestations) via build_morpheus_lexicon_yaml.py, 2026-07-10.
+
+Ζεύς:
+  forms:
+    ASM: Δία
+    DSM: Διί
+    GSM: Διός
+    NSM: Ζεύς
+    VSM: Ζεῦ
+βοῦς:
+  forms:
+    DPF: βουσὶ
+    DPM: βουσί
+    DSF: βοΐ
+    GSF: βοός
+    GSM: βοός
+γαῖα:
+  forms:
+    ASF: γαῖάν
+    DSF: γαίῃ
+    GSF: γαίης
+    NSF: γαῖα
+γείτων:
+  forms:
+    APF: γείτονας
+    APM: γείτονας
+    ASM: γείτονα
+    DPM: γείτοσι
+    GSM: γείτονος
+    NPM: γείτονες
+    NSM: γείτων
+    VPF: γείτονες
+γυνή:
+  forms:
+    APF: γυναῖκάς
+    ASF: γυναῖκά
+    DPF: γυναιξί
+    DSF: γυναικί
+    GPF: γυναικῶν
+    GSF: γυναικός
+    NSF: γυνὴ
+εἶδαρ:
+  forms:
+    ASN: εἶδαρ
+ζυγόν:
+  forms:
+    ASM: ζυγόν
+    ASN: ζυγόν
+    DPN: ζυγόφι
+    DSM: ζυγῷ
+    DSN: ζυγῷ
+    GSN: ζυγοῦ
+    NSM: ζυγός
+    NSN: ζυγὸν
+θάλασσα:
+  forms:
+    ASF: θάλασσάν
+    DSF: θαλάσσῃ
+    GSF: θαλάσσης
+    NSF: θάλασσά
+θίς:
+  forms:
+    ASF: θῖνα
+    DSM: θινὶ
+θεά:
+  forms:
+    ASF: θέαν
+    DPF: θεῇς
+    DSF: θεᾷ
+    GPF: θεάων
+    GSF: θεᾶς
+    NPF: θεαί
+    NSF: θεά
+    VSF: θεά
+θεός:
+  forms:
+    APM: θεούς
+    DPM: θεοῖς
+    GPM: θεῶν
+    GSM: θεοῖο
+    NPF: θεοὶ
+    NPM: θεοί
+    VPM: θεοὶ
+    VSM: θεέ
+θυγάτηρ:
+  forms:
+    APF: θυγατέρας
+    ASF: θυγατέρα
+    DPF: θυγατέρεσσιν
+    GPF: θυγατέρων
+    GSF: θυγατέρος
+    NPF: θυγατέρες
+    NSF: θυγάτηρ
+    VPF: θυγατέρες
+θυμός:
+  forms:
+    ASM: θυμόν
+    DSM: θυμῷ
+    GSM: θυμοῦ
+    NPM: θυμοί
+    NSM: θυμός
+    VSM: θυμέ
+κλέος:
+  forms:
+    APN: κλέα
+    ASN: κλέος
+    NSN: κλέος
+κτῆμα:
+  forms:
+    APN: κτήματα
+    ASN: κτῆμα
+    DPN: κτήμασι
+    GPN: κτημάτων
+    NPN: κτήματα
+κυβερνήτης:
+  forms:
+    DSM: κυβερνήτῃ
+    NSM: κυβερνήτης
+κῆρυξ:
+  forms:
+    APM: κήρυκας
+    ASM: κήρυκά
+    DPM: κήρυξί
+    DSM: κήρυκι
+    GPM: κηρύκων
+    GSM: κήρυκος
+    NDM: κήρυκε
+    NPM: κήρυκες
+κῦμα:
+  forms:
+    ASN: κῦμα
+    DPN: κύμασι
+    GPN: κυμάτων
+    GSN: κύματος
+    NPN: κύματα
+    NSN: κῦμα
+λαῖλαψ:
+  forms:
+    ASF: λαίλαπα
+    DSF: λαίλαπι
+    NSF: λαῖλαψ
+λωτός:
+  forms:
+    ASM: λωτόν
+    DSM: λωτῷ
+    GSM: λωτοῦ
+    NSM: λωτός
+μάχη:
+  forms:
+    APF: μάχας
+    ASF: μάχην
+    DPF: μάχαις
+    DSF: μάχῃ
+    GSF: μάχης
+    NPF: μάχαι
+    NSF: μάχη
+μέθυ:
+  forms:
+    ASN: μέθυ
+ναῦς:
+  forms:
+    APF: νέας
+    ASF: νέα
+    DPF: νέεσσι
+    GSF: ναὸς
+    NPF: νέες
+    NSM: ναῦς
+νεφέλη:
+  forms:
+    ASF: νεφέλην
+    DPF: νεφέλαις
+    DSF: νεφέλῃ
+    GPF: νεφελῶν
+    GSF: νεφέλης
+    NSF: νεφέλη
+νεφεληγερέτα:
+  forms:
+    GSM: νεφεληγερέταο
+    NSM: νεφεληγερέτα
+νοῦς:
+  forms:
+    ASM: νοῦν
+    DSM: νοΐ
+    GSM: νοός
+    NSM: νοῦς
+νύμφη:
+  forms:
+    APF: νύμφας
+    ASF: νύμφην
+    GPF: νυμφέων
+    GSF: νύμφας
+    NPF: νύμφαι
+    NSF: νύμφα
+    VSF: νύμφα
+νύξ:
+  forms:
+    APF: νύκτάς
+    ASF: νύκτα
+    DSF: νυκτὶ
+    GPF: νυκτῶν
+    GSF: νυκτὸς
+    NPF: νύκτες
+    NSF: νύξ
+οὐρανός:
+  forms:
+    APM: οὐρανούς
+    ASM: οὐρανὸν
+    DSM: οὐρανῷ
+    GSM: οὐρανοῦ
+    NPM: οὐρανοί
+    NSM: οὐρανός
+    VPM: οὐρανοὶ
+    VSM: οὐρανέ
+πατρίς:
+  forms:
+    APF: πατρίδας
+    ASF: πατρίδα
+    DPF: πατρίσι
+    DSF: πατρίδι
+    GPF: πατρίδων
+    GSF: πατρίδος
+    NSF: πατρίς
+    VSF: πατρί
+ποτής:
+  forms:
+    GSF: ποτῆτος
+πούς:
+  forms:
+    ASM: πόδα
+    DDM: ποδοῖιν
+    DPM: ποσί
+    DSM: ποδί
+    GDM: ποδοῖιν
+    GPM: ποδῶν
+    GSM: ποδός
+    NSM: πούς
+πτολίεθρον:
+  forms:
+    ASN: πτολίεθρον
+    NSN: πτολίεθρον
+πόλις:
+  forms:
+    APF: πόλεις
+    ASF: πτόλιν
+    DPF: πολίεσσιν
+    DSF: πόλει
+    GPF: πολίων
+    GSF: πολίων
+    NDF: πόλει
+    NPF: πόλεις
+πότνια:
+  forms:
+    NSF: πότνια
+    VSF: πότνια
+σπέος:
+  forms:
+    ASN: σπέος
+    NSN: σπέος
+στῆθος:
+  forms:
+    APN: στήθεά
+    ASN: στῆθος
+    DPN: στήθεσι
+    DSN: στήθεϊ
+    GSN: στήθεος
+    NPN: στήθεα
+    NSN: στῆθος
+τοκεύς:
+  forms:
+    APM: τοκέας
+    ASM: τοκέα
+    DPM: τοκεῦσι
+    GPM: τοκήων
+    NPM: τοκέες
+χθών:
+  forms:
+    ASF: χθόνα
+    DSF: χθονί
+    GSF: χθονός
+    NSF: χθών
+ψυχή:
+  forms:
+    APF: ψυχάς
+    ASF: ψυχάν
+    DPF: ψυχαῖς
+    DSF: ψυχᾷ
+    GSF: ψυχᾶς
+    NPF: ψυχαὶ
+    NSF: ψυχή
+    VSF: ψυχή
+ἀνάγκη:
+  forms:
+    APF: ἀνάγκας
+    ASF: ἀνάγκην
+    DPF: ἀνάγκαις
+    DSF: ἀνάγκῃ
+    GSF: ἀνάγκης
+    NSF: ἀνάγκη
+ἀνήρ:
+  forms:
+    APM: ἀνέρας
+    ASM: ἀνέρα
+    DSM: τἀνδρὶ
+    GSM: τἀνδρός
+    NDM: ἀνέρε
+    NPM: ἀνέρες
+    NSM: ἀνήρ
+    VPM: ἀνέρες
+ἀτασθαλία:
+  forms:
+    DPF: ἀτασθαλίῃσιν
+    GSF: ἀτασθαλίης
+ἄεθλος:
+  forms:
+    APM: ἀέθλους
+    ASM: ἄεθλον
+    DPM: ἀέθλοισι
+    GPM: ἀέθλων
+    NSM: ἄεθλος
+ἄλγος:
+  forms:
+    APN: ἄλγεά
+    ASN: ἄλγος
+    DPN: ἄλγεσι
+    NPN: ἄλγεα
+    NSN: ἄλγος
+ἄνθος:
+  forms:
+    APN: ἄνθεά
+    ASN: ἄνθος
+    DPN: ἄνθεσι
+    DSN: ἄνθει
+    NPN: ἄνθεα
+    NSN: ἄνθος
+ἄστυ:
+  forms:
+    APN: ἄστεα
+    ASN: ἄστυ
+    DSN: ἄστεϊ
+    GSN: ἄστεος
+    NSN: ἄστυ
+ἅλς:
+  forms:
+    ASF: ἅλα
+    GSF: ἁλός
+    GSM: ἁλός
+    NPM: ἅλες
+    NSM: ἃλς
+ἐγχείη:
+  forms:
+    ASF: ἐγχείην
+    DPF: ἐγχείῃσι
+    DSF: ἐγχείῃ
+    GPF: ἐγχειάων
+    NSF: ἐγχείη
+ἐνιαυτός:
+  forms:
+    APM: ἐνιαυτούς
+    ASM: ἐνιαυτόν
+    DSM: ἐνιαυτῷ
+    GPM: ἐνιαυτῶν
+    GSM: ἐνιαυτοῦ
+    NPM: ἐνιαυτοί
+    NSM: ἐνιαυτὸς
+ἔτος:
+  forms:
+    APN: ἔτεα
+    ASN: ἔτεα
+    DPN: ἔτεσί
+    DSN: ἔτει
+    GPN: ἐτέων
+    GSN: ἔτεος
+    NPN: ἔτεα
+    NSN: ἔτος
+ἠέλιος:
+  forms:
+    ASM: ἠέλιον
+    DSM: ἠελίῳ
+    GSM: ἠελίοιο
+    NSM: ἠέλιος
+ἠώς:
+  forms:
+    ADF: ἠῶ
+    APF: ἠῶ
+    ASF: ἠόα
+    DSF: ἠοῖ
+    GSF: ἠοῦς
+    NSF: ἠώς
+ἦμαρ:
+  forms:
+    APN: ἤματα
+    ASN: ἆμαρ
+    DSN: ἤματί
+    GSN: ἤματος
+    NSN: ἦμαρ
+ἦτορ:
+  forms:
+    ASN: ἦτορ
+    NSN: ἦτορ
+ἱστίον:
+  forms:
+    APN: ἱστία
+    DPN: ἱστίοις
+    DSN: ἱστίῳ
+ἱστός:
+  forms:
+    ASM: ἱστὸν
+    DSM: ἱστῷ
+ἴς:
+  forms:
+    ASF: ἶνα
+    DPF: ἴνεσιν
+    NSF: ἲς
+ὄρος:
+  forms:
+    APN: οὔρεα
+    DPN: οὔρεσι
+    DSM: ὄρει
+    DSN: ὄρει
+    GPN: ὀρέων
+    GSN: οὔρεος
+    NPN: ὄρεα
+    NSN: οὖρος
+ὕδωρ:
+  forms:
+    APN: ὕδατα
+    ASN: ὕδωρ
+    DPN: ὕδασι
+    DSN: ὕδατι
+    GPN: ὑδάτων
+    GSN: ὕδατος
+    NPN: ὕδατα
+    NSN: ὕδωρ
+ὥρα:
+  forms:
+    APF: ὥρας
+    ASF: ὤρην
+    DPF: ὥρῃσιν
+    DSF: ὥρᾳ
+    GPF: ὡρέων
+    GSF: ὥρας
+    NPF: ὧραί
+    NSF: ὥρα
+ῥόος:
+  forms:
+    ASM: ῥόον
+    GSM: ῥοῦ
+    NSM: ῥόος
