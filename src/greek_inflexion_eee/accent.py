@@ -10,7 +10,7 @@ _ACUTE = '́'
 
 
 def clean(w):
-    return rebreath(w).replace("|", "").replace("-", "")
+    return strip_length(rebreath(w).replace("|", "").replace("-", ""))
 
 
 def _fix_nominal_oxytone(w_bare, accented, lemma_ultima):

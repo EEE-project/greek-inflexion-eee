@@ -134,7 +134,12 @@ for the upstream documentation.
 
 - **Improved accent engine** — correct handling of nominal accent overrides for
   neuter forms; `_fix_nominal_oxytone` converts acute on inflected long ultima to
-  circumflex while preserving native long ultimas (e.g. βασιλεύς).
+  circumflex while preserving native long ultimas (e.g. βασιλεύς). The pedagogical
+  vowel-length macron some lexicon stems carry (e.g. λύω's long υ, needed so
+  participles/infinitives/imperatives get circumflex where Greek requires a long
+  vowel) is now stripped from final output once accent computation has used it —
+  previously it leaked into acute-accented forms as a stray combining mark
+  (`λύω` → `λῡ́ω`).
 
 
 ## Installation

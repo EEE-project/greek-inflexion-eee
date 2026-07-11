@@ -7,7 +7,7 @@ documents the intended output and guards against stemming regressions.
 """
 import unicodedata
 import pytest
-from greek_inflexion_eee import load_lexicons, load_noun_lexicons
+from greek_inflexion_eee import load_default, load_lexicons, load_noun_lexicons
 
 
 @pytest.fixture(scope="module")
@@ -124,3 +124,25 @@ def test_no_macron_in_noun_citations(gi_nouns):
             for form in gi_nouns.generate(lem, code).keys():
                 assert "̄" not in unicodedata.normalize("NFD", form), \
                     f"macron in citation {lem} -> {form}"
+
+
+def test_no_macron_in_verb_citations_pratt_ltrg():
+    # the verbs actually named in the "rejection class": their pratt/ltrg
+    # stems carry a macron for vowel-length-sensitive accentuation
+    # (participles, infinitives, some imperatives need it for circumflex
+    # placement), so PAI.1S must come out clean rather than λῡ́ω-style.
+    gi = load_lexicons(["pratt", "ltrg"])
+    verbs = ["λύω", "φύω", "νικάω", "δείκνυμι"]
+    for lem in verbs:
+        for form in gi.generate(lem, "PAI.1S").keys():
+            assert "̄" not in unicodedata.normalize("NFD", form), \
+                f"macron in citation {lem} -> {form}"
+
+
+def test_macron_stripping_keeps_length_sensitive_circumflex():
+    # the flip side of the fix: stripping the macron must happen only after
+    # accent computation has already used it to choose circumflex, not before
+    gi = load_default()
+    assert "λῦον" in gi.generate("λύω", "PAP.NSN").keys()
+    assert "λῦε" in gi.generate("λύω", "PAD.2S").keys()
+    assert "λῦσαι" in gi.generate("λύω", "AAN").keys()
