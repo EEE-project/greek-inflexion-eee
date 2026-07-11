@@ -78,6 +78,93 @@ BYZANTINE_VERB_FORMS = [
     ("ἄγω", "IAI.3P", "ἦγαν"),
     ("φέρω", "AAI.1S", "ἔφερα"),
     ("γράφω", "AAI.2S", "ἔγραψες"),
+    # 2026-07-11: second pattern, 3rd plural imperfect/2nd-aorist active
+    # in -οσαν (see the lexicon file's own header for the mining/
+    # verification discipline for this pattern specifically).
+    ("αἴρω", "AAI.3P", "ἤροσαν"),
+    ("ἁμαρτάνω", "AAI.3P", "ἡμάρτοσαν"),
+    ("λέγω", "AAI.3P", "εἴποσαν"),
+    ("ἐσθίω", "AAI.3P", "ἐφάγοσαν"),
+    ("εὑρίσκω", "AAI.3P", "εὕροσαν"),
+    ("ἔχω", "IAI.3P", "εἴχοσαν"),
+    ("ἔχω", "AAI.3P", "ἔσχοσαν"),
+    ("κρίνω", "AAI.3P", "ἐκρίνοσαν"),
+    ("λαμβάνω", "IAI.3P", "ἐλαμβάνοσαν"),
+    ("λαμβάνω", "AAI.3P", "ἐλάβοσαν"),
+    ("μανθάνω", "AAI.3P", "ἐμάθοσαν"),
+    # ὁράω/AAI.3P has two attested variants (augmented and unaugmented) --
+    # both checked as separate rows, same (lemma, code) pair.
+    ("ὁράω", "AAI.3P", "ἴδοσαν"),
+    ("ὁράω", "AAI.3P", "εἴδοσαν"),
+    ("πίνω", "AAI.3P", "ἐπίοσαν"),
+    ("φαίνω", "IAI.3P", "ἐφαίνοσαν"),
+    ("φέρω", "IAI.3P", "ἐφέροσαν"),
+    # 2026-07-11: third pattern, contract-verb imperfect 3rd plural in
+    # -αοσαν->-ῶσαν / -εοσαν,-οοσαν->-ουσαν (see the lexicon file's own
+    # header for the mining/verification discipline for this pattern).
+    ("ἀνομέω", "IAI.3P", "ἠνομοῦσαν"),
+    ("γεννάω", "IAI.3P", "ἐγεννῶσαν"),
+    ("δολιόω", "IAI.3P", "ἐδολιοῦσαν"),
+    ("ἐάω", "IAI.3P", "ἐῶσαν"),
+    ("θορυβέω", "IAI.3P", "ἐθορυβοῦσαν"),
+    ("θυμιάω", "IAI.3P", "ἐθυμιῶσαν"),
+    ("νικάω", "IAI.3P", "ἐνικῶσαν"),
+    ("νοέω", "IAI.3P", "ἐνοοῦσαν"),
+    ("οἰκοδομέω", "IAI.3P", "ᾠκοδομοῦσαν"),
+    ("ποιέω", "IAI.3P", "ἐποιοῦσαν"),
+    # 2026-07-11: fourth pattern, -ασι replacing -ον/-αν in imperfect or
+    # aorist active (see the lexicon file's own header for the mining/
+    # verification discipline for this pattern).
+    ("δίδωμι", "AAI.3P", "ἐδώκασι(ν)"),
+    # λέγω/AAI.3P has two attested variants (-οσαν from the second pattern,
+    # already a row above; -ασι from this one, added here).
+    ("λέγω", "AAI.3P", "εἴπασι"),
+    ("τίθημι", "IAI.3P", "ἐτιθέασι"),
+    ("ποιέω", "AAI.3P", "ἐποιήσασι"),
+    # 2026-07-11: fifth pattern, Optative 3rd plural -σαν (see the lexicon
+    # file's own header for the mining/verification discipline).
+    ("αἰνέω", "AAO.3P", "αἰνέσαισαν"),
+    ("ποιέω", "AAO.3P", "ποιήσαισαν"),
+    ("ψηλαφάω", "AAO.3P", "ψηλαφήσαισαν"),
+    ("θηρεύω", "AAO.3P", "θηρεύσαισαν"),
+    ("ἔρχομαι", "AAO.3P", "ἔλθοισαν"),
+    ("ὄλλυμι", "AAO.3P", "ὀλέσαισαν"),
+    ("λέγω", "AAO.3P", "εἴποισαν"),
+    ("λέγω", "AAO.3P", "εἴπαισαν"),
+    ("εὐλογέω", "AAO.3P", "εὐλογήσαισαν"),
+    ("εὑρίσκω", "AAO.3P", "εὕροισαν"),
+    # 2026-07-11: sixth pattern, Imperative -τωσαν/-σθωσαν (plus the
+    # perfect-as-3rd-person-imperative sub-pattern) -- see the lexicon
+    # file's own header for the mining/verification discipline.
+    ("ἐπίσταμαι", "PMD.3P", "ἐπιστάσθωσαν"),
+    ("εἶμι", "PAD.3P", "ἴτωσαν"),
+    ("θεραπεύω", "AAD.3P", "θεραπευσάτωσαν"),
+    ("δίδωμι", "AAD.3P", "δότωσαν"),
+    ("ποιέω", "PAD.3P", "ποιείτωσαν"),
+    ("διώκω", "PAD.3P", "διωκέτωσαν"),
+    ("ἄγω", "PMD.3P", "ἀγέσθωσαν"),
+    ("ἔχω", "PAD.3P", "ἐχέτωσαν"),
+    ("εἰμί", "PAD.3P", "ἔστωσαν"),
+    ("φωνέω", "XAD.3S", "πεφωνηκέτω"),
+    ("θεωρέω", "XAD.3S", "τεθεωρηκέτω"),
+    # 2026-07-11: seventh (last) pattern, Passive/Middle 2nd singular
+    # original -σαι (see the lexicon file's own header for the mining/
+    # verification discipline).
+    ("βούλομαι", "PMI.2S", "βούλεσαι"),
+    ("ἐπείγω", "PMI.2S", "ἐπείγεσαι"),
+    ("ἐσθίω", "FMI.2S", "φάγεσαι"),
+    ("ἰάομαι", "PMI.2S", "ἰᾶσαι"),
+    ("καυχάομαι", "PMI.2S", "καυχᾶσαι"),
+    ("κοιμάομαι", "PMI.2S", "κοιμᾶσαι"),
+    ("κομίζω", "PMI.2S", "κομίζεσαι"),
+    ("κτάομαι", "PMI.2S", "κτᾶσαι"),
+    ("λυτρόω", "PMI.2S", "λυτροῦσαι"),
+    ("ὀδυνάομαι", "PMI.2S", "ὀδυνᾶσαι"),
+    ("πίνω", "PMI.2S", "πίεσαι"),
+    ("πλανάω", "PMI.2S", "πλανᾶσαι"),
+    ("πολεμέω", "PMI.2S", "πολεμεῖσαι"),
+    ("στεφανόω", "PMI.2S", "στεφανοῦσαι"),
+    ("φοβέομαι", "PMI.2S", "φοβεῖσαι"),
 ]
 
 
@@ -104,9 +191,51 @@ def test_all_entries_use_forms_not_stems():
         assert "forms" in entry and entry["forms"], f"{lemma!r} has no forms:"
 
 
-def test_byzantine_lexicon_has_15_lemmas():
+def test_no_duplicate_lemma_keys():
+    """yaml.safe_load silently keeps only the last of a duplicate top-level
+    key, so a lemma mined in an earlier pattern and extended in a later one
+    (without noticing it already has a block further up the file) would
+    silently lose its earlier entries -- caught once for ἐσθίω during
+    authoring (see test_esthio_has_both_slots_from_separate_patterns).
+    Parses the raw YAML source with a duplicate-key-aware loader rather than
+    the standard one, which would just hide the problem."""
+    import yaml
+    from greek_inflexion_eee.fileformat import _DATA_PKG
+    from importlib.resources import files
+
+    class _DupeCheckLoader(yaml.SafeLoader):
+        pass
+
+    def _construct_mapping(loader, node, deep=False):
+        seen = set()
+        for key_node, _ in node.value:
+            key = loader.construct_object(key_node, deep=deep)
+            assert key not in seen, f"duplicate top-level key: {key!r}"
+            seen.add(key)
+        return yaml.SafeLoader.construct_mapping(loader, node, deep=deep)
+
+    _DupeCheckLoader.add_constructor(
+        yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, _construct_mapping)
+
+    resource = files(_DATA_PKG) / "byzantine_verbs_lexicon.yaml"
+    with resource.open("r", encoding="utf-8") as f:
+        yaml.load(f, Loader=_DupeCheckLoader)
+
+
+def test_byzantine_lexicon_has_61_lemmas():
     """Documents the lexicon's actual scope -- update deliberately, not by
     accident, if this changes."""
     from greek_inflexion_eee.fileformat import _load_lexicon_yaml
     data = _load_lexicon_yaml("byzantine_verbs_lexicon.yaml")
-    assert len(data) == 15
+    assert len(data) == 61
+
+
+def test_esthio_has_both_slots_from_separate_patterns():
+    """Regression guard: ἐσθίω was added in the second pattern (AAI.3P) and
+    extended in the seventh (FMI.2S) -- a duplicate top-level YAML key for
+    the same lemma would have YAML silently keep only the last one, dropping
+    AAI.3P. Caught once during authoring; guarded here so it can't regress."""
+    from greek_inflexion_eee import load_lexicons
+    gi = load_lexicons("byzantine")
+    assert gi.form_override.get(("ἐσθίω", "AAI.3P")) == "ἐφάγοσαν"
+    assert gi.form_override.get(("ἐσθίω", "FMI.2S")) == "φάγεσαι"

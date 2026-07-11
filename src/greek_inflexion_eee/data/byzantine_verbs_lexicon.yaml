@@ -44,13 +44,189 @@
 #     same surface forms as aorist-middle IMPERATIVE, not indicative as
 #     Sophocles' own section implies — a real mood conflict, left unresolved
 #     rather than guessed at.
-#   - πίνω's aorist (see verification note 2 above): illegible OCR.
 #   - Every compound-verb citation in the same Sophocles section (e.g.
 #     ἀπέσταλκαν for ἀποστέλλω, παρέστηκαν for παρίστημι, εἰσελήλυθαν for
 #     εἰσέρχομαι) — real, usable data for their own compound lemma, but not
 #     usable as evidence for the bare simplex verb, so left for a future
 #     pass that specifically targets those compound lemmas rather than
 #     silently attached to a simplex entry it doesn't verbatim describe.
+#
+# --- Second pattern, added 2026-07-11: 3rd plural imperfect/2nd-aorist
+# active in -οσαν (= -ον; Sophocles: "Boeotic, Chalcidean, or Asiatic") ---
+# A second, independent Byzantine-period analogical ending, distinct from the
+# -αν/-αμεν/-α pattern above (both existed as competing innovations — see
+# κρίνω/λαμβάνω below, which the engine already generates with -αν AND now
+# also carries the -οσαν variant as a second attested form for the same
+# slot, not a duplicate). Source: same Sophocles Introduction, "Active and
+# middle indicative" section, immediately following the -αν pattern.
+# Full candidate list with citations transcribed in
+# ~/work/greek/EEE/analisys/sophocles-byzantine-morphology.md (§3) before
+# this pass, so the mining could work from a clean list instead of raw OCR.
+#
+# Verification discipline for this pattern (same standard as above, re-run
+# fresh against the current engine, not assumed from the transcription):
+#   - πίνω's aorist (Jer. 28,7, ἐπίοσαν) is a *clean* reading that supersedes
+#     the illegible-OCR aorist candidate excluded above (that one was a
+#     different citation, "Mal. 234,15" — this is not the same form found
+#     legible on a second look; it's an independently-cited verse). πίνω had
+#     no aorist entry at all before this pass (perfect only).
+#   - ὁράω: the engine already generates 'εἴδεσαν' (stem `ειδε{root}`) for
+#     AAI.3P — checked directly, this is a DIFFERENT connecting vowel (-εσαν,
+#     not -οσαν) from an independent existing mechanism, not a duplicate of
+#     the -οσαν candidates ἴδοσαν/εἴδοσαν added below.
+#   - εὑρίσκω's -οσαν aorist (εὕροσαν, Ps. 114,3) is a *different slot* from
+#     whatever εὑρίσκω candidate was dropped as a duplicate in the first
+#     pass (noted above) — checked directly against the current engine
+#     (`['εὗραν', 'εὗρον']`, no -οσαν), genuinely not covered.
+#   - Excluded: αἱρέω/βάλλω/λείπω's -οσαν citations (καθείλοσαν, ἐνεβάλοσαν,
+#     κατελίποσαν) — Sophocles only cites the compound form for these three,
+#     no simplex citation for this specific pattern, so left out per the
+#     same compound-exclusion policy as the first pattern.
+#   - Excluded: σχάζω (ἐσχάζοσαν, Lycophr. 21) — the engine has literally
+#     zero data for this lemma from any other lexicon (checked directly),
+#     so a lone byzantine form would be an isolated island rather than an
+#     exceptions-layer entry merging with a real base paradigm — doesn't fit
+#     this lexicon's "merge with a Koine/Attic base" design (see README).
+#
+# --- Third pattern, added 2026-07-11: contract-verb imperfect 3rd plural
+# in -αοσαν→-ῶσαν / -εοσαν,-οοσαν→-ουσαν --- the contract-verb-specific
+# variant of the same -οσαν innovation above (§3), documented by Sophocles
+# immediately after it in the same "Active and middle indicative" section.
+# See sophocles-byzantine-morphology.md §4 for the full candidate list.
+#
+# Verification discipline: checked against the 5-lexicon Koine/Attic base
+# (lxx/morphgnt/pratt/ltrg/lsj) that `ag_byzantine` actually merges with in
+# the notebooks — every included entry differs from the engine's existing
+# classical `-ουν` contracted imperfect for the same lemma+slot (e.g.
+# ποιέω generates ἐποίουν, not ἐποιοῦσαν; νικάω generates ἐνίκων, not
+# ἐνικῶσαν). One near-collision worth recording: γεννάω's -οσαν candidate
+# (ἐγεννῶσαν) is the *identical string* already present in lxx's own data,
+# but filed there as an AAI.3P (aorist) alternate, not IAI.3P (imperfect) --
+# added here as imperfect per Sophocles' own categorization; the lack of a
+# σ-suffix on this "aorist" form (weak aorist γεννάω should be ἐγέννησα)
+# suggests it may genuinely be tense-syncretic under this same innovation
+# rather than a real classical-style aorist, not a data error on either side.
+#   - Excluded: παλινοδέω (ἐπαλινοδοῦσαν) — zero coverage anywhere across
+#     all 7 non-byzantine lexicons (checked, same standard as σχάζω above).
+#   - ἀνομέω and νοέω initially looked zero-coverage too on a narrower check
+#     (5-lexicon base only) but do have real stem coverage once homer/
+#     morpheus are included (ἀνομέω: ἠνόμησα in lxx/morphgnt; νοέω: νόουν
+#     via homer/morpheus) -- included, since "merge with *a* base" doesn't
+#     require the specific 5-lexicon combo the notebooks currently use.
+#
+# --- Fourth pattern, added 2026-07-11: -ασι replacing -ον/-αν in imperfect
+# or aorist active --- an unusual direction (perfect/present-style -ασι
+# invading past tenses), also from the same Sophocles section. Smaller set
+# than the other three patterns (6 citations, most compound-only).
+# See sophocles-byzantine-morphology.md §5.
+#
+#   - δίδωμι's -ασι aorist (ἐδώκασι(ν)) has the most citations of any single
+#     form in this whole file (4 independent sources per Sophocles) --
+#     movable-nu notation matches the existing project convention (see
+#     pratt_verbs_lexicon.yaml's εἰμί/PAI.3S: ἐστί(ν)), not custom syntax.
+#   - λέγω's -ασι aorist (εἴπασι) lands on the *same* AAI.3P slot as the
+#     -οσαν variant (εἴποσαν) already added in the second pattern above --
+#     both genuinely attested, different sources, so merged into a list
+#     rather than one overwriting the other (same mechanism as ὁράω's
+#     ἴδοσαν/εἴδοσαν pair above).
+#   - Excluded: ἐπαίρω (ἐπήρασι) -- Sophocles only cites this as a compound
+#     of αἴρω (which already has its own, unrelated -οσαν entry above from
+#     a different citation); no simplex citation for this -ασι pattern.
+#   - Excluded: the compound ἀπεδώκασιν (ἀπο+δίδωμι) -- an additional
+#     citation for the same δίδωμι pattern already covered by the simplex
+#     ἐδώκασι(ν) above, not independent evidence for a different lemma.
+#
+# --- Fifth pattern, added 2026-07-11: Optative 3rd plural -σαν (instead of
+# classical -ειεν/-αιεν/-οιεν) --- same "invading -σαν" family as the
+# earlier patterns, but mood rather than tense: the aorist optative.
+# See sophocles-byzantine-morphology.md, "Optative" section.
+#
+#   - Excluded: πυρσεύω (πυρσεύσαισαν) -- zero coverage anywhere across all
+#     7 non-byzantine lexicons (checked, same standard as σχάζω/παλινοδέω
+#     above).
+#   - ὄλλυμι (ὀλέσαισαν) has no optative coverage specifically but a real
+#     paradigm elsewhere (present/perfect/aorist/infinitive all present) --
+#     included, matches the ἀνομέω/νοέω precedent (a base to merge into
+#     doesn't require coverage of this exact slot).
+#   - λέγω's two variants (εἴποισαν, Ps. 34,25; εἴπαισαν, Phavor.) both
+#     checked against the existing engine's own optative forms for λέγω
+#     (εἴπαιεν/εἴπειαν/εἴποιεν/λέξαιεν/λέξειαν/λεξάαιεν/λεξάειαν, none
+#     ending in -σαν) -- genuinely distinct from all of them, added as a
+#     list on a new AAO.3P slot (λέγω already has AAI.3P entries from
+#     earlier patterns; this is its first optative).
+#   - Excluded: ἐκλείπω (ἐκλείποισαν) -- compound of λείπω, which isn't
+#     itself in this lexicon; ἀποτίνω (ἀποτίνοιαν) -- compound of τίνω,
+#     and Sophocles' own note flags this specific form as itself an
+#     alteration of the expected ἀποτίνοισαν, i.e. doubly uncertain;
+#     παρέχω (παρέχοιν) -- compound of ἔχω, and the citation is a
+#     grammarian's gloss ("= παρέχοισαν/παρέχοιεν, per Curtius") rather
+#     than a direct attestation of the form itself.
+#
+# --- Sixth pattern, added 2026-07-11: Imperative -τωσαν/-σθωσαν (later)
+# vs. classical -ντων/-σθων, plus a distinct "perfect active as 3rd-person
+# imperative" sub-pattern (a real morphological innovation -- attaching an
+# imperative ending directly onto a perfect stem -- not just a usage note).
+# See sophocles-byzantine-morphology.md, "Imperative" section.
+#
+#   - Two false gaps caught by verification, not assumed from the
+#     transcription: λέγω's perfect-imperative candidate (εἰρηκέτωσαν) and
+#     ποιέω's (πεποιηκέτω) are BOTH already generated verbatim by the
+#     existing engine (λέγω's suppletive perfect εἴρηκα and ποιέω's regular
+#     perfect already produce these exact -κέτω(σαν) forms through the
+#     ordinary stemming rules) -- excluded as duplicates, not added.
+#   - Excluded: ἵστημι's -τωσαν candidate (also transcribed as "ἔστωσαν",
+#     Sophocles' own citation vague -- "simplex, common", no specific
+#     source) genuinely collides with εἰμί's own -τωσαν candidate (same
+#     spelling, solid citation Plat. Soph. 231A) -- kept εἰμί's, dropped
+#     ἵστημι's rather than guess which lemma a bare "ἔστωσαν" belongs to
+#     without a citation to disambiguate.
+#   - ἄγω's citation (ἀγέσθωσαν) was flagged "(compound-looking, check)" in
+#     the transcription -- on inspection this is simplex ἄγω's own middle
+#     voice (ἄγομαι) taking the -σθωσαν middle/passive imperative ending,
+#     not a compound at all; included as ἄγω's own second entry (it
+#     already has an unrelated -οσαν entry from the second pattern).
+#   - Excluded: ἐννοέω (ἐννοησάτωσαν) and ἰχνεύω (ἰχνευέτωσαν) -- zero
+#     coverage anywhere across all 7 non-byzantine lexicons (checked, same
+#     standard as σχάζω/παλινοδέω/πυρσεύω above).
+#   - Excluded (usage, not morphology): πείθω (πεποίθατε) and ἵστημι
+#     (ἑστήκατε) -- Sophocles cites these as perfect INDICATIVE forms used
+#     with imperative *force* in context ("do not trust" / "stand!"), not
+#     as morphologically distinct forms -- the spelling itself is entirely
+#     regular classical perfect indicative, so there's nothing for a
+#     forms:-override lexicon (which documents distinctive spellings, not
+#     pragmatic reinterpretation) to add.
+#   - Excluded (compounds): πρόειμι/μετατίθημι/ἐπάνειμι/ὑφίημι from the
+#     first list; προσεληλυθέτω/ἀκολουθέω/ἐπιθυμέω from the perfect-
+#     imperative list -- no simplex citation given for any of these.
+#
+# --- Seventh pattern, added 2026-07-11: Passive/Middle 2nd singular
+# original -σαι (instead of the contracted -ῃ/-ᾳ) --- the last pattern in
+# Sophocles' morphological survey (see sophocles-byzantine-morphology.md,
+# "Passive and Middle Indicative" section). After this pattern the
+# Introduction moves into "Contract Verbs" (mostly usage/orthography notes,
+# not clean lemma->form pairs) and then SYNTAX/RHYTHM chapters -- not
+# morphology, not mined.
+#
+#   - Every included form verified to differ from the engine's existing
+#     contracted classical 2nd singular (e.g. βούλομαι generates
+#     βούλει/βούλῃ, not βούλεσαι; κτάομαι generates κτᾷ, not κτᾶσαι).
+#   - ἐσθίω's candidate (φάγεσαι) is FUTURE tense (FMI.2S), not present --
+#     the same suppletive φαγ- stem already noted for φέρω/ἔφερα-style
+#     innovations; ἐσθίω now has this as its only byzantine entry (the
+#     lemma wasn't otherwise in this lexicon).
+#   - Excluded: δεξιόομαι (δεξιοῦσαι) and ἐναντιόομαι (ἐναντιοῦσαι) -- zero
+#     coverage anywhere across all 7 non-byzantine lexicons (checked, same
+#     standard as the exclusions in every earlier pattern above).
+#   - Excluded (mood ambiguity, same standard as ἀφαιρέω at the top of this
+#     file): πτοέω (πτοεῖσαι) -- the transcription itself flags this
+#     citation "(imperative note, unclear)", i.e. genuine uncertainty
+#     whether Sophocles means this as indicative or imperative -- dropped
+#     rather than guessed at.
+#   - Excluded (compounds): ἀφάω (ἐπαφᾶσαι), ἔρχομαι's citation specifically
+#     (ἐξέρχεσαι -- ἔρχομαι itself already has unrelated entries above from
+#     other citations), λαμβάνω's citation specifically (ἀναλαμβάνεσαι --
+#     same situation), ξενόω (ἀποξενοῦσαι), σπάω (περισπᾶσαι) -- no simplex
+#     citation given for any of these.
 
 γιγνώσκω:
   forms:
@@ -59,6 +235,7 @@
 ὁράω:
   forms:
     XAI.3P: ἑόρακαν
+    AAI.3P: ["ἴδοσαν", "εἴδοσαν"]
 
 γίγνομαι:
   forms:
@@ -67,6 +244,8 @@
 δίδωμι:
   forms:
     XAI.3P: δέδωκαν
+    AAI.3P: ἐδώκασι(ν)
+    AAD.3P: δότωσαν
 
 δοξάζω:
   forms:
@@ -80,6 +259,9 @@
   forms:
     XAI.3P: ἔσχηκαν
     IAI.1P: εἴχαμεν
+    IAI.3P: εἴχοσαν
+    AAI.3P: ἔσχοσαν
+    PAD.3P: ἐχέτωσαν
 
 οἶδα:
   forms:
@@ -88,6 +270,8 @@
 πίνω:
   forms:
     XAI.3P: πέπωκαν
+    AAI.3P: ἐπίοσαν
+    PMI.2S: πίεσαι
 
 τηρέω:
   forms:
@@ -104,11 +288,204 @@
 ἄγω:
   forms:
     IAI.3P: ἦγαν
+    PMD.3P: ἀγέσθωσαν
 
 φέρω:
   forms:
     AAI.1S: ἔφερα
+    IAI.3P: ἐφέροσαν
 
 γράφω:
   forms:
     AAI.2S: ἔγραψες
+
+αἴρω:
+  forms:
+    AAI.3P: ἤροσαν
+
+ἁμαρτάνω:
+  forms:
+    AAI.3P: ἡμάρτοσαν
+
+λέγω:
+  forms:
+    AAI.3P: ["εἴποσαν", "εἴπασι"]
+    AAO.3P: ["εἴποισαν", "εἴπαισαν"]
+
+ἐσθίω:
+  forms:
+    AAI.3P: ἐφάγοσαν
+    FMI.2S: φάγεσαι
+
+εὑρίσκω:
+  forms:
+    AAI.3P: εὕροσαν
+    AAO.3P: εὕροισαν
+
+κρίνω:
+  forms:
+    AAI.3P: ἐκρίνοσαν
+
+λαμβάνω:
+  forms:
+    IAI.3P: ἐλαμβάνοσαν
+    AAI.3P: ἐλάβοσαν
+
+μανθάνω:
+  forms:
+    AAI.3P: ἐμάθοσαν
+
+φαίνω:
+  forms:
+    IAI.3P: ἐφαίνοσαν
+
+ἀνομέω:
+  forms:
+    IAI.3P: ἠνομοῦσαν
+
+γεννάω:
+  forms:
+    IAI.3P: ἐγεννῶσαν
+
+δολιόω:
+  forms:
+    IAI.3P: ἐδολιοῦσαν
+
+ἐάω:
+  forms:
+    IAI.3P: ἐῶσαν
+
+θορυβέω:
+  forms:
+    IAI.3P: ἐθορυβοῦσαν
+
+θυμιάω:
+  forms:
+    IAI.3P: ἐθυμιῶσαν
+
+νικάω:
+  forms:
+    IAI.3P: ἐνικῶσαν
+
+νοέω:
+  forms:
+    IAI.3P: ἐνοοῦσαν
+
+οἰκοδομέω:
+  forms:
+    IAI.3P: ᾠκοδομοῦσαν
+
+ποιέω:
+  forms:
+    IAI.3P: ἐποιοῦσαν
+    AAI.3P: ἐποιήσασι
+    AAO.3P: ποιήσαισαν
+    PAD.3P: ποιείτωσαν
+
+τίθημι:
+  forms:
+    IAI.3P: ἐτιθέασι
+
+αἰνέω:
+  forms:
+    AAO.3P: αἰνέσαισαν
+
+ψηλαφάω:
+  forms:
+    AAO.3P: ψηλαφήσαισαν
+
+θηρεύω:
+  forms:
+    AAO.3P: θηρεύσαισαν
+
+ἔρχομαι:
+  forms:
+    AAO.3P: ἔλθοισαν
+
+ὄλλυμι:
+  forms:
+    AAO.3P: ὀλέσαισαν
+
+εὐλογέω:
+  forms:
+    AAO.3P: εὐλογήσαισαν
+
+ἐπίσταμαι:
+  forms:
+    PMD.3P: ἐπιστάσθωσαν
+
+εἶμι:
+  forms:
+    PAD.3P: ἴτωσαν
+
+θεραπεύω:
+  forms:
+    AAD.3P: θεραπευσάτωσαν
+
+διώκω:
+  forms:
+    PAD.3P: διωκέτωσαν
+
+εἰμί:
+  forms:
+    PAD.3P: ἔστωσαν
+
+φωνέω:
+  forms:
+    XAD.3S: πεφωνηκέτω
+
+θεωρέω:
+  forms:
+    XAD.3S: τεθεωρηκέτω
+
+βούλομαι:
+  forms:
+    PMI.2S: βούλεσαι
+
+ἐπείγω:
+  forms:
+    PMI.2S: ἐπείγεσαι
+
+ἰάομαι:
+  forms:
+    PMI.2S: ἰᾶσαι
+
+καυχάομαι:
+  forms:
+    PMI.2S: καυχᾶσαι
+
+κοιμάομαι:
+  forms:
+    PMI.2S: κοιμᾶσαι
+
+κομίζω:
+  forms:
+    PMI.2S: κομίζεσαι
+
+κτάομαι:
+  forms:
+    PMI.2S: κτᾶσαι
+
+λυτρόω:
+  forms:
+    PMI.2S: λυτροῦσαι
+
+ὀδυνάομαι:
+  forms:
+    PMI.2S: ὀδυνᾶσαι
+
+πλανάω:
+  forms:
+    PMI.2S: πλανᾶσαι
+
+πολεμέω:
+  forms:
+    PMI.2S: πολεμεῖσαι
+
+στεφανόω:
+  forms:
+    PMI.2S: στεφανοῦσαι
+
+φοβέομαι:
+  forms:
+    PMI.2S: φοβεῖσαι

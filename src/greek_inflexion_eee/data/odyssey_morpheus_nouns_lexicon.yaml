@@ -1,0 +1,266 @@
+# odyssey_morpheus_nouns_lexicon.yaml — verbatim attested noun forms for
+# lemmas appearing in the created_with_eee Odyssey course vocabulary,
+# confirmed via the Perseids Morpheus analyzer. Companion to
+# odyssey_morpheus_verbs_lexicon.yaml — see that file's header for the full
+# sourcing/verification methodology (course-vocabulary-driven, not treebank-
+# driven like "morpheus"; grave-accent running-text forms normalized to
+# acute citation spelling; only cells not already covered by the existing
+# lexicon chain are included).
+#
+# βοῦς here documents its vocative singular/plural and nominative/vocative
+# plural — real Homeric readings; note some of these are legitimately
+# identical in surface form across case/number (βοῦς serving as both NPM
+# and NPF, since the noun is common-gender).
+#
+# Use merged alongside "homer" (or the full Odyssey chain), not standalone.
+#
+# Machine-generated 2026-07-11 — see odyssey_morpheus_verbs_lexicon.yaml
+# header for methodology.
+
+αἶσα:
+  forms:
+    VSF: αἶσα
+βοῦς:
+  forms:
+    NPF: βοῦς
+    NPM: βοῦς
+    VPF: βοῦς
+    VPM: βοῦς
+    VSF: βοῦς
+    VSM: βοῦς
+γαῖα:
+  forms:
+    ASF: γαῖαν
+γείτων:
+  forms:
+    NPF: γείτονες
+    VPM: γείτονες
+δεῖπνον:
+  forms:
+    VSN: δεῖπνον
+δόλος:
+  forms:
+    DPM: δόλοισιν
+εἶδαρ:
+  forms:
+    NSN: εἶδαρ
+    VSN: εἶδαρ
+ζυγόν:
+  forms:
+    ADF: ζυγά
+    APN: ζυγά
+    NDF: ζυγά
+    NPN: ζυγά
+    NSF: ζυγά
+    VDF: ζυγά
+    VPN: ζυγά
+    VSF: ζυγά
+θάλασσα:
+  forms:
+    ASF: θάλασσαν
+θάνατος:
+  forms:
+    ASM: θάνατόν
+    GSM: θανάτοιο
+θίς:
+  forms:
+    ASM: θῖνα
+θυγάτηρ:
+  forms:
+    VSF: θύγατερ
+κάματος:
+  forms:
+    DSM: καμάτῳ
+καρπός:
+  forms:
+    ASM: καρπόν
+κλέος:
+  forms:
+    VSN: κλέος
+κτῆμα:
+  forms:
+    VPN: κτήματα
+κυβερνήτης:
+  forms:
+    NPM: κυβερνῆταί
+    VPM: κυβερνῆταί
+κῆρυξ:
+  forms:
+    ADM: κήρυχ'
+    ASM: κήρυχ'
+    DSM: κήρυχ'
+    NDM: κήρυχ'
+    VDM: κήρυχ'
+κῦμα:
+  forms:
+    VSN: κῦμα
+μέγαρον:
+  forms:
+    DPN: μεγάροισιν
+μέθυ:
+  forms:
+    NSN: μέθυ
+μοῦσα:
+  forms:
+    NSF: μοῦσα
+    VSF: μοῦσα
+μόρος:
+  forms:
+    VSN: μόρον
+μῆλον:
+  forms:
+    VPN: μῆλα
+ναῦς:
+  forms:
+    APF: νῆας
+    DPF: νηυσί
+    GSF: νηός
+    NPF: νῆες
+    NSM: νηός
+    VPF: νῆες
+νεφεληγερέτα:
+  forms:
+    ADM: νεφεληγερέτα
+    GSM: νεφεληγερέτα
+    NDM: νεφεληγερέτα
+    VDM: νεφεληγερέτα
+    VSM: νεφεληγερέτα
+νύμφη:
+  forms:
+    NSF: νύμφη
+    VSF: νύμφη
+νύξ:
+  forms:
+    APF: νύκτας
+    VSF: νύξ
+νῆσος:
+  forms:
+    VPF: νῆσοι
+πεδίον:
+  forms:
+    DSN: πεδίῳ
+πούς:
+  forms:
+    VSF: ποδί
+πτολίεθρον:
+  forms:
+    VSN: πτολίεθρον
+πόλις:
+  forms:
+    ASF: πόλιν
+    GSF: πόλιος
+πόσις:
+  forms:
+    ASF: πόσιν
+    ASM: πόσιν
+πότνια:
+  forms:
+    NPF: πότνι᾽
+    NSF: πότνι᾽
+    VPF: πότνι᾽
+    VSF: πότνι᾽
+σπέος:
+  forms:
+    DPN: σπέσσι
+στῆθος:
+  forms:
+    DPN: στήθεσσιν
+σῖτος:
+  forms:
+    ASM: σῖτον
+    GSM: σίτοιό
+φύλλον:
+  forms:
+    VPN: φύλλα
+ψυχή:
+  forms:
+    ASF: ψυχήν
+ἀνήρ:
+  forms:
+    ADM: ἄνδρε
+    ASM: Ἄνδρα
+    DPM: ἀνδράσι
+    NDM: ἄνδρε
+    VDM: ἄνδρε
+ἄλγος:
+  forms:
+    APN: ἄλγεα
+    VPN: ἄλγεα
+ἄνεμος:
+  forms:
+    GSM: ἀνέμοιο
+ἄνθος:
+  forms:
+    APN: ἄνθεα
+    VPN: ἄνθεα
+ἄνθρωπος:
+  forms:
+    DPM: ἀνθρώποισι
+ἄστυ:
+  forms:
+    NPN: ἄστεα
+    VPN: ἄστεα
+ἅλς:
+  forms:
+    ASM: ἅλα
+    DSF: ἁλί
+    DSM: ἁλί
+    VSF: ἁλί
+ἐγχείη:
+  forms:
+    DPF: ἐγχείῃσιν
+ἐρετμός:
+  forms:
+    DPM: ἐρετμοῖς
+    DPN: ἐρετμοῖς
+ἑταῖρος:
+  forms:
+    APM:
+    - ἑτάρους
+    - ἑταίρους
+    GPM: ἑτάρων
+    VPM: ἑταῖροι
+ἔτος:
+  forms:
+    ASN: ἔτος
+    VSN: ἔτος
+ἠώς:
+  forms:
+    ASF: ἠῶ
+    NDF: ἠῶ
+    VDF: ἠῶ
+ἦμαρ:
+  forms:
+    ASN: ἦμαρ
+    NPN: ἤματα
+    VPN: ἤματα
+    VSN: ἦμαρ
+ἦτορ:
+  forms:
+    VSN: ἦτορ
+ἱστίον:
+  forms:
+    ADF: ἱστία
+    NDF: ἱστία
+    NPN: ἱστία
+    NSF: ἱστία
+    VDF: ἱστία
+    VPN: ἱστία
+    VSF: ἱστία
+ἱστός:
+  forms:
+    APM: ἱστούς
+ἴς:
+  forms:
+    VSF: ἴς
+ὄρος:
+  forms:
+    ASN: ὄρος
+    NSN: ὄρος
+    VSN: ὄρος
+ὕδωρ:
+  forms:
+    VSN: ὕδωρ
+ὥρα:
+  forms:
+    DSF: ὥρῃ

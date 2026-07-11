@@ -1,0 +1,275 @@
+# odyssey_morpheus_verbs_lexicon.yaml — verbatim attested verb forms for
+# lemmas appearing in the created_with_eee Odyssey course vocabulary
+# (lessons 2026_06_01 through 2026_07_06, 508 distinct word forms across
+# 520 form+lemma+pos triples), confirmed via the Perseids Morpheus analyzer.
+# Every entry is a `forms:` block, never `stems:`.
+#
+# Distinct provenance from "morpheus" (see that lexicon's own header):
+# "morpheus" sources (form, UD-feats) pairs from the UD_Ancient_Greek
+# treebanks, broadly, independent of any specific course. This lexicon
+# instead starts from the Odyssey course's own vocabulary TSVs (the exact
+# forms students actually meet in the assigned text), queries Morpheus
+# directly for each one, verifies the returned lemma+pos agree with the
+# TSV's own claim (accentuation/dialectal-spelling differences tolerated,
+# e.g. νόος vs νοῦς — a genuinely different citation-form convention, not
+# unified), then keeps only cells the FULL existing lexicon chain
+# (pratt+dik+ltrg+lsj+homer+lxx+morphgnt+morpheus+byzantine merged) does not
+# already generate correctly — i.e. genuine additive coverage, not a
+# restatement of what's already reachable.
+#
+# Grave-accent forms from running text (a positional convention — Greek
+# marks a non-phrase-final oxytone with grave instead of acute, not a
+# distinct accent) are normalized back to acute citation-form spelling
+# before storage; the acute form is what a paradigm-table cell should show.
+#
+# Some entries may look surprising next to a regularized teaching paradigm
+# and are kept anyway because Morpheus independently confirms them as real
+# Homeric/Epic attestations, not generation noise:
+#   - εἰμί IAI.3P has two Morpheus-confirmed readings, ἔσαν (the expected
+#     Homeric 3rd-plural alongside ἦσαν) and ἦν (a rarer but independently
+#     attested alternate 3rd-plural, alongside its far more common 1st/3rd
+#     singular reading) — stored as a 2-element list.
+#   - βάλλω PAP.VSM: βάλλον — an archaic bare-stem vocative singular
+#     participle, distinct from the nominative-leveled -ων vocative Pratt's
+#     regularized Attic paradigm shows for this cell (cf. λύω PAP.VSM:
+#     λύων in this package's own examples.rst).
+#   - Dual-number cells are included where Morpheus confirms them; see
+#     morpheus_verbs_lexicon.yaml's own header for the pre-existing
+#     limitation that AncientGreekBackend.paradigm() doesn't enumerate
+#     dual person/number combinations (still reachable via
+#     GreekInflexion.generate(lemma, "...D") directly).
+#
+# Use merged alongside "homer" (or the full Odyssey chain), not standalone —
+# same reasoning as morpheus_verbs_lexicon.yaml: this documents specific
+# attested cells, not a self-contained stemming engine.
+#
+# Machine-generated 2026-07-11 from the Odyssey course's own lesson
+# vocabulary TSVs via direct Perseids Morpheus API queries, cross-checked
+# against the full existing lexicon chain for genuine additive coverage.
+
+βάλλω:
+  forms:
+    IAI.1S: βάλλον
+    IAI.3P: βάλλον
+    PAP.VSM: βάλλον
+βούλομαι:
+  forms:
+    IMI.3P: βούλοντο
+γεγωνέω:
+  forms:
+    IAI.1S: γεγώνευν
+    IAI.3P: γεγώνευν
+δίδωμι:
+  forms:
+    AAI.3P: δόσαν
+δατέομαι:
+  forms:
+    AMI.1P: δασσάμεθ'
+δηϊόω:
+  forms:
+    APP.NPM: δῃωθέντες
+    APP.VPM: δῃωθέντες
+διασχίζω:
+  forms:
+    AAI.3S: διέσχισεν
+εἰμί:
+  forms:
+    IAI.3P:
+    - ἔσαν
+    - ἦν
+    PAI.1S: εἴμ᾽
+    PAP.APN: ἐόντα
+    PAP.ASM: ἐόντα
+    PAP.NPN: ἐόντα
+    PAP.VPN: ἐόντα
+εἶμι:
+  forms:
+    PAP.APM: ἰόντας
+    PAP.DSM: ἰόντι
+    PAP.DSN: ἰόντι
+θνῄσκω:
+  forms:
+    AAI.1S: θάνον
+    AAI.3P: θάνον
+κίω:
+  forms:
+    IAI.1S: κίον
+    IAI.3P: κίον
+    PAP.VSM: κίον
+καθίζω:
+  forms:
+    IAI.1S: καθῖζον
+    IAI.3P: καθῖζον
+καλύπτω:
+  forms:
+    AAI.3S: κάλυψε
+κατερητύω:
+  forms:
+    IAI.3S: κατερήτυεν
+κεῖμαι:
+  forms:
+    IMI.1P: κείμεθ᾽
+    PMI.1P: κείμεθ᾽
+    PMI.3S: κεῖται
+    PMO.1P: κείμεθ᾽
+λανθάνω:
+  forms:
+    APS.3S: λάθηται
+    PMS.3S: λάθηται
+μάχομαι:
+  forms:
+    IMI.3P: ἐμάχοντο
+μένω:
+  forms:
+    IAI.1P: μένομεν
+    PAN: μενέμεν
+μήδομαι:
+  forms:
+    IMI.3P: μήδονθ'
+    PMI.3P: μήδονθ'
+μίγνυμι:
+  forms:
+    API.3P: μίγεν
+μενεαίνω:
+  forms:
+    IAI.3S: μενέαινεν
+ναιετάω:
+  forms:
+    PAI.1S: ναιετάω
+    PAP.DPM: ναιετάουσι
+    PAP.DPN: ναιετάουσι
+    PAS.1S: ναιετάω
+πάσχω:
+  forms:
+    AAI.3S: πάθεν
+πέρθω:
+  forms:
+    AAI.3S: ἔπερσεν
+πίνω:
+  forms:
+    IMI.3S: πίνετο
+παραπλάζω:
+  forms:
+    AAI.3S: παρέπλαγξεν
+πατέομαι:
+  forms:
+    AMI.1P: ἐπασσάμεθ'
+πελάζω:
+  forms:
+    AAI.3S: πέλασσεν
+πλέω:
+  forms:
+    IAI.1P: πλέομεν
+προΐημι:
+  forms:
+    IAI.1S: προΐην
+τελέω:
+  forms:
+    AAI.1S: τέλεσ᾽
+    AAI.3S: τέλεσ᾽
+    AMD.2S: τέλεσ᾽
+τύπτω:
+  forms:
+    PAP.VSM: τύπτον
+φέρω:
+  forms:
+    IMI.1S: φερόμην
+    IMI.3P: ἐφέροντ᾽
+φεύγω:
+  forms:
+    IAI.3S: πεφυγμένος ἦεν
+    PAN: φευγέμεν
+    XMP.NSM: πεφυγμένος ἦεν
+ἀΰω:
+  forms:
+    AAN: ἀῦσαι
+ἀλέξω:
+  forms:
+    FMP.NPM: ἀλεξόμενοι
+    FMP.VPM: ἀλεξόμενοι
+ἀπωθέω:
+  forms:
+    AAI.3S: ἀπέωσε
+ἀφύσσω:
+  forms:
+    AMI.1P: ἀφυσσάμεθ'
+ἀχεύω:
+  forms:
+    PMP.NPM: ἀκαχήμενοι
+    PMP.VPM: ἀκαχήμενοι
+    XMP.NPM: ἀκαχήμενοι
+    XMP.VPM: ἀκαχήμενοι
+ἄγω:
+  forms:
+    IAI.3P: ἄγον
+    PAP.VSM: ἄγον
+ἄνωγα:
+  forms:
+    YAI.1S: ἠνώγεα
+ἐθέλω:
+  forms:
+    IAI.3S: ἤθελεν
+ἐλεαίρω:
+  forms:
+    IAI.1S: ἐλέαιρον
+    IAI.3P: ἐλέαιρον
+ἐνέπω:
+  forms:
+    IAI.3S: ἔννεπε
+    PAD.2S: ἔννεπε
+ἐπίσταμαι:
+  forms:
+    AMP.NPM: ἐπιστάμενοι
+    AMP.VPM: ἐπιστάμενοι
+    FMP.NPM: ἐπιστάμενοι
+    FMP.VPM: ἐπιστάμενοι
+ἐπιβαίνω:
+  forms:
+    API.1P: ἐπέβημεν
+    PAN: ἐπιβαινέμεν
+ἐπορνύμι:
+  forms:
+    AAI.1S: ἐπῶρσ᾽
+    AAI.3S: ἐπῶρσ᾽
+ἐρύκω:
+  forms:
+    IAI.3S: ἔρυκε
+ἐρύω:
+  forms:
+    AAP.NPM: ἐρύσαντες
+    AAP.NSM: ἐρύσσας
+    AAP.VPM: ἐρύσαντες
+    AAP.VSM: ἐρύσσας
+ἐφίημι:
+  forms:
+    AAI.3S: ἐφέηκεν
+ἔδω:
+  forms:
+    PAI.3P: ἔδουσιν
+    PAP.DPM: ἔδουσιν
+    PAP.DPN: ἔδουσιν
+ἔρχομαι:
+  forms:
+    AAI.3S: ἦλθε
+ἧμαι:
+  forms:
+    XMI.1P: ἥμεθα
+    YMI.1P: ἥμεθα
+ἵημι:
+  forms:
+    PMP.NSM: ἱέμενός
+ὀπάζω:
+  forms:
+    AAP.NSM: ὀπάσσας
+    AAP.VSM: ὀπάσσας
+ὄλλυμι:
+  forms:
+    AAP.NPM: ὀλέσαντες
+    AAP.VPM: ὀλέσαντες
+    AMI.3P: ὤλονθ'
+ὄρνυμι:
+  forms:
+    YAI.3S: ὀρώρει
+ῥύομαι:
+  forms:
+    YMI.3S: ἐρρύσατο

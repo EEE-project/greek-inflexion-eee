@@ -1,0 +1,285 @@
+# odyssey_morpheus_adjs_lexicon.yaml — verbatim attested adjective forms for
+# lemmas appearing in the created_with_eee Odyssey course vocabulary,
+# confirmed via the Perseids Morpheus analyzer. Companion to
+# odyssey_morpheus_verbs_lexicon.yaml — see that file's header for the full
+# sourcing/verification methodology.
+#
+# The first adjective lexicon beyond "pratt" (the bundled teaching set of
+# ~10 paradigm adjectives) — before this, load_adj_lexicons() had no named
+# corpus lexicon comparable to what load_lexicons()/load_noun_lexicons()
+# already offered for verbs/nouns. 49 lemmas here are Homeric adjectives
+# the course vocabulary uses that Pratt's small teaching set never covered
+# (e.g. πολύτροπος, the Odyssey's own opening epithet).
+#
+# πολύς ("much/many") shows unusually broad coverage (17 cells) because it's
+# a suppletive adjective (πολύς/πολλή/πολύ, distinct stems by gender/case)
+# not well handled by the pratt stem-based generator at all; several of its
+# cells are genuinely ambiguous surface forms (e.g. πολλά is simultaneously
+# a valid feminine dual and feminine singular and neuter plural nom/voc/acc
+# reading — real accidental syncretism in the 1st/2nd declension pattern,
+# confirmed independently by Morpheus for each reading, not query noise).
+#
+# Use merged alongside "pratt" (the required base), not standalone.
+#
+# Machine-generated 2026-07-11 — see odyssey_morpheus_verbs_lexicon.yaml
+# header for methodology.
+
+αἰνόμορος:
+  forms:
+    DPF: αἰνομόροισιν
+    DPM: αἰνομόροισιν
+    DPN: αἰνομόροισιν
+αἰπύς:
+  forms:
+    ASM: αἰπύν
+γλαφυρός:
+  forms:
+    DPF: γλαφυρῇσιν
+    DPM: γλαφυροῖσι
+    DPN: γλαφυροῖσι
+γλυκερός:
+  forms:
+    ASM: γλυκερώτερον
+    ASN: γλυκερώτερον
+    NSN: γλυκερώτερον
+    VSN: γλυκερώτερον
+γλυκύς:
+  forms:
+    ASM: γλύκιον
+    ASN: γλύκιον
+    NSN: γλύκιον
+    VSF: γλύκιον
+    VSM: γλύκιον
+    VSN: γλύκιον
+δέκατος:
+  forms:
+    DSF: δεκάτῃ
+δειλός:
+  forms:
+    GPF: δειλῶν
+    GPM: δειλῶν
+    GPN: δειλῶν
+διερός:
+  forms:
+    DSM: διερῷ
+    DSN: διερῷ
+δολόεις:
+  forms:
+    NSF: δολόεσσα
+    VSF: δολόεσσα
+δῖος:
+  forms:
+    APN: δῖα
+    NPN: δῖα
+    NSF: δῖα
+    VPN: δῖα
+    VSF: δῖα
+εἰλίπους:
+  forms:
+    APF: εἰλίποδας
+    APM: εἰλίποδας
+εἰνοσίφυλλος:
+  forms:
+    ASF: εἰνοσίφυλλον
+    ASM: εἰνοσίφυλλον
+    ASN: εἰνοσίφυλλον
+    NSN: εἰνοσίφυλλον
+    VSN: εἰνοσίφυλλον
+εὐδείελος:
+  forms:
+    ASF: εὐδείελον
+    ASM: εὐδείελον
+    ASN: εὐδείελον
+    NSN: εὐδείελον
+    VSN: εὐδείελον
+θεσπέσιος:
+  forms:
+    DSF: θεσπεσίῃ
+θοός:
+  forms:
+    DPF:
+    - θοῇσι
+    - θοῇς
+κακός:
+  forms:
+    NSF: κακή
+    VSF: κακή
+κουροτρόφος:
+  forms:
+    NSF: κουροτρόφος
+    NSM: κουροτρόφος
+μελιηδής:
+  forms:
+    APN: μελιηδέα
+    ASF: μελιηδέα
+    ASM: μελιηδέα
+    NPN: μελιηδέα
+    VPN: μελιηδέα
+νήπιος:
+  forms:
+    NPM: νήπιοι
+    VPM: νήπιοι
+νόστιμος:
+  forms:
+    ASF: νόστιμον
+    ASM: νόστιμον
+    ASN: νόστιμον
+    NSN: νόστιμον
+    VSN: νόστιμον
+οἶος:
+  forms:
+    ASM: οἶον
+    ASN: οἶον
+    NSN: οἶον
+    VSN: οἶον
+πανυπέρτατος:
+  forms:
+    NSF: πανυπερτάτη
+    VSF: πανυπερτάτη
+πεζός:
+  forms:
+    ASM: πεζόν
+    ASN: πεζόν
+    NSN: πεζόν
+    VSN: πεζόν
+πολιός:
+  forms:
+    ASF: πολιήν
+πολυκηδής:
+  forms:
+    APN: πολυκηδέα
+    ASF: πολυκηδέα
+    ASM: πολυκηδέα
+    NPN: πολυκηδέα
+    VPN: πολυκηδέα
+πολύς:
+  forms:
+    ADF: πολλά
+    APN: πολλά
+    ASM: πολλόν
+    ASN: πολλόν
+    GPF: πολλῶν
+    GPM: πολλῶν
+    GPN: πολλῶν
+    NDF: πολλά
+    NPF: πολλαί
+    NPN: πολλά
+    NSF: πολλά
+    NSN: πολλόν
+    VDF: πολλά
+    VPF: πολλαί
+    VPN: πολλά
+    VSF: πολλά
+    VSN: πολλόν
+πολύτροπος:
+  forms:
+    ASF: πολύτροπον
+    ASM: πολύτροπον
+    ASN: πολύτροπον
+    NSN: πολύτροπον
+    VSN: πολύτροπον
+πᾶς:
+  forms:
+    DPM: πᾶσι
+    DPN: πᾶσι
+    NPM: πάντες
+    VPM: πάντες
+φίλος:
+  forms:
+    APM: φίλους
+    DPM: φίλοισι
+    DPN: φίλοισι
+χαλκήρης:
+  forms:
+    DPF: χαλκήρεσιν
+    DPM: χαλκήρεσιν
+    DPN: χαλκήρεσιν
+χθαμαλός:
+  forms:
+    NSF: χθαμαλή
+    VSF: χθαμαλή
+ἀγαθός:
+  forms:
+    VSF: ἀγαθή
+ἀλλοδαπός:
+  forms:
+    DSF: ἀλλοδαπῇ
+ἀντίθεος:
+  forms:
+    DSM: ἀντιθέῳ
+    DSN: ἀντιθέῳ
+ἀριπρεπής:
+  forms:
+    ASN: ἀριπρεπές
+    NSN: ἀριπρεπές
+    VSF: ἀριπρεπές
+    VSM: ἀριπρεπές
+    VSN: ἀριπρεπές
+ἀσκηθής:
+  forms:
+    NSF: ἀσκηθής
+    NSM: ἀσκηθής
+ἄνθινος:
+  forms:
+    ASM: ἄνθινον
+    ASN: ἄνθινον
+    NSN: ἄνθινον
+    VSN: ἄνθινον
+ἄσμενος:
+  forms:
+    NPM: ἄσμενοι
+    VPM: ἄσμενοι
+ἅπας:
+  forms:
+    NPM: ἅπαντες
+    VPM: ἅπαντες
+ἐμός:
+  forms:
+    ASM: ἐμόν
+    ASN: ἐμόν
+    NSN: ἐμόν
+    VSN: ἐμόν
+ἐπικάρσιος:
+  forms:
+    NPF: ἐπικάρσιαι
+    VPF: ἐπικάρσιαι
+ἕκαστος:
+  forms:
+    ASM: ἕκαστον
+    ASN: ἕκαστον
+    GSF: ἑκάστης
+    NSN: ἕκαστον
+    VSN: ἕκαστον
+ἠέριος:
+  forms:
+    NPF: ἠέριοι
+    NPM: ἠέριοι
+    VPF: ἠέριοι
+    VPM: ἠέριοι
+ἰχθυόεις:
+  forms:
+    APN: ἰχθυόεντα
+    ASM: ἰχθυόεντα
+    NPN: ἰχθυόεντα
+    VPN: ἰχθυόεντα
+ἱερός:
+  forms:
+    ASF: ἱερόν
+    ASM: ἱερόν
+    ASN: ἱερόν
+    NSN: ἱερόν
+    VSN: ἱερόν
+ἴσος:
+  forms:
+    GSF: ἴσης
+ὀλοός:
+  forms:
+    DPM: ὀλοοῖσ'
+    DPN: ὀλοοῖσ'
+ὑλήεις:
+  forms:
+    NSF: ὑλήεσσα
+    VSF: ὑλήεσσα
+ὠκύς:
+  forms:
+    GPF: ὠκειάων

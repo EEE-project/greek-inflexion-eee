@@ -47,9 +47,10 @@ for the upstream documentation.
   | `"lxx"` | 1905 | Septuagint | Biblical κοινή, ~250–100 BCE |
   | `"morphgnt"` | 1848 | New Testament | κοινή, ~1st c. CE |
   | `"morpheus"` | 46 | Morpheus-confirmed attested forms | Epic/Homeric (mixed) |
-  | `"byzantine"` | 15 | hand-curated from Sophocles' Lexicon (1887) | Byzantine, ~4th–15th c. CE |
+  | `"byzantine"` | 61 | hand-curated from Sophocles' Lexicon (1887) | Byzantine, ~4th–15th c. CE |
+  | `"odyssey_morpheus"` | 58 | Morpheus-confirmed, Odyssey course vocabulary | Epic/Homeric |
 
-  Combined unique coverage: ~5066 verbs. Custom YAML files (same format) are also
+  Combined unique coverage: ~5050 verbs. Custom YAML files (same format) are also
   accepted as absolute paths.
 
   **Nouns** (`load_noun_lexicons`) — always includes Pratt as base:
@@ -60,12 +61,15 @@ for the upstream documentation.
   | `"homer"` | 15 | Homeric Odyssey/Iliad vocabulary |
   | `"lsj"` | 18 | Classical Attic (Perseus/LSJ-verified) |
   | `"morpheus"` | 62 | Morpheus-confirmed attested forms, Epic/Homeric (mixed) |
+  | `"odyssey_morpheus"` | 60 | Morpheus-confirmed, Odyssey course vocabulary |
+  | `"palaestra_morpheus"` | 26 | Morpheus-confirmed, Palaestra course vocabulary |
 
   **Adjectives** (`load_adj_lexicons`) — always includes Pratt as base:
 
   | Name | Source |
   |------|--------|
   | `"pratt"` | Pratt textbook paradigm adjectives |
+  | `"odyssey_morpheus"` | Morpheus-confirmed, Odyssey course vocabulary (49 lemmas) |
 
 - **Morpheus-confirmed attested-form lexicon** (`"morpheus"`) — unlike every other
   bundled lexicon, every entry is a `forms:` block: a verbatim attested surface
@@ -87,11 +91,14 @@ for the upstream documentation.
   problem (Ζεύς-style irregulars) from two ends.
 
 - **Byzantine lexicon** (`"byzantine"`) — a hand-curated `forms:`-only lexicon
-  documenting a specific, well-known Byzantine-period verb morphology shift:
-  the analogical leveling of person/number endings toward `-αν`/`-αμεν`/`-α`
-  (e.g. `ἔγνωκαν` replacing classical `ἐγνώκᾱσι(ν)`; `εἴχαμεν` replacing
-  `εἴχομεν`), the direct ancestor of Modern Greek's uniform past-tense
-  endings. 15 lemmas, sourced from Sophocles' *Greek Lexicon of the Roman
+  documenting several well-known Byzantine-period verb morphology shifts,
+  mostly variants of an analogical `-αν`/`-σαν`/`-ασι` ending spreading into
+  slots classical Greek marked differently (e.g. `ἔγνωκαν` replacing
+  classical `ἐγνώκᾱσι(ν)`; `ἐποιοῦσαν` replacing `ἐποίουν`; `ἐδώκασι(ν)`
+  replacing `ἔδωκαν`/`ἔδοσαν`) — the direct ancestor of Modern Greek's
+  uniform past-tense endings. See the lexicon file's own header for the
+  complete pattern-by-pattern breakdown and sourcing/verification discipline
+  for each. 61 lemmas, sourced from Sophocles' *Greek Lexicon of the Roman
   and Byzantine Periods* (1887, public domain) — specifically its
   Introduction's own systematic survey of this phenomenon, not scattered
   dictionary entries. The two entries whose citation is an NT verse
@@ -113,7 +120,7 @@ for the upstream documentation.
   instead of -ασι"), not a self-contained stemming engine — there's no
   principal-parts information here, only citations for individual already-
   inflected cells. Standalone (`load_lexicons("byzantine")`), the lexicon
-  therefore only covers its own 15 lemmas with 1-2 cells each. Merged with
+  therefore only covers its own 61 lemmas with 1-2 cells each. Merged with
   `lxx`/`morphgnt`/`lsj` as the base, it inherits their combined ~3000+
   lemma paradigm coverage and the `byzantine` override silently wins
   wherever Sophocles documents a divergence, falling through cleanly to
@@ -126,6 +133,28 @@ for the upstream documentation.
   gi = load_lexicons(["lxx", "morphgnt", "pratt", "ltrg", "lsj", "byzantine"])
   gi.generate("γιγνώσκω", "XAI.3P")   # {'ἔγνωκαν': [...]} (byzantine override)
   gi.generate("πάσχω", "AAI.3P")      # {'ἔπαθον': [...]}  (plain Koine, no override)
+  ```
+
+- **Course-specific Morpheus lexicons** (`"odyssey_morpheus"`, `"palaestra_morpheus"`)
+  — `forms:`-only lexicons covering gaps in the created_with_eee Odyssey and
+  Palaestra course vocabularies, verified against the Perseids Morpheus
+  analyzer. Distinct provenance from `"morpheus"` (treebank-driven, corpus-
+  general): these start from each course's own vocabulary and keep only
+  cells the rest of the lexicon chain doesn't already generate correctly.
+  Odyssey's forms are attested-in-text (harvested from the course's own
+  lesson TSVs, Morpheus-confirmed); Palaestra's are synthetic candidates
+  generated from known declension patterns and then Morpheus-verified, since
+  its vocabulary TSVs give only a citation form with no running text to
+  harvest from. See each lexicon file's own header for the full sourcing
+  story, and `test_odyssey_palaestra_morpheus_lexicons.py` for behavioral
+  coverage.
+
+  ```python
+  gi = load_noun_lexicons(["homer", "odyssey_morpheus"])
+  gi.generate("βοῦς", "NPM")              # {'βοῦς': [...]} (Homeric, not βόες)
+
+  gi = load_noun_lexicons("palaestra_morpheus")
+  gi.generate("σκιά", "GSF")              # {'σκιᾶς': [...]} (usable standalone)
   ```
 
 - **Adjective morphology** — `adj_stemming.yaml` + `pratt_adjs_lexicon.yaml` covering
@@ -195,6 +224,10 @@ gi.generate("θεός", "GSM")              # {'θεοῖο': [...]} (Epic genit
 # Verbs — Byzantine-period attested divergence (merge alongside a Koine lexicon)
 gi = load_lexicons(["morphgnt", "byzantine"])
 gi.generate("γιγνώσκω", "XAI.3P")       # {'ἔγνωκαν': [...]} (not ἐγνώκᾱσι(ν))
+
+# Nouns — Palaestra course vocabulary (usable standalone, no Homeric base needed)
+gi = load_noun_lexicons("palaestra_morpheus")
+gi.generate("δεσπότης", "GPM")          # {'δεσποτῶν': [...]}
 
 # Adjectives
 gi = load_adj_default()

@@ -35,6 +35,7 @@ _VERB_LEXICONS: dict[str, str] = {
     "lsj":      "lsj_verbs_lexicon.yaml",
     "morpheus": "morpheus_verbs_lexicon.yaml",
     "byzantine": "byzantine_verbs_lexicon.yaml",
+    "odyssey_morpheus": "odyssey_morpheus_verbs_lexicon.yaml",
 }
 
 # Named noun lexicons bundled with the package
@@ -43,11 +44,14 @@ _NOUN_LEXICONS: dict[str, str] = {
     "homer": "homer_nouns_lexicon.yaml",
     "lsj": "lsj_nouns_lexicon.yaml",
     "morpheus": "morpheus_nouns_lexicon.yaml",
+    "odyssey_morpheus": "odyssey_morpheus_nouns_lexicon.yaml",
+    "palaestra_morpheus": "palaestra_morpheus_nouns_lexicon.yaml",
 }
 
 # Named adjective lexicons bundled with the package
 _ADJ_LEXICONS: dict[str, str] = {
     "pratt": "pratt_adjs_lexicon.yaml",
+    "odyssey_morpheus": "odyssey_morpheus_adjs_lexicon.yaml",
 }
 
 _PARTNUM_TO_KEY_REGEX = {
@@ -283,6 +287,11 @@ def load_lexicons(names: "str | list[str]") -> "GreekInflexion":
                      Sophocles' Lexicon of the Roman and Byzantine Periods
                      (very small; documents specific attested morphological
                      divergences from Attic/Koine, not a full paradigm source)
+        "odyssey_morpheus" — Morpheus-confirmed attested forms for verbs in
+                     the created_with_eee Odyssey course vocabulary not
+                     already covered by the rest of the chain; course-
+                     vocabulary-driven (see its own header), distinct from
+                     the treebank-driven "morpheus"
 
     Absolute file paths load custom YAML lexicon files in the same format.
     Multiple names are merged additively; later entries add new stems without
@@ -337,6 +346,14 @@ def load_noun_lexicons(names: "str | list[str]") -> "GreekInflexion":
         "morpheus" — Morpheus-confirmed attested forms for lemmas the other
                      lexicons can't handle cleanly (non-2nd-declension,
                      oxytone, irregular); Epic/Homeric register
+        "odyssey_morpheus" — Morpheus-confirmed attested forms for nouns in
+                     the created_with_eee Odyssey course vocabulary not
+                     already covered by the rest of the chain
+        "palaestra_morpheus" — Morpheus-confirmed forms for the 27 nouns in
+                     the created_with_eee Palaestra course vocabulary;
+                     synthetic candidates generated from known declension
+                     patterns then Morpheus-verified, not attestation-
+                     harvested (see its own header) — usable standalone
 
     Examples::
 
@@ -358,6 +375,10 @@ def load_adj_lexicons(names: "str | list[str]") -> "GreekInflexion":
     Named lexicons::
 
         "pratt" — Pratt teaching adjectives
+        "odyssey_morpheus" — Morpheus-confirmed attested forms for
+                     adjectives in the created_with_eee Odyssey course
+                     vocabulary; the first named adjective lexicon beyond
+                     "pratt" (see its own header)
 
     Examples::
 
