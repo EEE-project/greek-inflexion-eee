@@ -183,8 +183,8 @@ def test_lexicon_sizes():
     accident, if this changes."""
     from greek_inflexion_eee.fileformat import _load_lexicon_yaml
     assert len(_load_lexicon_yaml("odyssey_morpheus_verbs_lexicon.yaml")) == 56
-    assert len(_load_lexicon_yaml("odyssey_morpheus_nouns_lexicon.yaml")) == 58
-    assert len(_load_lexicon_yaml("odyssey_morpheus_adjs_lexicon.yaml")) == 48
+    assert len(_load_lexicon_yaml("odyssey_morpheus_nouns_lexicon.yaml")) == 59
+    assert len(_load_lexicon_yaml("odyssey_morpheus_adjs_lexicon.yaml")) == 57
     assert len(_load_lexicon_yaml("palaestra_morpheus_nouns_lexicon.yaml")) == 26
 
 
@@ -256,3 +256,46 @@ def test_cross_lemma_contamination_excluded():
     assert "NPF" not in adjs["ἠέριος"]["forms"]
     assert "VPF" not in adjs["ἠέριος"]["forms"]
     assert set(adjs["ἠέριος"]["forms"]) == {"NPM", "VPM"}
+
+
+# --- gap-mining addition (2026-07-12): remaining Odyssey zero-coverage lemmas -
+
+def test_odyssey_zero_coverage_gap_fill_added():
+    """A fresh sweep of all 5 Odyssey lessons' vocab against the full 8-lexicon
+    chain (after the 2026-07-11 audit fixes above) found only 13 remaining
+    zero-coverage (lemma, pos) pairs -- down from 73 before odyssey_morpheus
+    existed. 9 were genuine Epic-appropriate Morpheus-confirmed gaps (verified
+    against the actual Homeric line for the 3 gender-ambiguous ones: ἕλικας
+    βοῦς is genuinely common-gender so both APM/APF are kept; ἐϋκνήμιδες
+    ἑταῖροι and ἐρίηρας ἑταίρους are both unambiguously masculine). 3 more
+    (τρηχύς, ἐρίηρες, κληίς) are deliberate-alias cases (Morpheus's own
+    preferred hdwd differs -- τραχύς, ἐρίηρος, κλείς respectively -- but the
+    dial tag confirms the reading is genuinely Epic/neutral); logged in
+    tools/morpheus/README.md's alias list. One candidate (ὑλήεις, attested
+    form ὑλήεσσα) was investigated and left OUT -- Morpheus confirms it only
+    for Doric dial, the same failure mode already caught and removed once
+    from this same lexicon on 2026-07-11.
+
+    The remaining 2 of the original 13 are NOT lexicon gaps at all: λαθέσθαι
+    and οἰχόμενοι are course-TSV lemma-column bugs (the inflected form was
+    entered as the lemma) -- λανθάνω already has the exact needed form
+    (AMN: λαθέσθαι); οἴχομαι needs a backend fix (plural participle cells
+    aren't enumerated by _build_verb_paradigm at all), not lexicon data.
+    """
+    from greek_inflexion_eee.fileformat import _load_lexicon_yaml
+
+    adjs = _load_lexicon_yaml("odyssey_morpheus_adjs_lexicon.yaml")
+    assert adjs["πίων"]["forms"]["ASM"] == "πίονα"
+    assert adjs["τρηχύς"]["forms"]["NSF"] == "τρηχεῖα"
+    assert adjs["ἀμφιέλισσα"]["forms"]["NPF"] == "ἀμφιέλισσαι"
+    assert adjs["ἐρίηρες"]["forms"]["APM"] == "ἐρίηρας"
+    assert adjs["ἐϋκνήμις"]["forms"]["NPM"] == "ἐϋκνήμιδες"
+    assert adjs["ἕλιξ"]["forms"]["APM"] == "ἕλικας"
+    assert adjs["ἕλιξ"]["forms"]["APF"] == "ἕλικας"
+    assert adjs["ἐυπλόκαμος"]["forms"]["NSF"] == "ἐυπλόκαμος"
+    assert adjs["τρίτος"]["forms"]["ASN"] == "τρίτον"
+    assert adjs["τρίτατος"]["forms"]["ASN"] == "τρίτατον"
+    assert "ὑλήεις" not in adjs  # Doric-only, deliberately left uncovered
+
+    nouns = _load_lexicon_yaml("odyssey_morpheus_nouns_lexicon.yaml")
+    assert nouns["κληίς"]["forms"]["DPF"] == "κληῖσι"

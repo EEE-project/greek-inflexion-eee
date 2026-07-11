@@ -92,11 +92,12 @@ alone**, since that check alone is exactly what let both bugs through.
   filed under one citation spelling while Morpheus's own preferred `hdwd`
   is a genuinely different consonant sequence for the same word (known
   cases so far: `ἐννέπω`↔`ἐνέπω`, `μετανίσομαι`↔`μετανίσσομαι`,
-  `νοῦς`↔`νόος`, `ἄεθλος`↔`ἆθλος`). These show up as `not_found` in an
-  audit even though the underlying data is correct — **always check by
-  hand whether a `not_found` entry is this, or a real bug**, before
-  removing anything (see `query_all_morpheus_lexicon.py`'s audit history
-  for worked examples of telling the two apart).
+  `νοῦς`↔`νόος`, `ἄεθλος`↔`ἆθλος`, `τρηχύς`↔`τραχύς`, `ἐρίηρες`↔`ἐρίηρος`,
+  `κληίς`↔`κλείς`). These show up as `not_found` in an audit even though
+  the underlying data is correct — **always check by hand whether a
+  `not_found` entry is this, or a real bug**, before removing anything
+  (see `query_all_morpheus_lexicon.py`'s audit history for worked examples
+  of telling the two apart).
 - **Some `dial`-only tags reflect corpus provenance, not a real dialect
   restriction.** A lemma whose stem ends in ε/ι/ρ keeps long-α in its
   paradigm in *every* period (the same rule that makes σκιά's plural
@@ -121,7 +122,7 @@ alone**, since that check alone is exactly what let both bugs through.
 
 | Lexicon | Audited | Result |
 |---|---|---|
-| `odyssey_morpheus` (verbs/nouns/adjs) | yes (2026-07-11) | 33 bad cells found and removed across two passes (5 dial, 28 cross-lemma-contamination) |
+| `odyssey_morpheus` (verbs/nouns/adjs) | yes (2026-07-11) | 33 bad cells found and removed across two passes (5 dial, 28 cross-lemma-contamination); separately grown by 10 lemmas (9 adjs + 1 noun) closing the remaining Odyssey zero-coverage gap, one (`ὑλήεις`) checked and left uncovered — Doric-only, no clean Epic attestation found |
 | `palaestra_morpheus` | yes (2026-07-11) | 0 bad cells; 4 `σκιά` cells flagged then kept (see phonology note above) |
 | `morpheus` (verbs/nouns) | yes (2026-07-11, fresh queries — no prior cache existed) | 22 bad cells found and removed across 13 lemmas (dial mismatches + wrong gender/number/case + invalid voice-letter tags); 2 lemmas (θεά, ὥρα) investigated and kept |
 | `byzantine` | not applicable | never went through live Morpheus querying — sourced from Sophocles' 1887 dictionary, cross-checked against the existing stem-based engine and published critical texts instead |

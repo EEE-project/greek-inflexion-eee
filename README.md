@@ -61,7 +61,7 @@ for the upstream documentation.
   | `"homer"` | 15 | Homeric Odyssey/Iliad vocabulary |
   | `"lsj"` | 18 | Classical Attic (Perseus/LSJ-verified) |
   | `"morpheus"` | 62 | Morpheus-confirmed attested forms, Epic/Homeric (mixed) |
-  | `"odyssey_morpheus"` | 58 | Morpheus-confirmed, Odyssey course vocabulary |
+  | `"odyssey_morpheus"` | 59 | Morpheus-confirmed, Odyssey course vocabulary |
   | `"palaestra_morpheus"` | 26 | Morpheus-confirmed, Palaestra course vocabulary |
 
   **Adjectives** (`load_adj_lexicons`) — always includes Pratt as base:
@@ -69,7 +69,7 @@ for the upstream documentation.
   | Name | Source |
   |------|--------|
   | `"pratt"` | Pratt textbook paradigm adjectives |
-  | `"odyssey_morpheus"` | Morpheus-confirmed, Odyssey course vocabulary (48 lemmas) |
+  | `"odyssey_morpheus"` | Morpheus-confirmed, Odyssey course vocabulary (57 lemmas) |
 
 - **Perseids Morpheus** — three lexicons (`"morpheus"`, `"odyssey_morpheus"`,
   `"palaestra_morpheus"`) are sourced from or verified against
