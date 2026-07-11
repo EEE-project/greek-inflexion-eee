@@ -34,6 +34,7 @@ _VERB_LEXICONS: dict[str, str] = {
     "morphgnt": "morphgnt_verbs_lexicon.yaml",
     "lsj":      "lsj_verbs_lexicon.yaml",
     "morpheus": "morpheus_verbs_lexicon.yaml",
+    "byzantine": "byzantine_verbs_lexicon.yaml",
 }
 
 # Named noun lexicons bundled with the package
@@ -278,6 +279,10 @@ def load_lexicons(names: "str | list[str]") -> "GreekInflexion":
         "morpheus" — Morpheus-confirmed attested forms for lemmas the other
                      lexicons can't handle cleanly (athematic/contract/
                      compound/deponent verbs); Epic/Homeric register
+        "byzantine" — Byzantine period, ~4th–15th c. CE, hand-curated from
+                     Sophocles' Lexicon of the Roman and Byzantine Periods
+                     (very small; documents specific attested morphological
+                     divergences from Attic/Koine, not a full paradigm source)
 
     Absolute file paths load custom YAML lexicon files in the same format.
     Multiple names are merged additively; later entries add new stems without

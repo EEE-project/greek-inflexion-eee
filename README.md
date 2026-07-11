@@ -47,8 +47,9 @@ for the upstream documentation.
   | `"lxx"` | 1905 | Septuagint | Biblical κοινή, ~250–100 BCE |
   | `"morphgnt"` | 1848 | New Testament | κοινή, ~1st c. CE |
   | `"morpheus"` | 46 | Morpheus-confirmed attested forms | Epic/Homeric (mixed) |
+  | `"byzantine"` | 15 | hand-curated from Sophocles' Lexicon (1887) | Byzantine, ~4th–15th c. CE |
 
-  Combined unique coverage: ~5064 verbs. Custom YAML files (same format) are also
+  Combined unique coverage: ~5066 verbs. Custom YAML files (same format) are also
   accepted as absolute paths.
 
   **Nouns** (`load_noun_lexicons`) — always includes Pratt as base:
@@ -84,6 +85,48 @@ for the upstream documentation.
   data correctly — restricting a noun's enumerated genders to what it actually
   has, since the fix and this lexicon were built together to solve the same
   problem (Ζεύς-style irregulars) from two ends.
+
+- **Byzantine lexicon** (`"byzantine"`) — a hand-curated `forms:`-only lexicon
+  documenting a specific, well-known Byzantine-period verb morphology shift:
+  the analogical leveling of person/number endings toward `-αν`/`-αμεν`/`-α`
+  (e.g. `ἔγνωκαν` replacing classical `ἐγνώκᾱσι(ν)`; `εἴχαμεν` replacing
+  `εἴχομεν`), the direct ancestor of Modern Greek's uniform past-tense
+  endings. 15 lemmas, sourced from Sophocles' *Greek Lexicon of the Roman
+  and Byzantine Periods* (1887, public domain) — specifically its
+  Introduction's own systematic survey of this phenomenon, not scattered
+  dictionary entries. The two entries whose citation is an NT verse
+  (`γιγνώσκω`, `ὁράω`) are additionally cross-verified against the
+  Westcott-Hort/Nestle 1904 critical text; the rest cite patristic/Byzantine
+  authors (Barnabas, Hippolytus, the Sibylline Oracles, Malalas, Theophanes,
+  ...) instantiating the same independently-documented phenomenon (see
+  Wikipedia's *Medieval Greek* article). Unlike `morpheus`, this is not a
+  systematic sweep of a corpus — TLG and LBG (the two best-fitting Byzantine
+  lexicons) were investigated and ruled out as sources, since both explicitly
+  prohibit bulk/programmatic extraction; see the lexicon file's own header
+  for the full sourcing story and what was deliberately excluded (ambiguous
+  mood readings, illegible OCR, forms already reachable via another
+  lexicon's own stem-based generation).
+
+  **Use `"byzantine"` merged with a Koine/Attic base, not standalone.**
+  Sophocles' Introduction documents *specific, optional deviations* from an
+  already-known classical paradigm (e.g. "3rd plural sometimes ends in -αν
+  instead of -ασι"), not a self-contained stemming engine — there's no
+  principal-parts information here, only citations for individual already-
+  inflected cells. Standalone (`load_lexicons("byzantine")`), the lexicon
+  therefore only covers its own 15 lemmas with 1-2 cells each. Merged with
+  `lxx`/`morphgnt`/`lsj` as the base, it inherits their combined ~3000+
+  lemma paradigm coverage and the `byzantine` override silently wins
+  wherever Sophocles documents a divergence, falling through cleanly to
+  the Koine/Attic-generated form everywhere else — which is also the
+  linguistically accurate picture: most Byzantine literary Greek genuinely
+  *is* Koine/Attic morphology, cell for cell; the exceptions layer is
+  exactly where (and only where) it actually diverges.
+
+  ```python
+  gi = load_lexicons(["lxx", "morphgnt", "pratt", "ltrg", "lsj", "byzantine"])
+  gi.generate("γιγνώσκω", "XAI.3P")   # {'ἔγνωκαν': [...]} (byzantine override)
+  gi.generate("πάσχω", "AAI.3P")      # {'ἔπαθον': [...]}  (plain Koine, no override)
+  ```
 
 - **Adjective morphology** — `adj_stemming.yaml` + `pratt_adjs_lexicon.yaml` covering
   2-1-2 uncontracted/contracted, two-termination, 3-1-3 participial and υ-stem,
@@ -143,6 +186,10 @@ gi.generate("βοῦς", "GPM")              # {'βοῶν': [...]}
 gi = load_noun_lexicons("morpheus")
 gi.generate("Ζεύς", "GSM")              # {'Διός': [...]} (suppletive, not a stem+ending)
 gi.generate("θεός", "GSM")              # {'θεοῖο': [...]} (Epic genitive, not Attic -ου)
+
+# Verbs — Byzantine-period attested divergence (merge alongside a Koine lexicon)
+gi = load_lexicons(["morphgnt", "byzantine"])
+gi.generate("γιγνώσκω", "XAI.3P")       # {'ἔγνωκαν': [...]} (not ἐγνώκᾱσι(ν))
 
 # Adjectives
 gi = load_adj_default()

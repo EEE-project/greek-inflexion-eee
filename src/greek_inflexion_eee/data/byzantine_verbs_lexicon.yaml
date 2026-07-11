@@ -1,0 +1,114 @@
+# byzantine_verbs_lexicon.yaml — verbatim attested verb forms documenting a
+# specific, well-known Byzantine-period morphological development: the
+# analogical leveling of person/number endings toward -αν/-αμεν/-α (replacing
+# classical -ασι(ν)/-ομεν/-ον and the like), the direct ancestor of Modern
+# Greek's uniform past-tense endings (e.g. είδαν, ήρθαν, έγραψαν, είχαμε).
+# Every entry is a `forms:` block (never `stems:`) — the exact attested
+# surface form, not a reconstruction.
+#
+# Sourcing: Sophocles, "Greek Lexicon of the Roman and Byzantine Periods
+# (146 BC-1100 AD)" (1887), Introduction, "Active and middle" section —
+# a systematic 19th-century philological survey of this exact phenomenon,
+# with citations to real Byzantine/Koine texts. Archive.org copy:
+# https://archive.org/details/cu31924021609395
+#
+# Verification discipline:
+#   1. Every entry cross-checked against ALL other bundled lexicons
+#      (pratt/dik/ltrg/lsj/homer/lxx/morphgnt/morpheus) to confirm the target
+#      form is genuinely absent, not already reachable — several
+#      superficially-promising Sophocles citations turned out to be
+#      duplicates of forms the engine's existing dual-stem generation (e.g.
+#      morphgnt's `stems: {3-: ελθ/ελθ{2nd}}` pattern for ἔρχομαι) already
+#      produces, or of forms already in lxx/morphgnt directly (αἱρέω,
+#      εὑρίσκω, λαμβάνω, φεύγω) — all such duplicates were dropped, not kept.
+#   2. Every entry's OCR reading re-verified directly against the source
+#      scan text (not trusted from a first pass) — one candidate (πίνω's
+#      aorist, cited "Mal. 234, 15") was dropped for genuinely illegible OCR
+#      ("ἔπιον. ... éma."), rather than guessed at.
+#   3. The two entries whose citation is a Bible verse (γιγνώσκω, ὁράω)
+#      additionally cross-checked against a modern critical edition:
+#      ἔγνωκαν (John 17:7) and ἑόρακαν (Colossians 2:1) are the
+#      Westcott-Hort/Nestle 1904 critical readings, not obscure manuscript
+#      variants — confirmed via BibleHub/StudyLight, independent of
+#      Sophocles' own OCR. The remaining entries' citations are patristic/
+#      Byzantine texts (Barnabas, Hippolytus, the Sibylline Oracles, John
+#      Malalas, Theophanes, ...) without as convenient an independent
+#      critical-text lookup; trusted on (1)+(2) plus the fact that all of
+#      them instantiate the same independently-attested phenomenon (see
+#      Wikipedia's Medieval Greek article, which documents this exact
+#      -ασι(ν)/-ουσι(ν) vs. -αν/-ουν rivalry from a real Byzantine text,
+#      Digenes Akritas) rather than being isolated, unrelated claims.
+#
+# Excluded on purpose, not just "not yet added":
+#   - ἀφαιρέω (ἀφείλαντο/ἀφείλατο): an independent source classifies these
+#     same surface forms as aorist-middle IMPERATIVE, not indicative as
+#     Sophocles' own section implies — a real mood conflict, left unresolved
+#     rather than guessed at.
+#   - πίνω's aorist (see verification note 2 above): illegible OCR.
+#   - Every compound-verb citation in the same Sophocles section (e.g.
+#     ἀπέσταλκαν for ἀποστέλλω, παρέστηκαν for παρίστημι, εἰσελήλυθαν for
+#     εἰσέρχομαι) — real, usable data for their own compound lemma, but not
+#     usable as evidence for the bare simplex verb, so left for a future
+#     pass that specifically targets those compound lemmas rather than
+#     silently attached to a simplex entry it doesn't verbatim describe.
+
+γιγνώσκω:
+  forms:
+    XAI.3P: ἔγνωκαν
+
+ὁράω:
+  forms:
+    XAI.3P: ἑόρακαν
+
+γίγνομαι:
+  forms:
+    XAI.3P: γέγοναν
+
+δίδωμι:
+  forms:
+    XAI.3P: δέδωκαν
+
+δοξάζω:
+  forms:
+    XAI.3P: δεδόξακαν
+
+ἔρδω:
+  forms:
+    XAI.3P: ἔοργαν
+
+ἔχω:
+  forms:
+    XAI.3P: ἔσχηκαν
+    IAI.1P: εἴχαμεν
+
+οἶδα:
+  forms:
+    XAI.3P: οἶδαν
+
+πίνω:
+  forms:
+    XAI.3P: πέπωκαν
+
+τηρέω:
+  forms:
+    XAI.3P: τετήρηκαν
+
+φανερόω:
+  forms:
+    XAI.3P: πεφανέρωκαν
+
+φρίσσω:
+  forms:
+    XAI.3P: πέφρικαν
+
+ἄγω:
+  forms:
+    IAI.3P: ἦγαν
+
+φέρω:
+  forms:
+    AAI.1S: ἔφερα
+
+γράφω:
+  forms:
+    AAI.2S: ἔγραψες
