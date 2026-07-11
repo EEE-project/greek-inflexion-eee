@@ -182,7 +182,77 @@ def test_lexicon_sizes():
     """Documents each lexicon's actual scope -- update deliberately, not by
     accident, if this changes."""
     from greek_inflexion_eee.fileformat import _load_lexicon_yaml
-    assert len(_load_lexicon_yaml("odyssey_morpheus_verbs_lexicon.yaml")) == 58
-    assert len(_load_lexicon_yaml("odyssey_morpheus_nouns_lexicon.yaml")) == 60
-    assert len(_load_lexicon_yaml("odyssey_morpheus_adjs_lexicon.yaml")) == 49
+    assert len(_load_lexicon_yaml("odyssey_morpheus_verbs_lexicon.yaml")) == 56
+    assert len(_load_lexicon_yaml("odyssey_morpheus_nouns_lexicon.yaml")) == 58
+    assert len(_load_lexicon_yaml("odyssey_morpheus_adjs_lexicon.yaml")) == 48
     assert len(_load_lexicon_yaml("palaestra_morpheus_nouns_lexicon.yaml")) == 26
+
+
+def test_dialect_mismatched_cells_excluded():
+    """The original build (query_morpheus.py) never captured Morpheus's own
+    `dial` field, so 5 cells shipped from Doric/Doric-Aeolic-only readings --
+    inappropriate for an Epic/Ionic (Homeric) course lexicon, caught via a
+    follow-up audit against the raw cached responses. λανθάνω and ἠώς each
+    keep their other, dialect-neutral cell for the same surface form;
+    ὑλήεις had no other cell and was dropped entirely (49 -> 48 adjective
+    lemmas)."""
+    from greek_inflexion_eee.fileformat import _load_lexicon_yaml
+    verbs = _load_lexicon_yaml("odyssey_morpheus_verbs_lexicon.yaml")
+    assert "PMS.3S" not in verbs["λανθάνω"]["forms"]
+    assert verbs["λανθάνω"]["forms"]["APS.3S"] == "λάθηται"
+
+    nouns = _load_lexicon_yaml("odyssey_morpheus_nouns_lexicon.yaml")
+    assert "NDF" not in nouns["ἠώς"]["forms"]
+    assert "VDF" not in nouns["ἠώς"]["forms"]
+    assert nouns["ἠώς"]["forms"]["ASF"] == "ἠῶ"
+
+    adjs = _load_lexicon_yaml("odyssey_morpheus_adjs_lexicon.yaml")
+    assert "ὑλήεις" not in adjs
+
+
+def test_cross_lemma_contamination_excluded():
+    """A second, more serious bug found by the same audit: the original
+    build script (odyssey_gaps.py) iterated over *every* Morpheus reading
+    for a surface form without re-filtering to the ones whose lemma matched
+    the target lemma before computing a tag code -- so a tag code correctly
+    derived from lemma A's grammatical features could get shipped under
+    lemma B's entry, if both happened to share a surface form (e.g. Morpheus
+    returns both κέω-optative and κεῖμαι-indicative for "κείμεθ᾽"; the
+    optative tag was wrongly filed under κεῖμαι, which has no optative
+    reading at all). 26 cells across 21 lemmas were affected (8 verb cells /
+    6 lemmas, 15 noun cells / 7 lemmas, 3 adjective cells / 2 lemmas);
+    2 lemmas lost all their cells and were dropped entirely from each of
+    verbs (ἐπίσταμαι, ῥύομαι: 58 -> 56) and nouns (μόρος, πούς: 60 -> 58).
+    Two more πολύς cells (NSF/VSF) turned out to be a second, unrelated
+    Doric-Aeolic dial mismatch missed by the first audit pass, which only
+    checked entries where lemma+tag both already matched cleanly."""
+    from greek_inflexion_eee.fileformat import _load_lexicon_yaml
+
+    verbs = _load_lexicon_yaml("odyssey_morpheus_verbs_lexicon.yaml")
+    assert "ἐπίσταμαι" not in verbs
+    assert "ῥύομαι" not in verbs
+    assert "PMO.1P" not in verbs["κεῖμαι"]["forms"]
+    assert verbs["κεῖμαι"]["forms"]["PMI.1P"] == "κείμεθ᾽"
+    assert "IAI.3S" not in verbs["φεύγω"]["forms"]
+    assert "API.1P" not in verbs["ἐπιβαίνω"]["forms"]
+    assert verbs["ἐπιβαίνω"]["forms"] == {"PAN": "ἐπιβαινέμεν"}
+
+    nouns = _load_lexicon_yaml("odyssey_morpheus_nouns_lexicon.yaml")
+    assert "μόρος" not in nouns
+    assert "πούς" not in nouns
+    # ζυγόν and ἱστίον are unambiguously neuter -- the 5 feminine-case cells
+    # each shipped (belonging to unrelated lemmas ζυγή / ἑστία) are gone;
+    # their genuine neuter cells survive untouched.
+    assert set(nouns["ζυγόν"]["forms"]) == {"APN", "NPN", "VPN"}
+    assert set(nouns["ἱστίον"]["forms"]) == {"NPN", "VPN"}
+    assert "NSM" not in nouns["ναῦς"]["forms"]  # was ναός's reading, wrong gender too
+    assert "VSF" not in nouns["ἅλς"]["forms"]
+    assert "DPN" not in nouns["ἐρετμός"]["forms"]
+
+    adjs = _load_lexicon_yaml("odyssey_morpheus_adjs_lexicon.yaml")
+    assert "NSF" not in adjs["πολύς"]["forms"]
+    assert "VSF" not in adjs["πολύς"]["forms"]
+    assert "ASM" not in adjs["γλυκύς"]["forms"]
+    assert "NPF" not in adjs["ἠέριος"]["forms"]
+    assert "VPF" not in adjs["ἠέριος"]["forms"]
+    assert set(adjs["ἠέριος"]["forms"]) == {"NPM", "VPM"}

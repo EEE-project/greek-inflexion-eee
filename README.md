@@ -48,7 +48,7 @@ for the upstream documentation.
   | `"morphgnt"` | 1848 | New Testament | κοινή, ~1st c. CE |
   | `"morpheus"` | 46 | Morpheus-confirmed attested forms | Epic/Homeric (mixed) |
   | `"byzantine"` | 61 | hand-curated from Sophocles' Lexicon (1887) | Byzantine, ~4th–15th c. CE |
-  | `"odyssey_morpheus"` | 58 | Morpheus-confirmed, Odyssey course vocabulary | Epic/Homeric |
+  | `"odyssey_morpheus"` | 56 | Morpheus-confirmed, Odyssey course vocabulary | Epic/Homeric |
 
   Combined unique coverage: ~5050 verbs. Custom YAML files (same format) are also
   accepted as absolute paths.
@@ -61,7 +61,7 @@ for the upstream documentation.
   | `"homer"` | 15 | Homeric Odyssey/Iliad vocabulary |
   | `"lsj"` | 18 | Classical Attic (Perseus/LSJ-verified) |
   | `"morpheus"` | 62 | Morpheus-confirmed attested forms, Epic/Homeric (mixed) |
-  | `"odyssey_morpheus"` | 60 | Morpheus-confirmed, Odyssey course vocabulary |
+  | `"odyssey_morpheus"` | 58 | Morpheus-confirmed, Odyssey course vocabulary |
   | `"palaestra_morpheus"` | 26 | Morpheus-confirmed, Palaestra course vocabulary |
 
   **Adjectives** (`load_adj_lexicons`) — always includes Pratt as base:
@@ -69,7 +69,21 @@ for the upstream documentation.
   | Name | Source |
   |------|--------|
   | `"pratt"` | Pratt textbook paradigm adjectives |
-  | `"odyssey_morpheus"` | Morpheus-confirmed, Odyssey course vocabulary (49 lemmas) |
+  | `"odyssey_morpheus"` | Morpheus-confirmed, Odyssey course vocabulary (48 lemmas) |
+
+- **Perseids Morpheus** — three lexicons (`"morpheus"`, `"odyssey_morpheus"`,
+  `"palaestra_morpheus"`) are sourced from or verified against
+  [Perseids Morpheus](https://services.perseids.org/bsp/morphologyservice/analysis/word),
+  a free, public, no-auth HTTP API that analyzes a single Ancient Greek
+  surface form and returns every morphological reading it can find — lemma,
+  part of speech, full grammatical features, and a `dial` field naming the
+  attested dialect(s) for that specific reading (e.g. `"epic"`, `"Homeric
+  Ionic"`, `"Attic"`). It analyzes; it does not generate (no "give me all
+  forms of X"). Built originally by the Perseus Project for the Homeric
+  corpus specifically, so Epic/Ionic coverage is a genuine strength, not an
+  afterthought — but always check `dial` before trusting a reading for a
+  specific register; see `tools/morpheus/README.md` for the querying/
+  auditing scripts and two real bugs they caught.
 
 - **Morpheus-confirmed attested-form lexicon** (`"morpheus"`) — unlike every other
   bundled lexicon, every entry is a `forms:` block: a verbatim attested surface

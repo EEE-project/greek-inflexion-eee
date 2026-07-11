@@ -29,6 +29,16 @@
 #
 # Machine-generated from grc_paradigm_cache_final.tsv (Morpheus-confirmed
 # treebank attestations) via build_morpheus_lexicon_yaml.py, 2026-07-10.
+#
+# Audited 2026-07-11 (tools/morpheus/audit_dial.py, fresh queries -- no raw
+# cache existed from the original build): 7 mistagged cells removed --
+# 3 Doric-only readings (λανθάνω, no epic alternative) and 4 outright wrong
+# tags (κεῖμαι's number, and ἀχεύω's voice letter × 3 -- "P" isn't even a
+# valid key for present/imperfect tense in stemming.yaml, only "A"/"M" are;
+# the real matches use "M"). See tools/morpheus/README.md for the full
+# noun+verb list and the two false-positive classes (deliberate spelling
+# aliases; phonologically period-invariant α-stems) this audit had to rule
+# out before trusting anything as a genuine bug.
 
 αἱρέω:
   forms:
@@ -110,7 +120,6 @@
     PMD.3S: κείσθω
     PMI.1P: κείμεθα
     PMI.3P: κέαται
-    PMI.3S: κέεται
     PMO.3S: κέοιτο
 λανθάνω:
   forms:
@@ -119,9 +128,6 @@
     AMD.2P: λάθεσθε
     AMI.3P: λάθοντο
     AMS.1S: λάθωμαι
-    IMI.3P: λάθοντο
-    PAI.3S: λάθει
-    PMI.3S: λάθεται
 λιλαίομαι:
   forms:
     IMI.3S: λιλαίετο
@@ -290,10 +296,7 @@
     AAI.3S: ἀκάχησε
     AMO.1P: ἀκαχοίμεθα
     AMO.3S: ἀκάχοιτο
-    IPI.3S: ἄχνυτο
     PMD.2S: ἀκαχίζεο
-    PPI.3S: ἄχνυται
-    PPN: ἀκάχησθαι
 ἄρνυμαι:
   forms:
     IMI.3D: ἀρνύσθην

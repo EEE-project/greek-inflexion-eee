@@ -124,3 +124,51 @@ def test_all_entries_use_forms_not_stems():
         for lemma, entry in data.items():
             assert "stems" not in entry, f"{filename}: {lemma!r} has a stems: entry"
             assert "forms" in entry and entry["forms"], f"{filename}: {lemma!r} has no forms:"
+
+
+# --- audit fix (2026-07-11): mistagged cells removed --------------------------
+
+def test_audited_bad_cells_removed():
+    """A fresh-query audit (tools/morpheus/audit_dial.py, run against this
+    lexicon for the first time since it was built in an earlier session)
+    found the same two failure classes already caught in odyssey_morpheus:
+    dial-register mismatches (a Doric-only reading with no epic alternative)
+    and outright wrong-tag bugs (wrong gender/number/case, or a voice letter
+    that isn't even a valid key in stemming.yaml -- e.g. `ἀχεύω`'s IPI/PPI/
+    PPN, when present/imperfect tense only ever has A/M voice letters, never
+    P). 22 cells across 13 lemmas removed; every affected lemma keeps other,
+    unaffected cells. See tools/morpheus/README.md for the full list and
+    reasoning, and the two lemmas (θεά, ὥρα) whose all-Attic/Doric dial
+    tagging was investigated and *kept* -- their stems end in ε/ρ, so -α is
+    the period-invariant spelling by the same phonological rule that makes
+    σκιά's forms dialect-general, not a real restriction."""
+    from greek_inflexion_eee.fileformat import _load_lexicon_yaml
+
+    verbs = _load_lexicon_yaml("morpheus_verbs_lexicon.yaml")
+    assert "PMI.3S" not in verbs["κεῖμαι"]["forms"]
+    assert "PMI.3P" in verbs["κεῖμαι"]["forms"]  # unaffected cell survives
+    for tag in ("IPI.3S", "PPI.3S", "PPN"):
+        assert tag not in verbs["ἀχεύω"]["forms"]
+    for tag in ("IMI.3P", "PAI.3S", "PMI.3S"):
+        assert tag not in verbs["λανθάνω"]["forms"]
+    assert verbs["λανθάνω"]["forms"]["AAI.3S"] == "λάθε"  # unaffected cell survives
+
+    nouns = _load_lexicon_yaml("morpheus_nouns_lexicon.yaml")
+    assert "NPF" not in nouns["θεός"]["forms"]
+    assert nouns["θεός"]["forms"]["GSM"] == "θεοῖο"  # unaffected cell survives
+    assert "NSM" not in nouns["ναῦς"]["forms"]
+    assert "GSF" not in nouns["πόλις"]["forms"]
+    assert "ASN" not in nouns["ἔτος"]["forms"]
+    assert "APF" not in nouns["ἠώς"]["forms"]
+    assert "ADF" not in nouns["ἠώς"]["forms"]
+    assert "DSM" not in nouns["ὄρος"]["forms"]
+    assert "GSM" not in nouns["ῥόος"]["forms"]
+    assert "ASN" not in nouns["ἦμαρ"]["forms"]
+    for tag in ("GSF", "NSF", "VSF"):
+        assert tag not in nouns["νύμφη"]["forms"]
+    for tag in ("ASF", "DSF", "GSF"):
+        assert tag not in nouns["ψυχή"]["forms"]
+
+    # θεά / ὥρα deliberately kept -- see docstring
+    assert "NSF" in nouns["θεά"]["forms"]
+    assert "NSF" in nouns["ὥρα"]["forms"]

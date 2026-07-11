@@ -24,6 +24,17 @@
 #
 # Machine-generated from grc_paradigm_cache_final.tsv (Morpheus-confirmed
 # treebank attestations) via build_morpheus_lexicon_yaml.py, 2026-07-10.
+#
+# Audited 2026-07-11 (tools/morpheus/audit_dial.py, fresh queries -- no raw
+# cache existed from the original build): 15 mistagged cells removed across
+# 10 lemmas -- wrong gender (θεός, ναῦς, ὄρος), wrong number (πόλις, ἔτος,
+# ἠώς), Attic/Doric-only contractions with no epic alternative (ῥόος, ἦμαρ),
+# and Doric-only α-spellings of an otherwise -η paradigm (νύμφη, ψυχή).
+# Two lemmas (θεά, ὥρα) show the same all-Attic/Doric/Aeolic `dial` pattern
+# but were investigated and kept: both stems end in ε/ρ, so -α is their
+# period-invariant spelling (the same phonological rule behind σκιά's
+# dialect-general plural in palaestra_morpheus_nouns_lexicon.yaml), not a
+# real restriction. See tools/morpheus/README.md for the full verb+noun list.
 
 Ζεύς:
   forms:
@@ -103,7 +114,6 @@
     DPM: θεοῖς
     GPM: θεῶν
     GSM: θεοῖο
-    NPF: θεοὶ
     NPM: θεοί
     VPM: θεοὶ
     VSM: θεέ
@@ -189,7 +199,6 @@
     DPF: νέεσσι
     GSF: ναὸς
     NPF: νέες
-    NSM: ναῦς
 νεφέλη:
   forms:
     ASF: νεφέλην
@@ -213,10 +222,7 @@
     APF: νύμφας
     ASF: νύμφην
     GPF: νυμφέων
-    GSF: νύμφας
     NPF: νύμφαι
-    NSF: νύμφα
-    VSF: νύμφα
 νύξ:
   forms:
     APF: νύκτάς
@@ -270,7 +276,6 @@
     DPF: πολίεσσιν
     DSF: πόλει
     GPF: πολίων
-    GSF: πολίων
     NDF: πόλει
     NPF: πόλεις
 πότνια:
@@ -306,10 +311,7 @@
 ψυχή:
   forms:
     APF: ψυχάς
-    ASF: ψυχάν
     DPF: ψυχαῖς
-    DSF: ψυχᾷ
-    GSF: ψυχᾶς
     NPF: ψυχαὶ
     NSF: ψυχή
     VSF: ψυχή
@@ -390,7 +392,6 @@
 ἔτος:
   forms:
     APN: ἔτεα
-    ASN: ἔτεα
     DPN: ἔτεσί
     DSN: ἔτει
     GPN: ἐτέων
@@ -405,8 +406,6 @@
     NSM: ἠέλιος
 ἠώς:
   forms:
-    ADF: ἠῶ
-    APF: ἠῶ
     ASF: ἠόα
     DSF: ἠοῖ
     GSF: ἠοῦς
@@ -414,7 +413,6 @@
 ἦμαρ:
   forms:
     APN: ἤματα
-    ASN: ἆμαρ
     DSN: ἤματί
     GSN: ἤματος
     NSN: ἦμαρ
@@ -440,7 +438,6 @@
   forms:
     APN: οὔρεα
     DPN: οὔρεσι
-    DSM: ὄρει
     DSN: ὄρει
     GPN: ὀρέων
     GSN: οὔρεος
@@ -469,5 +466,4 @@
 ῥόος:
   forms:
     ASM: ῥόον
-    GSM: ῥοῦ
     NSM: ῥόος
