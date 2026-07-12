@@ -18,6 +18,11 @@ def gi():
     return load_lexicons("byzantine")
 
 
+@pytest.fixture(scope="module")
+def gi_ltrg_byzantine():
+    return load_lexicons(["ltrg", "byzantine"])
+
+
 # --- name resolution ---------------------------------------------------------
 
 def test_byzantine_name_resolves(gi):
@@ -37,21 +42,19 @@ def test_byzantine_merge_with_morphgnt_overrides_classical_ending():
     assert "ἔγνωκαν" in gi_merged.generate("γιγνώσκω", "XAI.3P").keys()
 
 
-def test_byzantine_merge_with_ltrg():
-    gi_merged = load_lexicons(["ltrg", "byzantine"])
+def test_byzantine_merge_with_ltrg(gi_ltrg_byzantine):
     # byzantine's override
-    assert "ἔγνωκαν" in gi_merged.generate("γιγνώσκω", "XAI.3P").keys()
+    assert "ἔγνωκαν" in gi_ltrg_byzantine.generate("γιγνώσκω", "XAI.3P").keys()
     # ltrg still provides its own unrelated verbs (παύω isn't in byzantine)
-    assert gi_merged.generate("παύω", "PAI.1S").keys()
+    assert gi_ltrg_byzantine.generate("παύω", "PAI.1S").keys()
 
 
-def test_byzantine_merge_does_not_disturb_lexicon_own_other_slots():
+def test_byzantine_merge_does_not_disturb_lexicon_own_other_slots(gi_ltrg_byzantine):
     """byzantine's ἄγω entry is IAI.3P only -- merging must not affect ltrg's
     own PAI.1S generation for the same lemma (form_override is per-slot, not
     per-lemma)."""
-    gi_merged = load_lexicons(["ltrg", "byzantine"])
-    assert "ἦγαν" in gi_merged.generate("ἄγω", "IAI.3P").keys()
-    assert gi_merged.generate("ἄγω", "PAI.1S").keys()  # still ltrg's own
+    assert "ἦγαν" in gi_ltrg_byzantine.generate("ἄγω", "IAI.3P").keys()
+    assert gi_ltrg_byzantine.generate("ἄγω", "PAI.1S").keys()  # still ltrg's own
 
 
 # --- correctness gate: exact attested forms -----------------------------------
@@ -199,27 +202,8 @@ def test_no_duplicate_lemma_keys():
     authoring (see test_esthio_has_both_slots_from_separate_patterns).
     Parses the raw YAML source with a duplicate-key-aware loader rather than
     the standard one, which would just hide the problem."""
-    import yaml
-    from greek_inflexion_eee.fileformat import _DATA_PKG
-    from importlib.resources import files
-
-    class _DupeCheckLoader(yaml.SafeLoader):
-        pass
-
-    def _construct_mapping(loader, node, deep=False):
-        seen = set()
-        for key_node, _ in node.value:
-            key = loader.construct_object(key_node, deep=deep)
-            assert key not in seen, f"duplicate top-level key: {key!r}"
-            seen.add(key)
-        return yaml.SafeLoader.construct_mapping(loader, node, deep=deep)
-
-    _DupeCheckLoader.add_constructor(
-        yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, _construct_mapping)
-
-    resource = files(_DATA_PKG) / "byzantine_verbs_lexicon.yaml"
-    with resource.open("r", encoding="utf-8") as f:
-        yaml.load(f, Loader=_DupeCheckLoader)
+    from conftest import assert_no_duplicate_yaml_keys
+    assert_no_duplicate_yaml_keys("byzantine_verbs_lexicon.yaml")
 
 
 def test_byzantine_lexicon_has_61_lemmas():

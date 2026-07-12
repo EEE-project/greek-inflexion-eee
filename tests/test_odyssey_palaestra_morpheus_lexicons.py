@@ -51,22 +51,20 @@ def test_palaestra_morpheus_name_resolves(gi_palaestra_nouns):
 
 # --- additive merge ------------------------------------------------------
 
-def test_odyssey_morpheus_verbs_merge_with_homer():
-    gi = load_lexicons(["homer", "odyssey_morpheus"])
-    assert "βάλλον" in gi.generate("βάλλω", "IAI.3P").keys()   # from odyssey_morpheus
-    assert gi.generate("μένω", "PAI.1S").keys()                 # still from homer
+def test_odyssey_morpheus_verbs_merge_with_homer(gi_odyssey_verbs):
+    assert "βάλλον" in gi_odyssey_verbs.generate("βάλλω", "IAI.3P").keys()   # from odyssey_morpheus
+    assert gi_odyssey_verbs.generate("μένω", "PAI.1S").keys()                 # still from homer
 
 
-def test_palaestra_morpheus_usable_standalone():
+def test_palaestra_morpheus_usable_standalone(gi_palaestra_nouns):
     """Unlike the odyssey_morpheus lexicons (documented cells only, meant to
     merge alongside a full paradigm source), palaestra_morpheus nouns were
     entirely absent from the existing chain -- this lexicon alone covers
     their full 8-cell paradigm."""
-    gi = load_noun_lexicons("palaestra_morpheus")
     cells = {"NSM", "ASM", "GSM", "DSM", "NPM", "APM", "GPM", "DPM"}
     generated_cells = set()
     for cell in cells:
-        if gi.generate("δεσπότης", cell):
+        if gi_palaestra_nouns.generate("δεσπότης", cell):
             generated_cells.add(cell)
     assert generated_cells == cells
 
@@ -154,28 +152,8 @@ def test_no_duplicate_lemma_keys():
     file actually hit this bug). These 4 files are machine-generated from a
     Python dict so the bug class can't occur at generation time, but a
     future hand-edit could reintroduce it -- keep the guard."""
-    import yaml
-    from greek_inflexion_eee.fileformat import _DATA_PKG
-    from importlib.resources import files
-
-    class _DupeCheckLoader(yaml.SafeLoader):
-        pass
-
-    def _construct_mapping(loader, node, deep=False):
-        seen = set()
-        for key_node, _ in node.value:
-            key = loader.construct_object(key_node, deep=deep)
-            assert key not in seen, f"duplicate top-level key: {key!r}"
-            seen.add(key)
-        return yaml.SafeLoader.construct_mapping(loader, node, deep=deep)
-
-    _DupeCheckLoader.add_constructor(
-        yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, _construct_mapping)
-
-    for filename in _NEW_LEXICON_FILES:
-        resource = files(_DATA_PKG) / filename
-        with resource.open("r", encoding="utf-8") as f:
-            yaml.load(f, Loader=_DupeCheckLoader)
+    from conftest import assert_no_duplicate_yaml_keys
+    assert_no_duplicate_yaml_keys(*_NEW_LEXICON_FILES)
 
 
 def test_lexicon_sizes():

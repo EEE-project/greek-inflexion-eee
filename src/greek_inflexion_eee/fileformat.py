@@ -410,9 +410,12 @@ def load_pron_lexicons(names: "str | list[str]") -> "GreekInflexion":
         load_pron_lexicons("pronoun")
         load_pron_lexicons(["pronoun", "/path/to/my_pronouns.yaml"])
     """
-    # noun_stemming.yaml is passed for API-shape consistency with the
-    # other loaders, but is never actually consulted: every pronoun
-    # lexicon entry is forms:-only (no stems:), and generate() returns
-    # from the forms:-override lookup before the stemming ruleset is
-    # ever reached.
-    return _load_pos_lexicons("noun_stemming.yaml", {}, "pronoun_lexicon.yaml", names)
+    # Pronouns have no stemming ruleset: every entry is forms:-only (no
+    # stems:), so generate() always returns from the forms:-override
+    # lookup and the stemming rule set is never consulted (verified: an
+    # empty stemming list here is behaviorally identical to borrowing
+    # noun_stemming.yaml for known forms, unknown keys, and unknown
+    # lemmas alike). Passing [] instead of a real-but-irrelevant file
+    # means a lemma that ever needs actual stemming fails loudly rather
+    # than silently applying the wrong (noun) declension rules.
+    return _load_pos_lexicons([], {}, "pronoun_lexicon.yaml", names)

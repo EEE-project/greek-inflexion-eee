@@ -113,7 +113,6 @@ def calculate_accent(w, parse, lemma, segmented_lemma, stem, inflexion,
                 ]
 
                 for nsm, _ in nsms:
-                    nsm = strip_length(nsm)
                     return (
                         clean(persistent(w, nsm, default_short=True)),
                         f"participle: PAP persistent from NSM {nsm}"
