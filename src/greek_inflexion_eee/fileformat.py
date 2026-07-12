@@ -391,3 +391,28 @@ def load_adj_lexicons(names: "str | list[str]") -> "GreekInflexion":
         "pratt_adjs_lexicon.yaml",
         names,
     )
+
+
+def load_pron_lexicons(names: "str | list[str]") -> "GreekInflexion":
+    """Return a GreekInflexion for pronoun inflection using one or more lexicons merged.
+
+    Always includes the base pronoun lexicon (`pronoun_lexicon.yaml`). No
+    named variants exist yet -- any non-absolute-path name in `names`
+    currently resolves to nothing beyond the always-included default file
+    (mirrors `_load_pos_lexicons`'s "unknown names are silently skipped"
+    behavior already used for noun/adjective).
+
+    Args:
+        names: a lexicon name or list of names / absolute file paths.
+
+    Examples::
+
+        load_pron_lexicons("pronoun")
+        load_pron_lexicons(["pronoun", "/path/to/my_pronouns.yaml"])
+    """
+    # noun_stemming.yaml is passed for API-shape consistency with the
+    # other loaders, but is never actually consulted: every pronoun
+    # lexicon entry is forms:-only (no stems:), and generate() returns
+    # from the forms:-override lookup before the stemming ruleset is
+    # ever reached.
+    return _load_pos_lexicons("noun_stemming.yaml", {}, "pronoun_lexicon.yaml", names)

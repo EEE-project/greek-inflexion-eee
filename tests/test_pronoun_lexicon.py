@@ -4,13 +4,15 @@ for the two structurally distinct pronoun tag shapes (adjective-like
 Case+Number+Gender, and personal-pronoun Case+Number+Person). Mirrors
 test_morpheus_lexicon.py's conventions for a forms:-only lexicon.
 
-load_pron_lexicons() doesn't exist until section-04/Phase 5 -- every test
-below reads the raw YAML directly via _load_lexicon_yaml instead of going
-through a loader, matching test_morpheus_lexicon.py's own structural
-guard (test_all_entries_use_forms_not_stems), which does the same thing
-for the same reason.
+Most tests read the raw YAML directly via _load_lexicon_yaml instead of
+going through a loader, matching test_morpheus_lexicon.py's own
+structural guard (test_all_entries_use_forms_not_stems), which does the
+same thing for the same reason. The load_pron_lexicons()-based tests
+near the end of this file are the exception, exercising the loader
+itself rather than the raw lexicon content.
 """
 import pytest
+from greek_inflexion_eee import load_pron_lexicons
 from greek_inflexion_eee.fileformat import _load_lexicon_yaml
 
 LEXICON_FILE = "pronoun_lexicon.yaml"
@@ -278,3 +280,33 @@ def test_interrogative_and_indefinite_are_distinct_entries(pronoun_data):
     assert pronoun_data["τίς"]["forms"]["NSM"] == "τίς"
     assert pronoun_data["τις"]["forms"]["NSM"] == "τις"
     assert pronoun_data["τίς"]["forms"] != pronoun_data["τις"]["forms"]
+
+
+# --- load_pron_lexicons(): name resolution, matching load_noun_lexicons/
+# load_adj_lexicons's existing pattern --------------------------------
+
+def test_pron_lexicon_loads_without_error():
+    """Name-resolution smoke test. lexicon_map is empty for
+    load_pron_lexicons (no named variants exist yet) -- default_file is
+    always included regardless of what's in names, matching
+    _load_pos_lexicons's existing behavior for noun/adjective."""
+    gi = load_pron_lexicons("pronoun")
+    assert "ἐγώ" in gi.generate("ἐγώ", "NS1")
+
+
+def test_absolute_path_custom_lexicon_loaded(tmp_path):
+    """Mirrors test_absolute_path_custom_lexicon_loaded in
+    test_load_adj_lexicons.py / test_load_noun_lexicons.py. Uses a forms:
+    block (not stems:), matching the pronoun lexicon's own forms:-only
+    convention. Uses ἑαυτοῦ (reflexive "himself/herself/itself") -- a
+    real pronoun, but NOT one of the 10 lemmas in pronoun_lexicon.yaml
+    (see test_all_ten_lemmas_present's fixed set) -- because
+    _load_pos_lexicons always includes default_file regardless of names,
+    so reusing an already-shipped lemma (e.g. τις) would pass even if
+    absolute-path loading were completely broken."""
+    custom_yaml = tmp_path / "custom_pronouns.yaml"
+    custom_yaml.write_text(
+        "ἑαυτοῦ:\n    forms:\n        GSM: ἑαυτοῦ\n", encoding="utf-8",
+    )
+    gi = load_pron_lexicons(["pronoun", str(custom_yaml)])
+    assert "ἑαυτοῦ" in gi.generate("ἑαυτοῦ", "GSM")
