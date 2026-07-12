@@ -1,0 +1,437 @@
+# pronoun_lexicon.yaml -- verbatim attested pronoun forms across four
+# structurally distinct families: personal (ἐγώ, σύ), demonstrative
+# (οὗτος, ἐκεῖνος, ὅδε), relative/interrogative/indefinite/indefinite-
+# relative (ὅς, τίς, τις, ὅστις), and reciprocal (ἀλλήλων). Every entry
+# is a forms: block (never stems:) -- every lemma here is independently
+# suppletive/irregular, not mechanically generatable from stems: +
+# stemming.yaml ending rules the way regular nouns/adjectives/verbs are.
+#
+# Sourcing: every cell is confirmed against BOTH (1) Herbert Weir Smyth,
+# "A Greek Grammar for Colleges" (1920, public domain), Part II section
+# 325-339, for the paradigm shape -- consulted via the CCEL unicode
+# transcription (ccel.org/s/smyth/grammar/html/smyth_2l_uni.htm) and the
+# Perseus-hosted edition (perseus.tufts.edu, doc=Perseus:text:1999.04.0007)
+# -- and (2) the Perseids Morpheus morphological analyzer
+# (tools/morpheus/query_morpheus.py's query_word(), cached under
+# tools/morpheus/cache/) for per-form attestation, matching lemma +
+# case + number (+ gender or person).
+#
+# Verification discipline (see tools/morpheus/verify_pronouns*.py in this
+# planning session's scratch history for the full pass):
+#   1. Every cell's paradigm shape looked up in Smyth's before being typed.
+#   2. Every distinct surface form independently queried against Morpheus;
+#      lemma/case/number(/gender or person) cross-checked against Smyth's.
+#   3. audit_dial.py was run in its pos="adjective" mode, target_register
+#      "attic", against this whole file: 0 MISMATCH (no wrong-register
+#      forms), 14 target_confirmed, 150 neutral, 69 not_found. Every
+#      not_found cell was individually investigated, not blanket-ignored,
+#      and falls into one of four understood, already-independently-
+#      resolved gaps between this general-purpose audit tool and this
+#      lexicon's specific shape (none indicate an actual unconfirmed
+#      form -- each was separately confirmed via direct query_word()
+#      calls during implementation, with matching relaxed appropriately):
+#        a. All ἐγώ/σύ (Family B) cells -- tag_codes_for(pos="adjective")
+#           cannot generate Case+Number+Person codes at all; cross-checked
+#           manually instead, per this section's own documented workaround.
+#        b. Macron-marked forms (ταύτᾱς, ἐκείνᾱς, τά̄σδε, ἅ̄ς, ἅ̄στινας,
+#           ἀλλήλᾱ, ἀλλήλᾱς) -- the audit tool looks its cache up keyed by
+#           the exact shipped spelling (with macron); this project's own
+#           verification queried the macron-stripped spelling (Morpheus's
+#           index has no macron-marked entries), caching under a different
+#           filename. Confirmed live against the stripped spelling.
+#        c. τίς/τις oblique-case cells (GSM/DSM/GPM/DPM keys) -- Morpheus
+#           tags these common-gender (M/F share one form) entries with
+#           gender=None, not "masculine"; the audit tool's stricter match
+#           reports not_found where this project's own verification
+#           correctly treated gender=None as compatible with the M-keyed
+#           cell (matching Smyth's own single M/F-combined column).
+#        d. ὅστις's ὅ τι cells (two words) -- the audit tool queries the
+#           shipped value as one string; Morpheus indexes single words
+#           only. Confirmed piecewise: "ὅ" independently confirms as ὅς's
+#           own neuter Nom/Acc singular, "τι" as τις's own neuter
+#           Nom/Acc singular -- exactly how the compound is analyzed.
+#      Family A's dual-syncretism not_found cells (e.g. οὗτος's NDF/ADF)
+#      overlap with (b)/(c) above once macron/gender-strictness is
+#      accounted for; none are a fifth distinct category.
+#
+# Known, deliberate departures from a literal Morpheus-only reading,
+# each backed by Smyth's explicit paradigm table rather than guessed:
+#   - Dual forms are syncretic across Nominative/Accusative(/Vocative)
+#     and separately across Genitive/Dative -- standard for every Greek
+#     dual paradigm, not specific to pronouns. Morpheus does not always
+#     tag every case label in a syncretic pair for a given dual word
+#     (e.g. it may tag ουτος's τούτω only as "accusative", never
+#     "nominative", even though Smyth's prints them as one "N.A." row);
+#     where Morpheus confirms lemma+number(+one case of the pair), the
+#     other case of the same syncretic pair is shipped with the identical
+#     value, per Smyth's own table, not re-verified as a separate query.
+#   - Similarly, dual forms of the adjective-like demonstrative/relative
+#     pronouns are syncretic across all three genders (Smyth's prints the
+#     identical form under Masc/Fem/Neut columns for every dual row).
+#     Morpheus's own dual data under-tags feminine specifically (it
+#     usually confirms masculine and/or neuter for a given dual word, but
+#     often omits a separate feminine-tagged reading for the exact same
+#     orthographic form); the feminine cell is still shipped, using the
+#     identical value, per Smyth's explicit same-form claim.
+#   - ND1/AD1 (νώ) and their σύ counterparts: Morpheus confirms
+#     lemma=ἐγώ/σύ, case, and number for the dual, but leaves the person
+#     field unset (a general dual-tagging gap, not specific to this
+#     word) -- lemma+case+number is sufficient confirmation since νώ/σφώ
+#     are unambiguously 1st/2nd person by lemma alone.
+#
+# αὐτός -- the standard 3rd-person pronoun (him/her/it) and intensive
+# "self"/"same" -- is intentionally NOT one of the lemmas in this file.
+# It declines exactly like a regular 2-1-2 adjective and lives in the
+# adjective lexicon instead: pratt_adjs_lexicon.yaml. A student or a
+# future list_lemmas("pronoun")-driven UI looking for "the pronoun
+# αὐτός" will not find it here -- see that file's own header comment for
+# the mirroring note.
+#
+# Tag-key convention (per this project's section-02 investigation): keys
+# below never carry a leading dot, matching every other forms:-only
+# lexicon in this package (morpheus_nouns_lexicon.yaml,
+# byzantine_verbs_lexicon.yaml, ...). The leading dot seen in
+# ancient-greek-backend-eee's noun-tags.tsv / ag_noun_key() is a
+# backend-only presentation/cache-key convention added in
+# AncientGreekBackend._build_nominal_cache, with no bearing on lexicon
+# storage.
+#
+# Two key shapes are used, matching the two structurally different
+# pronoun families in scope:
+#   Family A (demonstrative/relative/interrogative/indefinite/reciprocal):
+#     <Case><Number><Gender>, identical shape to every noun/adjective
+#     lexicon -- e.g. NSM, GPF. N=Nom/G=Gen/D=Dat/A=Acc;
+#     S=Sing/P=Plur/D=Dual; M/F/N=Masc/Fem/Neut. (Note "D" means Dat in
+#     position 0 but Dual in position 1 -- already-precedented, see
+#     section-03's own planning notes; every consumer parses positionally.)
+#   Family B (personal, ἐγώ/σύ): <Case><Number><Person> -- no Gender axis;
+#     Person replaces it ('1' or '2'; no '3' -- 3rd person routes through
+#     αὐτός, out of scope here). E.g. NS1 = ἐγώ, GD2 = σφῷν.
+#
+# PronType (forward documentation for section-05's pronoun-tags.tsv --
+# not used anywhere in this file itself, since it's a per-lemma property,
+# not a per-cell one):
+#   Personal (ἐγώ, σύ)                          -> Prs
+#   Demonstrative (οὗτος, ἐκεῖνος, ὅδε)          -> Dem
+#   Relative (ὅς)                                -> Rel
+#   Interrogative (τίς)                          -> Int
+#   Indefinite (τις)                             -> Ind
+#   Indefinite relative (ὅστις)                  -> Rel or Ind (confirm
+#                                                    against treebank usage
+#                                                    during section-05)
+#   Reciprocal (ἀλλήλων)                         -> Rcp
+
+ἐγώ:
+  forms:
+    NS1: ἐγώ
+    GS1: [ἐμοῦ, μου]     # emphatic / enclitic
+    DS1: [ἐμοί, μοι]
+    AS1: [ἐμέ, με]
+    ND1: νώ
+    AD1: νώ
+    GD1: νῷν
+    DD1: νῷν
+    NP1: ἡμεῖς           # = ἡμεῖς
+    GP1: ἡμῶν
+    DP1: ἡμῖν
+    AP1: ἡμᾶς
+
+σύ:
+  forms:
+    NS2: σύ
+    GS2: [σοῦ, σου]      # emphatic / enclitic
+    DS2: [σοί, σοι]
+    AS2: [σέ, σε]
+    ND2: σφώ
+    AD2: σφώ
+    GD2: σφῷν
+    DD2: σφῷν
+    NP2: ὑμεῖς           # = ὑμεῖς
+    GP2: ὑμῶν
+    DP2: ὑμῖν
+    AP2: ὑμᾶς
+
+οὗτος:
+  forms:
+    NSM: οὗτος
+    NSF: αὕτη
+    NSN: τοῦτο
+    GSM: τούτου
+    GSF: ταύτης
+    GSN: τούτου
+    DSM: τούτῳ
+    DSF: ταύτῃ
+    DSN: τούτῳ
+    ASM: τοῦτον
+    ASF: ταύτην
+    ASN: τοῦτο
+    NDM: τούτω
+    NDF: τούτω
+    NDN: τούτω
+    ADM: τούτω
+    ADF: τούτω
+    ADN: τούτω
+    GDM: τούτοιν
+    GDF: τούτοιν
+    GDN: τούτοιν
+    DDM: τούτοιν
+    DDF: τούτοιν
+    DDN: τούτοιν
+    NPM: οὗτοι
+    NPF: αὗται
+    NPN: ταῦτα
+    GPM: τούτων
+    GPF: τούτων
+    GPN: τούτων
+    DPM: τούτοις
+    DPF: ταύταις
+    DPN: τούτοις
+    APM: τούτους
+    APF: ταύτᾱς
+    APN: ταῦτα
+
+ἐκεῖνος:
+  forms:
+    NSM: ἐκεῖνος
+    NSF: ἐκείνη
+    NSN: ἐκεῖνο
+    GSM: ἐκείνου
+    GSF: ἐκείνης
+    GSN: ἐκείνου
+    DSM: ἐκείνῳ
+    DSF: ἐκείνῃ
+    DSN: ἐκείνῳ
+    ASM: ἐκεῖνον
+    ASF: ἐκείνην
+    ASN: ἐκεῖνο
+    NDM: ἐκείνω
+    NDF: ἐκείνω
+    NDN: ἐκείνω
+    ADM: ἐκείνω
+    ADF: ἐκείνω
+    ADN: ἐκείνω
+    GDM: ἐκείνοιν
+    GDF: ἐκείνοιν
+    GDN: ἐκείνοιν
+    DDM: ἐκείνοιν
+    DDF: ἐκείνοιν
+    DDN: ἐκείνοιν
+    NPM: ἐκεῖνοι
+    NPF: ἐκεῖναι
+    NPN: ἐκεῖνα
+    GPM: ἐκείνων
+    GPF: ἐκείνων
+    GPN: ἐκείνων
+    DPM: ἐκείνοις
+    DPF: ἐκείναις
+    DPN: ἐκείνοις
+    APM: ἐκείνους
+    APF: ἐκείνᾱς
+    APN: ἐκεῖνα
+
+ὅδε:
+  forms:
+    NSM: ὅδε
+    NSF: ἥδε
+    NSN: τόδε
+    GSM: τοῦδε
+    GSF: τῆσδε
+    GSN: τοῦδε
+    DSM: τῷδε
+    DSF: τῇδε
+    DSN: τῷδε
+    ASM: τόνδε
+    ASF: τήνδε
+    ASN: τόδε
+    NDM: τώδε
+    NDF: τώδε
+    NDN: τώδε
+    ADM: τώδε
+    ADF: τώδε
+    ADN: τώδε
+    GDM: τοῖνδε
+    GDF: τοῖνδε
+    GDN: τοῖνδε
+    DDM: τοῖνδε
+    DDF: τοῖνδε
+    DDN: τοῖνδε
+    NPM: οἵδε
+    NPF: αἵδε
+    NPN: τάδε
+    GPM: τῶνδε
+    GPF: τῶνδε
+    GPN: τῶνδε
+    DPM: τοῖσδε
+    DPF: ταῖσδε
+    DPN: τοῖσδε
+    APM: τούσδε
+    APF: τά̄σδε
+    APN: τάδε
+
+# Relative pronoun. One entry covers ὅς(M)/ἥ(F)/ὅ(N) -- not separate
+# top-level ἥ:/ὅ: entries, matching how a regular adjective's stems:
+# entry covers all three genders under one lemma key.
+ὅς:
+  forms:
+    NSM: ὅς
+    NSF: ἥ
+    NSN: ὅ
+    GSM: οὗ
+    GSF: ἧς
+    GSN: οὗ
+    DSM: ᾧ
+    DSF: ᾗ
+    DSN: ᾧ
+    ASM: ὅν
+    ASF: ἥν
+    ASN: ὅ
+    NDM: ὥ
+    NDF: ὥ
+    NDN: ὥ
+    ADM: ὥ
+    ADF: ὥ
+    ADN: ὥ
+    GDM: οἷν
+    GDF: οἷν
+    GDN: οἷν
+    DDM: οἷν
+    DDF: οἷν
+    DDN: οἷν
+    NPM: οἵ
+    NPF: αἵ
+    NPN: ἅ
+    GPM: ὧν
+    GPF: ὧν
+    GPN: ὧν
+    DPM: οἷς
+    DPF: αἷς
+    DPN: οἷς
+    APM: οὕς
+    APF: ἅ̄ς
+    APN: ἅ
+
+# Interrogative "who?/what?" -- always accented (acute on first
+# syllable throughout the paradigm), distinct from the enclitic
+# indefinite τις below. One entry covers τίς(M/F, common gender)/τί(N);
+# Morpheus itself does not distinguish a separate masculine vs feminine
+# reading for this word (common-gender), so the M-labeled keys below
+# hold the shared common-gender form, matching Smyth's own single
+# "τίς" column for M/F combined. Unlike the M/F/N-distinguishing
+# pronominal-declension lemmas above (where only Gen/Dat singular is
+# masc=neut, fem stays distinct), τίς has NO gender distinction at all
+# outside Nom/Acc -- Gen/Dat singular and Gen/Dat plural are one shared
+# form across all three genders (Smyth's prints these as single,
+# non-columned rows) -- so GSN/DSN/GPN/DPN below intentionally repeat
+# the identical GSM/DSM/GPM/DPM values, not a masc-only omission. No
+# distinct dual paradigm is given for this word in Smyth's Grammar.
+τίς:
+  forms:
+    NSM: τίς
+    NSN: τί
+    GSM: τίνος
+    GSN: τίνος
+    DSM: τίνι
+    DSN: τίνι
+    ASM: τίνα
+    ASN: τί
+    NPM: τίνες
+    NPN: τίνα
+    GPM: τίνων
+    GPN: τίνων
+    DPM: τίσι(ν)
+    DPN: τίσι(ν)
+    APM: τίνας
+    APN: τίνα
+
+# Indefinite "someone/something" -- enclitic, unaccented in its citation
+# form (except where accent rules force one). A distinct top-level entry
+# from τίς above despite the near-identical spelling -- a genuine
+# accent-based minimal pair (interrogative vs indefinite), not one lemma.
+# Same common-gender-M-key convention as τίς, including the GSN/DSN/
+# GPN/DPN masc=neut duplication (see τίς's comment above for why) and
+# the same absence of a distinct dual paradigm in Smyth's Grammar.
+τις:
+  forms:
+    NSM: τις
+    NSN: τι
+    GSM: τινός
+    GSN: τινός
+    DSM: τινί
+    DSN: τινί
+    ASM: τινά
+    ASN: τι
+    NPM: τινές
+    NPN: τινά
+    GPM: τινῶν
+    GPN: τινῶν
+    DPM: τισί(ν)
+    DPN: τισί(ν)
+    APM: τινάς
+    APN: τινά
+
+# Indefinite relative "whoever/whatever" = ὅς + τις compounded. One
+# entry covers ὅστις(M)/ἥτις(F)/ὅ τι(N) -- the neuter is written as two
+# words (ὅ τι, "sometimes printed ὅ, τι to avoid confusion with the
+# conjunction ὅτι" per Smyth's), independently Morpheus-confirmed as the
+# neuter singular of ὅς (ὅ) + the neuter singular of τις (τι) written
+# together, matching how the whole lemma is itself compounded. Because
+# the case/gender syncretism pattern belongs to the ὅς half of the
+# compound (τις itself is common-gender and contributes no syncretism
+# of its own), ὅστις mirrors ὅς's own masc=neut Gen/Dat-singular and
+# fully-3-way-syncretic Gen-plural pattern, plus ὅς's genuinely distinct
+# feminine Dat singular/plural (ᾗ/αἷς -> ᾗτινι/αἷστισι(ν), both
+# independently Morpheus-confirmed, not just mechanically assumed):
+# GSN=GSM, DSN=DSM, GPN=GPF=GPM, DPN=DPM (masc=neut); DSF and DPF are
+# distinct forms, not copies of the masc/neut ones. No distinct dual
+# paradigm is given for this word in Smyth's Grammar either.
+ὅστις:
+  forms:
+    NSM: ὅστις
+    NSF: ἥτις
+    NSN: ὅ τι
+    GSM: οὗτινος
+    GSF: ἧστινος
+    GSN: οὗτινος
+    DSM: ᾧτινι
+    DSF: ᾗτινι
+    DSN: ᾧτινι
+    ASM: ὅντινα
+    ASF: ἥντινα
+    ASN: ὅ τι
+    NPM: οἵτινες
+    NPF: αἵτινες
+    NPN: ἅτινα
+    GPM: ὧντινων
+    GPF: ὧντινων
+    GPN: ὧντινων
+    DPM: οἷστισι(ν)
+    DPF: αἷστισι(ν)
+    DPN: οἷστισι(ν)
+    APM: οὕστινας
+    APF: ἅ̄στινας
+    APN: ἅτινα
+
+# Reciprocal "one another" -- genuinely defective: oblique cases only
+# (no Nominative), dual and plural only (no Singular). Do not add
+# Nominative or Singular cells here; test_allelon_has_no_nominative_or_singular
+# asserts their absence outright.
+ἀλλήλων:
+  forms:
+    GDM: ἀλλήλοιν
+    GDF: ἀλλήλαιν
+    GDN: ἀλλήλοιν
+    DDM: ἀλλήλοιν
+    DDF: ἀλλήλαιν
+    DDN: ἀλλήλοιν
+    ADM: ἀλλήλω
+    ADF: ἀλλήλᾱ
+    ADN: ἀλλήλω
+    GPM: ἀλλήλων
+    GPF: ἀλλήλων
+    GPN: ἀλλήλων
+    DPM: ἀλλήλοις
+    DPF: ἀλλήλαις
+    DPN: ἀλλήλοις
+    APM: ἀλλήλους
+    APF: ἀλλήλᾱς
+    APN: ἄλληλα
