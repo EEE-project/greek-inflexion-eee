@@ -24,6 +24,21 @@
     accents:
         - ["..N", "δίκαιος"]
 
+# αὐτός also serves as the 3rd-person pronoun (oblique-case him/her/it)
+# and intensive "self"/"same" — declines as a regular adjective here and
+# is intentionally NOT part of the "pronoun" POS/lexicon; it will not be
+# discoverable via list_lemmas("pronoun").
+αὐτός:
+    stems:
+        M: αὐτο
+        F: αὐτη
+        N: αὐτο
+    accents:
+        - ["..N", "αὐτός"]
+    forms:
+        NSN: αὐτό
+        ASN: αὐτό
+
 χρυσοῦς:
     forms:
         NSM: χρυσοῦς

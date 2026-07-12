@@ -2,7 +2,7 @@
 import pytest
 from greek_inflexion_eee import load_adj_lexicons
 
-PRATT_ADJS = ["ἀγαθός", "ἄδικος", "δίκαιος"]
+PRATT_ADJS = ["ἀγαθός", "ἄδικος", "δίκαιος", "αὐτός"]
 
 
 @pytest.fixture(scope="module")
@@ -21,6 +21,15 @@ def test_pratt_adj_has_forms(gi, lemma):
     ("ἀγαθός", "NSF", "ἀγαθή"),
     ("ἀγαθός", "NSN", "ἀγαθόν"),
     ("ἄδικος", "GSM", "ἀδίκου"),
+    ("αὐτός", "NSM", "αὐτός"),
+    ("αὐτός", "GSM", "αὐτοῦ"),
+    ("αὐτός", "NSF", "αὐτή"),
+    ("αὐτός", "GSF", "αὐτῆς"),
+    ("αὐτός", "NSN", "αὐτό"),
+    ("αὐτός", "GSN", "αὐτοῦ"),
+    ("αὐτός", "ASN", "αὐτό"),
+    ("αὐτός", "DSN", "αὐτῷ"),
+    ("αὐτός", "NPM", "αὐτοί"),
 ])
 def test_spot_check(gi, lemma, key, expected):
     forms = gi.generate(lemma, key)

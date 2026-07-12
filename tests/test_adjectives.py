@@ -80,6 +80,15 @@ def test_3_3_comparative(gi):
     assert "μείζονος" in gi.generate("μείζων", "GSM")
 
 
+def test_2_1_2_pronominal_neuter(gi):
+    """αὐτός — pronominal-declension neuter singular has no final -ν
+    (αὐτό, not αὐτόν), unlike a regular 2-1-2 adjective (ἀγαθόν)."""
+    assert "αὐτό" in gi.generate("αὐτός", "NSN")
+    assert "αὐτό" in gi.generate("αὐτός", "ASN")
+    assert "αὐτόν" not in gi.generate("αὐτός", "NSN")
+    assert "αὐτόν" not in gi.generate("αὐτός", "ASN")
+
+
 def test_unknown_adjective_lemma(gi):
     """Unknown lemma returns empty dict."""
     result = gi.generate("ἄγνωστος_not_in_lexicon", "NSM")
