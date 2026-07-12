@@ -6,6 +6,7 @@ Lexicon (with form and accent overrides)
 
 from __future__ import annotations
 
+import functools
 import os
 from collections import defaultdict
 from importlib.resources import files
@@ -160,6 +161,15 @@ def load_lexicon(lexicon_file, pre_processor=lambda x: x):
     return lexicon, form_override, accent_override, segmented_lemmas
 
 
+@functools.lru_cache(maxsize=None)
+def _load_stemming_yaml(filename: str) -> dict:
+    """Parse a bundled stemming YAML resource. Cached — package resources are
+    static within a process, and callers never mutate the returned dict."""
+    resource = files(_DATA_PKG) / filename
+    with resource.open("r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
 def _load_stemming_resource(
     filename: str,
     ruleset: StemmingRuleSet | None = None,
@@ -168,20 +178,29 @@ def _load_stemming_resource(
     """Load a bundled stemming YAML. Pass an existing *ruleset* to merge."""
     if ruleset is None:
         ruleset = StemmingRuleSet()
-    resource = files(_DATA_PKG) / filename
-    with resource.open("r", encoding="utf-8") as f:
-        stemming_dict = yaml.safe_load(f)
+    stemming_dict = _load_stemming_yaml(filename)
     return _populate_stemming(stemming_dict, ruleset, strip_length_flag)
 
 
-def _load_lexicon_yaml(filename: str) -> dict:
-    """Load a lexicon YAML from a package resource or an absolute file path."""
-    if os.path.isabs(filename):
-        with open(filename, encoding="utf-8") as fh:
-            return yaml.safe_load(fh)
+@functools.lru_cache(maxsize=None)
+def _load_bundled_lexicon_yaml(filename: str) -> dict:
+    """Parse a bundled lexicon YAML resource. Cached — package resources are
+    static within a process, and callers never mutate the returned dict."""
     resource = files(_DATA_PKG) / filename
     with resource.open("r", encoding="utf-8") as fh:
         return yaml.safe_load(fh)
+
+
+def _load_lexicon_yaml(filename: str) -> dict:
+    """Load a lexicon YAML from a package resource or an absolute file path.
+
+    Only the package-resource path is cached — an absolute path may point at
+    a file a caller (or a test) writes to mid-process, so it's always re-read.
+    """
+    if os.path.isabs(filename):
+        with open(filename, encoding="utf-8") as fh:
+            return yaml.safe_load(fh)
+    return _load_bundled_lexicon_yaml(filename)
 
 
 def _load_lexicon_resource(
