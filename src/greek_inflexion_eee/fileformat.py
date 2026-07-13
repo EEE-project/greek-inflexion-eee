@@ -162,12 +162,13 @@ def load_lexicon(lexicon_file, pre_processor=lambda x: x):
 
 
 @functools.lru_cache(maxsize=None)
-def _load_stemming_yaml(filename: str) -> dict:
-    """Parse a bundled stemming YAML resource. Cached — package resources are
-    static within a process, and callers never mutate the returned dict."""
+def _load_bundled_yaml(filename: str) -> dict:
+    """Parse a bundled YAML resource (stemming or lexicon). Cached — package
+    resources are static within a process, and callers never mutate the
+    returned dict."""
     resource = files(_DATA_PKG) / filename
-    with resource.open("r", encoding="utf-8") as f:
-        return yaml.safe_load(f)
+    with resource.open("r", encoding="utf-8") as fh:
+        return yaml.safe_load(fh)
 
 
 def _load_stemming_resource(
@@ -178,17 +179,8 @@ def _load_stemming_resource(
     """Load a bundled stemming YAML. Pass an existing *ruleset* to merge."""
     if ruleset is None:
         ruleset = StemmingRuleSet()
-    stemming_dict = _load_stemming_yaml(filename)
+    stemming_dict = _load_bundled_yaml(filename)
     return _populate_stemming(stemming_dict, ruleset, strip_length_flag)
-
-
-@functools.lru_cache(maxsize=None)
-def _load_bundled_lexicon_yaml(filename: str) -> dict:
-    """Parse a bundled lexicon YAML resource. Cached — package resources are
-    static within a process, and callers never mutate the returned dict."""
-    resource = files(_DATA_PKG) / filename
-    with resource.open("r", encoding="utf-8") as fh:
-        return yaml.safe_load(fh)
 
 
 def _load_lexicon_yaml(filename: str) -> dict:
@@ -200,7 +192,7 @@ def _load_lexicon_yaml(filename: str) -> dict:
     if os.path.isabs(filename):
         with open(filename, encoding="utf-8") as fh:
             return yaml.safe_load(fh)
-    return _load_bundled_lexicon_yaml(filename)
+    return _load_bundled_yaml(filename)
 
 
 def _load_lexicon_resource(

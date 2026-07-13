@@ -1,20 +1,13 @@
-"""_load_bundled_lexicon_yaml / _load_stemming_yaml caching (fileformat.py)."""
-from greek_inflexion_eee.fileformat import (
-    _load_bundled_lexicon_yaml,
-    _load_lexicon_yaml,
-    _load_stemming_yaml,
-)
+"""_load_bundled_yaml caching (fileformat.py)."""
+import pytest
+
+from greek_inflexion_eee.fileformat import _load_bundled_yaml, _load_lexicon_yaml
 
 
-def test_bundled_lexicon_yaml_is_cached():
-    first = _load_bundled_lexicon_yaml("pratt_verbs_lexicon.yaml")
-    second = _load_bundled_lexicon_yaml("pratt_verbs_lexicon.yaml")
-    assert first is second
-
-
-def test_bundled_stemming_yaml_is_cached():
-    first = _load_stemming_yaml("stemming.yaml")
-    second = _load_stemming_yaml("stemming.yaml")
+@pytest.mark.parametrize("filename", ["pratt_verbs_lexicon.yaml", "stemming.yaml"])
+def test_bundled_yaml_is_cached(filename):
+    first = _load_bundled_yaml(filename)
+    second = _load_bundled_yaml(filename)
     assert first is second
 
 
