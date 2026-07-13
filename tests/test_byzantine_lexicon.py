@@ -187,11 +187,8 @@ def test_byzantine_covers_all_expected_lemmas(gi):
 # --- structural guard: every entry is forms:, never stems: -------------------
 
 def test_all_entries_use_forms_not_stems():
-    from greek_inflexion_eee.fileformat import _load_lexicon_yaml
-    data = _load_lexicon_yaml("byzantine_verbs_lexicon.yaml")
-    for lemma, entry in data.items():
-        assert "stems" not in entry, f"{lemma!r} has a stems: entry"
-        assert "forms" in entry and entry["forms"], f"{lemma!r} has no forms:"
+    from conftest import assert_all_entries_use_forms
+    assert_all_entries_use_forms("byzantine_verbs_lexicon.yaml")
 
 
 def test_no_duplicate_lemma_keys():

@@ -1,3 +1,19 @@
+def assert_all_entries_use_forms(*filenames):
+    """Every entry in each bundled lexicon YAML file must be a forms: block,
+    never stems: -- the shared structural guard for every forms:-only
+    lexicon (byzantine, morpheus, odyssey_morpheus, palaestra_morpheus,
+    pronoun): each is verbatim attested/suppletive forms, not mechanically
+    generatable from stems: + stemming.yaml rules, so a stems: entry
+    slipping in would silently reintroduce that generation risk."""
+    from greek_inflexion_eee.fileformat import _load_lexicon_yaml
+
+    for filename in filenames:
+        data = _load_lexicon_yaml(filename)
+        for lemma, entry in data.items():
+            assert "stems" not in entry, f"{filename}: {lemma!r} has a stems: entry"
+            assert "forms" in entry and entry["forms"], f"{filename}: {lemma!r} has no forms:"
+
+
 def assert_no_duplicate_yaml_keys(*filenames):
     """Parse each bundled lexicon YAML file with a duplicate-key-aware
     loader, since yaml.safe_load silently keeps only the last of a

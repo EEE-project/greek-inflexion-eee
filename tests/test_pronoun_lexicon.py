@@ -25,16 +25,15 @@ def pronoun_data():
 
 # --- structural guard: every entry is forms:, never stems: -------------
 
-def test_all_entries_use_forms_not_stems(pronoun_data):
+def test_all_entries_use_forms_not_stems():
     """Every pronoun lexicon entry must be a forms: block -- matches
     test_morpheus_lexicon.py's identically-purposed guard for the same
     forms:-only-lexicon convention (byzantine/morpheus/odyssey_morpheus
     all follow it; pronoun_lexicon.yaml is the same shape for the same
     reason -- every lemma here is suppletive/irregular, not mechanically
     generatable from stems: + stemming.yaml rules)."""
-    for lemma, entry in pronoun_data.items():
-        assert "stems" not in entry, f"{lemma!r} has a stems: entry"
-        assert "forms" in entry and entry["forms"], f"{lemma!r} has no forms:"
+    from conftest import assert_all_entries_use_forms
+    assert_all_entries_use_forms(LEXICON_FILE)
 
 
 def test_all_ten_lemmas_present(pronoun_data):

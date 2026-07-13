@@ -118,12 +118,8 @@ def test_all_entries_use_forms_not_stems():
     """morpheus's whole reason to exist is verbatim attested forms with zero
     stem-extraction/re-inflection risk; a stems: entry slipping in would
     silently reintroduce that risk for whichever lemma it's on."""
-    from greek_inflexion_eee.fileformat import _load_lexicon_yaml
-    for filename in ("morpheus_verbs_lexicon.yaml", "morpheus_nouns_lexicon.yaml"):
-        data = _load_lexicon_yaml(filename)
-        for lemma, entry in data.items():
-            assert "stems" not in entry, f"{filename}: {lemma!r} has a stems: entry"
-            assert "forms" in entry and entry["forms"], f"{filename}: {lemma!r} has no forms:"
+    from conftest import assert_all_entries_use_forms
+    assert_all_entries_use_forms("morpheus_verbs_lexicon.yaml", "morpheus_nouns_lexicon.yaml")
 
 
 # --- audit fix (2026-07-11): mistagged cells removed --------------------------

@@ -138,12 +138,8 @@ _NEW_LEXICON_FILES = (
 
 
 def test_all_entries_use_forms_not_stems():
-    from greek_inflexion_eee.fileformat import _load_lexicon_yaml
-    for filename in _NEW_LEXICON_FILES:
-        data = _load_lexicon_yaml(filename)
-        for lemma, entry in data.items():
-            assert "stems" not in entry, f"{filename}: {lemma!r} has a stems: entry"
-            assert "forms" in entry and entry["forms"], f"{filename}: {lemma!r} has no forms:"
+    from conftest import assert_all_entries_use_forms
+    assert_all_entries_use_forms(*_NEW_LEXICON_FILES)
 
 
 def test_no_duplicate_lemma_keys():
