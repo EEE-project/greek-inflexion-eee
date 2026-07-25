@@ -67,6 +67,13 @@ class GreekInflexion:
                 yield key, rebreath(strip_accents(stem))
 
     def parse(self, form):
+        if self.ruleset is None:
+            raise ValueError(
+                "parse() requires a stemming rule set; this instance was "
+                "constructed with none (e.g. load_pron_lexicons(), whose "
+                "lexicon is forms:-override-only and has no stems: to "
+                "derive a rule set from)."
+            )
         return self.inflexion.parse(
             debreath(form), stem_post_processor=strip_accents)
 

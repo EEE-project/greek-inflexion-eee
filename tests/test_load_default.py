@@ -27,3 +27,11 @@ def test_verb_find_stems_luo():
     gi = load_default()
     stems = gi.find_stems("λύω", "AAI.1S")
     assert stems, "find_stems returned empty for λύω AAI.1S"
+
+
+def test_parse_ballo():
+    # Not λύω: its principal stem carries a macron (λῡ), which possible_stems()
+    # can't recover from the plain surface spelling -- a separate, pre-existing
+    # reverse-stemming limitation, unrelated to parse() itself.
+    gi = load_default()
+    assert ("βάλλω", "PAI.1S") in gi.parse("βάλλω")

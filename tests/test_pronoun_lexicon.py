@@ -293,6 +293,24 @@ def test_pron_lexicon_loads_without_error():
     assert "ἐγώ" in gi.generate("ἐγώ", "NS1")
 
 
+def test_pron_lexicon_has_no_stemming_ruleset():
+    """Pronoun forms are all forms:-overrides (see the module docstring's
+    structural guard above) -- load_pron_lexicons() passes an empty
+    stemming-file list, so .ruleset is None, not a real StemmingRuleSet."""
+    gi = load_pron_lexicons("pronoun")
+    assert gi.ruleset is None
+
+
+def test_parse_raises_clear_error_without_a_ruleset():
+    """.parse() walks .ruleset unconditionally; a pronoun-loaded instance
+    has none (see test_pron_lexicon_has_no_stemming_ruleset above), so
+    calling it must raise a clear, actionable error instead of leaking an
+    AttributeError from deep inside the upstream inflexion.parse()."""
+    gi = load_pron_lexicons("pronoun")
+    with pytest.raises(ValueError, match="stemming rule set"):
+        gi.parse("ἐγώ")
+
+
 def test_absolute_path_custom_lexicon_loaded(tmp_path):
     """Mirrors test_absolute_path_custom_lexicon_loaded in
     test_load_adj_lexicons.py / test_load_noun_lexicons.py. Uses a forms:
