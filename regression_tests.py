@@ -2,7 +2,7 @@
 
 import sys
 
-from greek_inflexion import GreekInflexion
+from greek_inflexion_eee import GreekInflexion
 
 mi = GreekInflexion("stemming.yaml", "STEM_DATA/morphgnt_lexicon.yaml")
 

@@ -1,4 +1,4 @@
-from greek_inflexion import GreekInflexion
+from greek_inflexion_eee import GreekInflexion
 import paradigm_tools as pu
 
 inflexion = GreekInflexion('stemming.yaml', 'STEM_DATA/pratt_lexicon.yaml')

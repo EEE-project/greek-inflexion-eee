@@ -3,7 +3,7 @@
 from collections import defaultdict
 
 from accent import strip_length
-from greek_inflexion import GreekInflexion
+from greek_inflexion_eee import GreekInflexion
 from homer_utils import key_to_part, trim_multiples
 
 

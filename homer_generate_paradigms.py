@@ -4,7 +4,7 @@ from collections import defaultdict
 import sys
 
 from accent import strip_length
-from greek_inflexion import GreekInflexion
+from greek_inflexion_eee import GreekInflexion
 from test_generate import output_item
 from homer_utils import key_to_part
 

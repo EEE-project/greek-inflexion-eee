@@ -4,7 +4,7 @@ import unittest
 
 from fileformat import load_stemming, load_lexicon
 from fileformat import RefDoesNotExistException
-from greek_inflexion import GreekInflexion
+from greek_inflexion_eee import GreekInflexion
 
 
 class FileFormatTest(unittest.TestCase):

@@ -2,7 +2,7 @@ import yaml
 
 from accent import strip_length
 
-from greek_inflexion import GreekInflexion
+from greek_inflexion_eee import GreekInflexion
 
 
 def output_detail(detail):

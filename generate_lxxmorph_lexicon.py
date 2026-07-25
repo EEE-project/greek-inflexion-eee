@@ -3,7 +3,7 @@
 from collections import defaultdict
 
 from accent import strip_length
-from greek_inflexion import GreekInflexion
+from greek_inflexion_eee import GreekInflexion
 from morphgnt_utils import key_to_part
 from normalise import convert as norm_convert
 from lxxmorph_utils import get_words, convert_parse, trim_multiples

@@ -6,7 +6,7 @@ from collections import defaultdict
 from pysblgnt import morphgnt_rows
 
 from accent import strip_length
-from greek_inflexion import GreekInflexion
+from greek_inflexion_eee import GreekInflexion
 from morphgnt_utils import bcv_tuple, convert_parse, key_to_part
 
 
