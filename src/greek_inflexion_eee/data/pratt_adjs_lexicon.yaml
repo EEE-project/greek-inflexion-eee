@@ -16,6 +16,15 @@
     accents:
         - ["..N", "ἄδικος"]
 
+# Fem stems:/accents: mechanism gets 5 of 8 cells wrong here (confirmed via
+# Perseids Morpheus, see tools/morpheus/query_morpheus.py): NSF/GSF/ASF/APF
+# come out accented on the antepenult ("δίκαια" etc.) when the real forms
+# shift the accent to the penult ("δικαία"), and GPF gets a wrong baked-in
+# circumflex ("δικαιῶν" instead of "δικαίων") from noun_stemming.yaml's "1c"
+# rule -- both are instances of the engine's inability to know a bare,
+# undiacritized alpha's true (here, long) length, same root cause as
+# ἐχθρός's GSF bug. DSF/NPF/DPF (and all masc/neut cells) are unaffected and
+# stay on the mechanism; only the 5 wrong cells are overridden.
 δίκαιος:
     stems:
         M: δικαιο
@@ -23,6 +32,12 @@
         N: δικαιο
     accents:
         - ["..N", "δίκαιος"]
+    forms:
+        NSF: δικαία
+        GSF: δικαίας
+        ASF: δικαίαν
+        APF: δικαίας
+        GPF: δικαίων
 
 # αὐτός also serves as the 3rd-person pronoun (oblique-case him/her/it)
 # and intensive "self"/"same" — declines as a regular adjective here and

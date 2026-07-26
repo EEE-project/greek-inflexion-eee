@@ -37,6 +37,22 @@ def test_2_1_2_contracted(gi):
     assert "χρυσοῦν" in gi.generate("χρυσοῦς", "NSN")
 
 
+def test_2_1_2_dikaios_fem_accent_recession(gi):
+    """δίκαιος -- feminine oblique singular and gen plural shift the accent
+    to the penult (δικαία, δικαίας, δικαίαν, δικαίων), not the antepenult
+    (δίκαια, δίκαιας, δίκαιαν) or a wrongly baked-in circumflex (δικαιῶν) --
+    both wrong forms came from the same-mechanism blind spot for a bare,
+    undiacritized alpha's true (here, long) vowel length; fixed via
+    forms: overrides, confirmed against Perseids Morpheus."""
+    assert "δικαία" in gi.generate("δίκαιος", "NSF")
+    assert "δίκαια" not in gi.generate("δίκαιος", "NSF")
+    assert "δικαίας" in gi.generate("δίκαιος", "GSF")
+    assert "δικαίαν" in gi.generate("δίκαιος", "ASF")
+    assert "δικαίας" in gi.generate("δίκαιος", "APF")
+    assert "δικαίων" in gi.generate("δίκαιος", "GPF")
+    assert "δικαιῶν" not in gi.generate("δίκαιος", "GPF")
+
+
 def test_2_2_two_termination(gi):
     """ἄδικος — masc and fem nominative singular are identical."""
     nsm = gi.generate("ἄδικος", "NSM")

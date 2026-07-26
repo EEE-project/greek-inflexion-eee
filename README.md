@@ -186,6 +186,14 @@ for the upstream documentation.
   3-termination adjective (distinct forms exist, just not yet in the bundled
   lexicons) or a genuinely gender-restricted fixed epithet — not fixed here,
   since mirroring the other gender for those would be grammatically wrong.
+  Separately, `δίκαιος`'s feminine paradigm had 5 wrong cells: NSF/GSF/ASF/APF
+  came out accented on the antepenult (`δίκαια` etc.) instead of the correct
+  penult (`δικαία`), and GPF got a wrong baked-in circumflex (`δικαιῶν` instead
+  of `δικαίων`) — both are the stemming engine's inability to know a bare,
+  undiacritized alpha's true (here, long) vowel length. Fixed via targeted
+  `forms:` overrides for just those 5 cells (same pattern as `ταχύς`'s entry
+  in the same file); the unaffected DSF/NPF/DPF and all masc/neut cells stay
+  on the regular mechanism.
 
 - **Improved accent engine** — correct handling of nominal accent overrides for
   neuter forms; `_fix_nominal_oxytone` converts acute on inflected long ultima to
