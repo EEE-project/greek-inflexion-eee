@@ -173,7 +173,12 @@ for the upstream documentation.
 
 - **Adjective morphology** — `adj_stemming.yaml` + `pratt_adjs_lexicon.yaml` covering
   2-1-2 uncontracted/contracted, two-termination, 3-1-3 participial and υ-stem,
-  3-3 σ-stem, and comparative adjectives.
+  3-3 σ-stem, and comparative adjectives. 3-3 σ-stem two-termination adjectives
+  (e.g. `ἀληθής`) generate masculine oblique forms directly now — previously
+  only the feminine cells were reachable via `noun_stemming.yaml`'s existing
+  masculine sigma-stem rule, which is correctly scoped to a different,
+  genuinely masc-only class (contracted proper names like `Περικλῆς`) and left
+  untouched; the two-termination adjective case gets its own rules instead.
 
 - **Improved accent engine** — correct handling of nominal accent overrides for
   neuter forms; `_fix_nominal_oxytone` converts acute on inflected long ultima to

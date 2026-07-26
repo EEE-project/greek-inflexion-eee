@@ -1,2 +1,16 @@
 NSM:
     - "[^ε]|εσ>ης<ς|"   # 3c sigma-stem adjective M (ἀληθής)
+GSM:
+    - "|εσ>ου<ο|ς"   # 3c sigma-stem adjective M -- masc/fem share every oblique form (ἀληθής); noun_stemming.yaml's own 3cM (εεσ, double epsilon) is for a different, genuinely masc-only class (e.g. Περικλῆς) and is left untouched
+DSM:
+    - "|εσ>ει<ι|"    # 3c sigma-stem adjective M
+ASM:
+    - "|εσ>η<α|"    # 3c sigma-stem adjective M
+NPM:
+    - "|εσ>ει<ε|ς"    # 3c sigma-stem adjective M
+GPM:
+    - "|εσ>ων<ων|"    # 3c sigma-stem adjective M
+DPM:
+    - "ε|σ>σ<σ|ι(ν)"    # 3c sigma-stem adjective M
+APM:
+    - "|εσ>ει<@|ς"    # 3c sigma-stem adjective M

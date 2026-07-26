@@ -72,6 +72,19 @@ def test_3_3_sigma_stem(gi):
     assert "ἀληθεῖ" in gi.generate("ἀληθής", "DSN")
 
 
+def test_3_3_sigma_stem_masc_oblique(gi):
+    """ἀληθής — masc/fem share every oblique-case form in this declension
+    (ancient-greek-backend-eee#4: masc oblique cells were previously absent
+    from the paradigm entirely, only stored under the fem keys)."""
+    assert "ἀληθοῦς" in gi.generate("ἀληθής", "GSM")
+    assert "ἀληθεῖ" in gi.generate("ἀληθής", "DSM")
+    assert "ἀληθῆ" in gi.generate("ἀληθής", "ASM")
+    assert "ἀληθεῖς" in gi.generate("ἀληθής", "NPM")
+    assert "ἀληθῶν" in gi.generate("ἀληθής", "GPM")
+    assert "ἀληθέσι(ν)" in gi.generate("ἀληθής", "DPM")
+    assert "ἀληθεῖς" in gi.generate("ἀληθής", "APM")
+
+
 def test_3_3_comparative(gi):
     """μείζων — 3-3 comparative — masc/fem share nom sg, neut is distinct."""
     assert "μείζων" in gi.generate("μείζων", "NSM")
