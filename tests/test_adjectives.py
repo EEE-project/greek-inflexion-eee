@@ -93,6 +93,15 @@ def test_3_3_comparative(gi):
     assert "μείζονος" in gi.generate("μείζων", "GSM")
 
 
+def test_3_3_comparative_fem_oblique(gi):
+    """ancient-greek-backend-eee#11: DSF/ASF were missing from μείζων's
+    entry entirely (masc equivalents already present) -- comparatives
+    genuinely share every case between masc/fem, so these should be
+    identical to the masc forms, not merely reachable via a fallback."""
+    assert "μείζονι" in gi.generate("μείζων", "DSF")
+    assert "μείζονα" in gi.generate("μείζων", "ASF")
+
+
 def test_2_1_2_pronominal_neuter(gi):
     """αὐτός — pronominal-declension neuter singular has no final -ν
     (αὐτό, not αὐτόν), unlike a regular 2-1-2 adjective (ἀγαθόν)."""

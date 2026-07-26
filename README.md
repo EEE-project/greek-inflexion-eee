@@ -179,6 +179,13 @@ for the upstream documentation.
   masculine sigma-stem rule, which is correctly scoped to a different,
   genuinely masc-only class (contracted proper names like `Περικλῆς`) and left
   untouched; the two-termination adjective case gets its own rules instead.
+  Verified via a full sweep (real Perseids Morpheus lookups, not guessing)
+  that only `μείζων` (comparative) and `ἐυπλόκαμος` were genuinely missing a
+  cell for their shared gender's data; added those directly. Every other
+  adjective with an apparent masc/fem gap turned out to be a regular
+  3-termination adjective (distinct forms exist, just not yet in the bundled
+  lexicons) or a genuinely gender-restricted fixed epithet — not fixed here,
+  since mirroring the other gender for those would be grammatically wrong.
 
 - **Improved accent engine** — correct handling of nominal accent overrides for
   neuter forms; `_fix_nominal_oxytone` converts acute on inflected long ultima to

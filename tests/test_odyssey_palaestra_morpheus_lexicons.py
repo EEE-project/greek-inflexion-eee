@@ -267,6 +267,11 @@ def test_odyssey_zero_coverage_gap_fill_added():
     assert adjs["ἕλιξ"]["forms"]["APM"] == "ἕλικας"
     assert adjs["ἕλιξ"]["forms"]["APF"] == "ἕλικας"
     assert adjs["ἐυπλόκαμος"]["forms"]["NSF"] == "ἐυπλόκαμος"
+    # ancient-greek-backend-eee#11: ἐυπλόκαμος is 2-termination (Morpheus
+    # stemtype os_on, no separate feminine stem) -- masc nominative
+    # singular is spelled identically, but was missing from this entry
+    # entirely (not merely deferred to a runtime fallback).
+    assert adjs["ἐυπλόκαμος"]["forms"]["NSM"] == "ἐυπλόκαμος"
     assert adjs["τρίτος"]["forms"]["ASN"] == "τρίτον"
     assert adjs["τρίτατος"]["forms"]["ASN"] == "τρίτατον"
     assert "ὑλήεις" not in adjs  # Doric-only, deliberately left uncovered
