@@ -156,9 +156,9 @@ def test_lexicon_sizes():
     """Documents each lexicon's actual scope -- update deliberately, not by
     accident, if this changes."""
     from greek_inflexion_eee.fileformat import _load_lexicon_yaml
-    assert len(_load_lexicon_yaml("odyssey_morpheus_verbs_lexicon.yaml")) == 56
-    assert len(_load_lexicon_yaml("odyssey_morpheus_nouns_lexicon.yaml")) == 59
-    assert len(_load_lexicon_yaml("odyssey_morpheus_adjs_lexicon.yaml")) == 57
+    assert len(_load_lexicon_yaml("odyssey_morpheus_verbs_lexicon.yaml")) == 64
+    assert len(_load_lexicon_yaml("odyssey_morpheus_nouns_lexicon.yaml")) == 76
+    assert len(_load_lexicon_yaml("odyssey_morpheus_adjs_lexicon.yaml")) == 69
     assert len(_load_lexicon_yaml("palaestra_morpheus_nouns_lexicon.yaml")) == 26
 
 

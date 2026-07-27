@@ -68,6 +68,7 @@
     VSF: δολόεσσα
 δῖος:
   forms:
+    ASF: δῖαν
     APN: δῖα
     NPN: δῖα
     NSF: δῖα
@@ -147,6 +148,7 @@
 πολιός:
   forms:
     ASF: πολιήν
+    GSF: πολιοῖο
 πολυκηδής:
   forms:
     APN: πολυκηδέα
@@ -180,6 +182,7 @@
     VSN: πολύτροπον
 πᾶς:
   forms:
+    APN: πάντα
     DPM: πᾶσι
     DPN: πᾶσι
     NPM: πάντες
@@ -303,3 +306,44 @@
 ὠκύς:
   forms:
     GPF: ὠκειάων
+
+# 2026_07_20 gap-mining pass (2026-07-27) -- same methodology, this batch
+# never went through a coverage pass before (course-vocab header note above
+# predates this lesson's addition to the course).
+ἐϋκτίμενος:
+  forms:
+    ASF: ἐϋκτιμένην
+ὥριος:
+  forms:
+    APN: ὥρια
+ὑδρηλός:
+  forms:
+    NPM: ὑδρηλοὶ
+μαλακός:
+  forms:
+    NPM: μαλακοί
+ἄφθιτος:
+  forms:
+    NPF: ἄφθιτοι
+λεῖος:
+  forms:
+    NSF: λείη
+βαθύς:
+  forms:
+    ASN: βαθὺ
+    NSF: βαθεῖ᾽
+εὔορμος:
+  forms:
+    NSM: εὔορμος
+ἀγλαός:
+  forms:
+    NSN: ἀγλαὸν
+ὀρφναῖος:
+  forms:
+    ASF: ὀρφναίην
+μακρός:
+  forms:
+    APN: μακρὰ
+ἐΰσσελμος:
+  forms:
+    APF: ἐϋσσέλμους

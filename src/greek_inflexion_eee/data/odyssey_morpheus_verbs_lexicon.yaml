@@ -1,7 +1,9 @@
 # odyssey_morpheus_verbs_lexicon.yaml — verbatim attested verb forms for
 # lemmas appearing in the created_with_eee Odyssey course vocabulary
 # (lessons 2026_06_01 through 2026_07_06, 508 distinct word forms across
-# 520 form+lemma+pos triples), confirmed via the Perseids Morpheus analyzer.
+# 520 form+lemma+pos triples; a second pass on 2026-07-27 added 2026_07_20,
+# which had never been through a coverage pass — 2026_07_13 remains
+# unmined as of that pass), confirmed via the Perseids Morpheus analyzer.
 # Every entry is a `forms:` block, never `stems:`.
 #
 # Distinct provenance from "morpheus" (see that lexicon's own header):
@@ -49,6 +51,7 @@
 
 βάλλω:
   forms:
+    AAN: βαλέειν
     IAI.1S: βάλλον
     IAI.3P: βάλλον
     PAP.VSM: βάλλον
@@ -260,3 +263,39 @@
 ὄρνυμι:
   forms:
     YAI.3S: ὀρώρει
+
+# 2026_07_20 gap-mining pass (2026-07-27) -- same methodology, this batch
+# never went through a coverage pass before (course-vocab header note above
+# predates this lesson's addition to the course). δέρκομαι/προφαίνομαι/
+# προφαίνω: Morpheus's own citation resolves the compound with its
+# preverb spelled out (εἰσδέρκομαι, πρό-ὑφαίνω) -- stored here under the
+# course vocab TSV's own simple-verb lemma spelling instead, matching how
+# this file's lookup path actually queries it (same class of citation-form
+# difference as accent/dialect spelling, tolerated per this file's own
+# header). TSV's gloss for ἐσέδρακεν says "perfect" but Morpheus confirms
+# aorist active indicative -- the TSV gloss itself has a small error here;
+# the tag below is the grammatically correct (Morpheus-verified) one.
+ἀμάω:
+  forms:
+    PAO.3P: ἀμῶιεν
+ἐποτρύνω:
+  forms:
+    PAS.3S: ἐποτρύνηι
+ῥέω:
+  forms:
+    PAI.3S: ῥέει
+φύω:
+  forms:
+    XAI.3P: πεφύασιν
+προφαίνομαι:
+  forms:
+    IMI.3S: προυφαίνετ᾽
+προφαίνω:
+  forms:
+    IAI.3S: προύφαινε
+δέρκομαι:
+  forms:
+    AAI.3S: ἐσέδρακεν
+κέλλω:
+  forms:
+    AAP.DPF: κελσάσηισι

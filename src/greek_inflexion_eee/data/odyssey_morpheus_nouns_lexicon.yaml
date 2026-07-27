@@ -53,6 +53,7 @@
 θάλασσα:
   forms:
     ASF: θάλασσαν
+    GSF: θαλάσσης
 θάνατος:
   forms:
     ASM: θάνατόν
@@ -246,3 +247,64 @@
 ὥρα:
   forms:
     DSF: ὥρῃ
+
+# 2026_07_20 gap-mining pass (2026-07-27) -- same methodology, this batch
+# never went through a coverage pass before (course-vocab header note above
+# predates this lesson's addition to the course). πρυμνήσιον: Morpheus's
+# own analysis resolves the word to the adjective πρυμνήσιος used
+# substantively (understood νηός πρυμνήσιος, "the [rope] of the stern");
+# the course vocab TSV tags it as a distinct noun lemma for teaching
+# purposes, so it's stored here under that citation rather than moved to
+# the adjective lexicon, matching the TSV's own lemma the way this file's
+# lookup path actually queries it.
+ὄχθη:
+  forms:
+    APF: ὄχθας
+ἄμπελος:
+  forms:
+    NPF: ἄμπελοι
+ἄροσις:
+  forms:
+    NSF: ἄροσις
+λήϊον:
+  forms:
+    ASN: λήϊον
+πῖαρ:
+  forms:
+    NSN: πῖαρ
+οὖδας:
+  forms:
+    ASN: οὖδας
+χρεώ:
+  forms:
+    NSF: χρεὼ
+πεῖσμα:
+  forms:
+    GSN: πείσματός
+πρυμνήσιον:
+  forms:
+    APN: πρυμνήσι᾽
+χρόνος:
+  forms:
+    ASM: χρόνον
+ἀήτης:
+  forms:
+    NPM: ἀῆται
+κράς:
+  forms:
+    GSF: κρατὸς
+αἴγειρος:
+  forms:
+    NPF: αἴγειροι
+ἀήρ:
+  forms:
+    NSF: ἀήρ
+νέφος:
+  forms:
+    DPN: νεφέεσσιν
+χέρσος:
+  forms:
+    ASF: χέρσον
+ῥηγμίν:
+  forms:
+    DSM: ῥηγμῖνι
