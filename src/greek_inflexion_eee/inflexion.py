@@ -46,6 +46,17 @@ class GreekInflexion:
         segmented_lemma = self.segmented_lemmas.get(lemma)
         for orig_form, details in self.inflexion.generate(
                 lemma, key, tags).items():
+            if "{" in orig_form:
+                # No stemming rule matched this stem's principal-part marker
+                # (e.g. "{root}", "{athematic}") for this specific key, so
+                # the rule engine fell through to its stem-unchanged default
+                # rule -- the marker survives into the "generated" surface
+                # form instead of a real Greek word. No legitimate Greek
+                # form ever contains "{", so this is an unambiguous signal
+                # to treat the cell as unresolved (same as the stemming
+                # engine's own everyday "no rule matched at all" case)
+                # rather than surface the raw template text.
+                continue
             for detail in details:
                 accent_form, accent_notes = calculate_accent(
                     orig_form, key, lemma, segmented_lemma, detail["stem"],

@@ -5,7 +5,7 @@ import pytest
 import yaml
 
 from greek_accentuation.characters import strip_length
-from greek_inflexion_eee import load_default
+from greek_inflexion_eee import load_default, load_lexicons
 
 _TEST_DATA = Path(__file__).parent / "test_data" / "pratt_test.yaml"
 
@@ -40,3 +40,20 @@ def test_verb_form(gi, lemma, key, tags, expected):
     assert got == want, (
         f"{lemma} {key}: generated {set(generated.keys())!r}, expected {expected!r}"
     )
+
+
+def test_generate_never_returns_unsubstituted_template_marker():
+    """Regression test (2026-07-27): a stem whose principal-part marker
+    (e.g. "{root}", "{athematic}") has no matching stemming rule for a
+    given key falls through to the rule engine's own stem-unchanged
+    default rule, leaking the literal marker into the "generated" surface
+    form -- e.g. βαίνω's alternate perfect-system stem "ἐβεβα{root}" against
+    YAI.1S (pluperfect active indicative 1st singular), which has {root}
+    rules for plural persons but not singular. No legitimate Greek form
+    ever contains "{"; generate() must never surface one. βαίνω lives in
+    the homer lexicon, not the small pratt one load_default() loads."""
+    gi_homer = load_lexicons("homer")
+    generated = gi_homer.generate("βαίνω", "YAI.1S")
+    assert generated
+    assert all("{" not in form for form in generated)
+    assert "ἐβεβήκη" in {strip_length(w) for w in generated}
