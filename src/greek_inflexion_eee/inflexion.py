@@ -58,9 +58,22 @@ class GreekInflexion:
                 # rather than surface the raw template text.
                 continue
             for detail in details:
-                accent_form, accent_notes = calculate_accent(
-                    orig_form, key, lemma, segmented_lemma, detail["stem"],
-                    self.inflexion, self.accent_override)
+                try:
+                    accent_form, accent_notes = calculate_accent(
+                        orig_form, key, lemma, segmented_lemma, detail["stem"],
+                        self.inflexion, self.accent_override)
+                except TypeError:
+                    # greek_accentuation's syllabifier doesn't recognize
+                    # every valid Greek consonant cluster as a single
+                    # syllable onset (e.g. "τλ" in "τλην" splits into a
+                    # vowel-less "τ" syllable on its own), which crashes
+                    # its own syllable_length() with a None nucleus deep
+                    # inside a third-party dependency -- not an EEE bug to
+                    # fix here, and not every alternate spelling for a
+                    # cell hits it (e.g. the augmented "ἐτλην" alternate
+                    # for the same cell is unaffected). Skip just this one
+                    # unaccentable form rather than losing the whole cell.
+                    continue
                 detail["original_form"] = orig_form
                 detail["accent_notes"] = accent_notes
                 generated[accent_form].append(detail)

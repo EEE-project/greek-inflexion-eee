@@ -57,3 +57,21 @@ def test_generate_never_returns_unsubstituted_template_marker():
     assert generated
     assert all("{" not in form for form in generated)
     assert "ἐβεβήκη" in {strip_length(w) for w in generated}
+
+
+def test_generate_skips_a_form_the_syllabifier_cannot_accent():
+    """Regression test (2026-07-27): τλάω's augmentless Homeric alternate
+    "τλην" (AAI.1S) syllabifies as ["τ", "λην"] in the third-party
+    greek_accentuation package -- "τλ" isn't recognized as a single
+    syllable onset, leaving a vowel-less "τ" syllable that crashes its
+    own syllable_length() (TypeError: NoneType has no len()) during
+    recessive-accent calculation. Not an EEE bug to fix (third-party
+    syllabifier limitation, real Greek word). generate() must skip just
+    that one form rather than losing the whole cell -- the properly
+    augmented "ἔτλην" and the alternate "ἐτάλασσα" stem for the same cell
+    are both unaffected and must still come through."""
+    gi_homer = load_lexicons("homer")
+    generated = gi_homer.generate("τλάω", "AAI.1S")
+    assert generated
+    got = {strip_length(w) for w in generated}
+    assert got == {"ἔτλην", "ἐτάλασσα"}
