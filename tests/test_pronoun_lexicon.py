@@ -60,11 +60,12 @@ PRONOUN_FORMS = [
     ("ἐγώ", "AD1", "νώ"),
     ("ἐγώ", "GD1", "νῷν"),
     ("ἐγώ", "DD1", "νῷν"),
-    # ἐγώ -- singular (enclitic/emphatic pair) and plural (= ἡμεῖς cells)
-    ("ἐγώ", "NS1", "ἐγώ"),
-    ("ἐγώ", "GS1", ["ἐμοῦ", "μου"]),
+    # ἐγώ -- singular (enclitic/emphatic pair, plus epic variants added
+    # 2026-07-27) and plural (= ἡμεῖς cells)
+    ("ἐγώ", "NS1", ["ἐγώ", "ἐγὼν"]),
+    ("ἐγώ", "GS1", ["ἐμοῦ", "μου", "μευ"]),
     ("ἐγώ", "DS1", ["ἐμοί", "μοι"]),
-    ("ἐγώ", "AS1", ["ἐμέ", "με"]),
+    ("ἐγώ", "AS1", ["ἐμέ", "με", "μ᾽"]),
     ("ἐγώ", "NP1", "ἡμεῖς"),
     ("ἐγώ", "GP1", "ἡμῶν"),
     ("ἐγώ", "DP1", "ἡμῖν"),
@@ -145,6 +146,8 @@ PRONOUN_FORMS = [
     ("ὅς", "NDM", "ὥ"),
     ("ὅς", "NPM", "οἵ"),
     ("ὅς", "NPN", "ἅ"),
+    # DPM gained an epic variant (οἷσι) 2026-07-27
+    ("ὅς", "DPM", ["οἷς", "οἷσι"]),
     # τίς -- interrogative, always accented; common-gender M/F share one
     # form (the "M"-labeled keys), N is distinct. No gender distinction
     # at all outside Nom/Acc, so GSN/DSN/GPN/DPN deliberately repeat
@@ -200,7 +203,8 @@ PRONOUN_FORMS = [
     ("ἀλλήλων", "ADM", "ἀλλήλω"),
     ("ἀλλήλων", "ADF", "ἀλλήλᾱ"),
     ("ἀλλήλων", "GPM", "ἀλλήλων"),
-    ("ἀλλήλων", "DPF", "ἀλλήλαις"),
+    # DPF gained an epic variant (ἀλλήλῃσι) 2026-07-27
+    ("ἀλλήλων", "DPF", ["ἀλλήλαις", "ἀλλήλῃσι"]),
     ("ἀλλήλων", "APM", "ἀλλήλους"),
     ("ἀλλήλων", "APN", "ἄλληλα"),
 ]

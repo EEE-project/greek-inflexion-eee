@@ -156,9 +156,9 @@ def test_lexicon_sizes():
     """Documents each lexicon's actual scope -- update deliberately, not by
     accident, if this changes."""
     from greek_inflexion_eee.fileformat import _load_lexicon_yaml
-    assert len(_load_lexicon_yaml("odyssey_morpheus_verbs_lexicon.yaml")) == 71
-    assert len(_load_lexicon_yaml("odyssey_morpheus_nouns_lexicon.yaml")) == 86
-    assert len(_load_lexicon_yaml("odyssey_morpheus_adjs_lexicon.yaml")) == 82
+    assert len(_load_lexicon_yaml("odyssey_morpheus_verbs_lexicon.yaml")) == 77
+    assert len(_load_lexicon_yaml("odyssey_morpheus_nouns_lexicon.yaml")) == 100
+    assert len(_load_lexicon_yaml("odyssey_morpheus_adjs_lexicon.yaml")) == 84
     assert len(_load_lexicon_yaml("palaestra_morpheus_nouns_lexicon.yaml")) == 26
 
 
@@ -213,7 +213,10 @@ def test_cross_lemma_contamination_excluded():
 
     nouns = _load_lexicon_yaml("odyssey_morpheus_nouns_lexicon.yaml")
     assert "μόρος" not in nouns
-    assert "πούς" not in nouns
+    # πούς itself was re-added later (2026-07-27 older-lessons gap-mining
+    # pass) with a genuinely new, correct cell -- distinct data, not a
+    # revival of the contaminated one removed here.
+    assert nouns["πούς"]["forms"] == {"DSM": "ποδὶ"}
     # ζυγόν and ἱστίον are unambiguously neuter -- the 5 feminine-case cells
     # each shipped (belonging to unrelated lemmas ζυγή / ἑστία) are gone;
     # their genuine neuter cells survive untouched.
@@ -260,7 +263,9 @@ def test_odyssey_zero_coverage_gap_fill_added():
 
     adjs = _load_lexicon_yaml("odyssey_morpheus_adjs_lexicon.yaml")
     assert adjs["πίων"]["forms"]["ASM"] == "πίονα"
-    assert adjs["τρηχύς"]["forms"]["NSF"] == "τρηχεῖα"
+    # 2026-07-27: gained a second NSF value (τρηχεῖ᾽, the elided spelling
+    # 2026_06_15's own text actually uses) alongside the original.
+    assert adjs["τρηχύς"]["forms"]["NSF"] == ["τρηχεῖα", "τρηχεῖ᾽"]
     assert adjs["ἀμφιέλισσα"]["forms"]["NPF"] == "ἀμφιέλισσαι"
     assert adjs["ἐρίηρες"]["forms"]["APM"] == "ἐρίηρας"
     assert adjs["ἐϋκνήμις"]["forms"]["NPM"] == "ἐϋκνήμιδες"

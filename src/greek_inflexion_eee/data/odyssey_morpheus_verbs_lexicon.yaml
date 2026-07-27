@@ -155,6 +155,7 @@
 πατέομαι:
   forms:
     AMI.1P: ἐπασσάμεθ'
+    AMN: πάσασθαι
 πελάζω:
   forms:
     AAI.3S: πέλασσεν
@@ -328,3 +329,35 @@
 περόω:
   forms:
     PAI.3P: περόωσι
+
+# Older-5-lessons gap-mining pass (2026-07-27) -- see the matching header
+# note in odyssey_morpheus_adjs_lexicon.yaml for the skipped-lemma list.
+# Real bug found and left alone (out of scope for a data-only pass, needs
+# a code fix in ancient-greek-backend-eee, not this file): `ἄνωγα` and
+# `ὄρνυμι` already had correct YAI/pluperfect forms: entries from an
+# earlier pass (ἠνώγεα, ὀρώρει) -- but verb-tags.tsv has no pluperfect
+# ("Y") rows at all, so paradigm() never requests those cells for *any*
+# verb regardless of what's in the lexicon. Same shape as the missing
+# "XAI"/perfect column fixed once already (see the Byzantine time slice
+# history) -- that fix was never extended to pluperfect. Confirmed via
+# direct query: ag_homer.paradigm("ἄνωγα", "verb") returns 354 real
+# cells but zero starting with "Y", despite the YAML entry being present
+# and correctly spelled.
+ὁράω:
+  forms:
+    AAI.3S: ἴδεν
+ἀπόλλυμι:
+  forms:
+    AMI.3P: ὄλοντο
+νέομαι:
+  forms:
+    PMN: νέεσθαι
+ἱκνέομαι:
+  forms:
+    PAI.3S: ἵκει
+ἐννέπω:
+  forms:
+    AAS.1S: ἐνίσπω
+μετανίσομαι:
+  forms:
+    AMI.3S: μετενίσετο

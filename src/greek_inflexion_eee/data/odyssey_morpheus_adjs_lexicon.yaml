@@ -195,7 +195,9 @@
     ASN: τρίτον
 τρηχύς:
   forms:
-    NSF: τρηχεῖα
+    NSF:
+    - τρηχεῖα
+    - τρηχεῖ᾽
 φίλος:
   forms:
     APM: φίλους
@@ -212,6 +214,7 @@
     VSF: χθαμαλή
 ἀγαθός:
   forms:
+    APM: ἀρείους
     VSF: ἀγαθή
 ἀλλοδαπός:
   forms:
@@ -396,3 +399,48 @@
 εὔσελμος:
   forms:
     APF: ἐϋσσέλμους
+
+# Older-5-lessons gap-mining pass (2026-07-27): lessons 2026_06_01 through
+# 2026_07_06, which had already been through the original 2026-07-11/12
+# mining pass -- this is the residual "long tail" that pass's own framing
+# anticipated. 74 genuine gaps found via the same grc_lexicon_sources +
+# full cross-POS/UniMorph triage as the two most-recent lessons; skipped
+# as documented non-fixes (not oversights), same discipline as before:
+#   - the article ὁ/ἡ/τό (~13 occurrences across all 5 lessons) -- never
+#     given standalone paradigm data anywhere in this package, validated
+#     contextually against its noun instead.
+#   - σφεῖς/μιν (3rd-person personal pronouns, out of pronoun_lexicon.yaml's
+#     own documented scope, same as before).
+#   - πολύς/πλέονες -- already documented elsewhere (pronoun-coverage plan)
+#     as one of 3 irregular/suppletive adjectives deliberately out of scope.
+#   - ἡμεῖς (all forms) -- pronoun_lexicon.yaml stores this paradigm under
+#     ἐγώ (its singular), not a separate "ἡμεῖς" lemma; the course TSVs
+#     tag lemma=ἡμεῖς, so the data is unreachable via the TSV's own claim
+#     regardless of whether the specific form already exists under ἐγώ.
+#   - σφέτερος/ὅσος/ἡμέτερος/οὐδείς -- all confirmed by Morpheus to be
+#     regular adjective- or pronoun_lexicon-shaped words, but the course
+#     TSVs tag them pos=pronoun where the data would need to live under a
+#     different pos (adjective) or a brand-new pronoun_lexicon.yaml
+#     top-level lemma -- same routing-mismatch shape as αὐτός; left alone
+#     rather than unilaterally deciding a new architecture routing.
+#   - ὣς (2026_06_01) and ὑλήεσσα/ὑλήεις (2026_06_15, a repeat of the
+#     already-known case) -- both Morpheus-confirmed Doric-only readings,
+#     same exclusion rule as test_dialect_mismatched_cells_excluded.
+#   - θεός/θεά (2026_06_01) -- Morpheus does not recognize θεά as a form
+#     of θεός at all, only as a wholly separate lemma; a real TSV lemma
+#     error, not something to paper over with invented data.
+#   - σύ/τοι (2026_06_15) -- Morpheus confirms τοι as the ordinary
+#     particle; the σύ-dative reading it also returns is Doric-only and
+#     contextually implausible in this Epic passage (another TSV error).
+#   - ἄνωγα/ὄρνυμι (pluperfect cells only) -- see the matching note in
+#     odyssey_morpheus_verbs_lexicon.yaml: correct forms: data already
+#     exists, blocked by a separate paradigm()-rendering bug
+#     (verb-tags.tsv has no pluperfect rows at all), not a lexicon gap.
+ἄλλος:
+  forms:
+    ASN: ἄλλο
+    APM: ἄλλους
+    NPM: ἄλλοι
+λευκός:
+  forms:
+    APN: λεύκ᾽

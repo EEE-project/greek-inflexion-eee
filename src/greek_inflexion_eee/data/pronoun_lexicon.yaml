@@ -123,10 +123,10 @@
 
 ἐγώ:
   forms:
-    NS1: ἐγώ
-    GS1: [ἐμοῦ, μου]     # emphatic / enclitic
+    NS1: [ἐγώ, ἐγὼν]      # ἐγὼν: epic movable-nu variant (Od. IX.87)
+    GS1: [ἐμοῦ, μου, μευ] # ἐμοῦ emphatic / μου enclitic; μευ: epic (Od. IX.24)
     DS1: [ἐμοί, μοι]
-    AS1: [ἐμέ, με]
+    AS1: [ἐμέ, με, μ᾽]    # ἐμέ emphatic / με enclitic; μ᾽: elided με (Od. IX.29)
     ND1: νώ
     AD1: νώ
     GD1: νῷν
@@ -303,7 +303,7 @@
     GPM: ὧν
     GPF: ὧν
     GPN: ὧν
-    DPM: οἷς
+    DPM: [οἷς, οἷσι]  # οἷσι: epic (Od. I.32)
     DPF: αἷς
     DPN: οἷς
     APM: οὕς
@@ -430,7 +430,7 @@
     GPF: ἀλλήλων
     GPN: ἀλλήλων
     DPM: ἀλλήλοις
-    DPF: ἀλλήλαις
+    DPF: [ἀλλήλαις, ἀλλήλῃσι]  # ἀλλήλῃσι: epic (Od. IX.22)
     DPN: ἀλλήλοις
     APM: ἀλλήλους
     APF: ἀλλήλᾱς

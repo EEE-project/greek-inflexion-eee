@@ -31,6 +31,8 @@
 γαῖα:
   forms:
     ASF: γαῖαν
+    DSF: γαίῃ
+    GSF: γαίης
 γείτων:
   forms:
     NPF: γείτονες
@@ -175,10 +177,12 @@
     ASM: Ἄνδρα
     DPM: ἀνδράσι
     NDM: ἄνδρε
+    NPM: ἀνέρες
     VDM: ἄνδρε
 ἄλγος:
   forms:
     APN: ἄλγεα
+    DPN: ἄλγεσι
     VPN: ἄλγεα
 ἄνεμος:
   forms:
@@ -220,6 +224,7 @@
 ἠώς:
   forms:
     ASF: ἠῶ
+    NSF: ἠὼς
 ἦμαρ:
   forms:
     ASN: ἦμαρ
@@ -355,3 +360,64 @@
 ἄροτος:
   forms:
     DPM: ἀρότοισιν
+
+# Older-5-lessons gap-mining pass (2026-07-27) -- lessons 2026_06_01 through
+# 2026_07_06, which had already been through the original 2026-07-11/12
+# mining pass; this is the residual "long tail" the earlier pass's own
+# framing anticipated. Same methodology, plus several new false-gap
+# patterns caught this round (see the matching header note in
+# odyssey_morpheus_adjs_lexicon.yaml for the full skip list and reasoning):
+# the article (ὁ), πολύς (documented elsewhere as out of scope), σφεῖς/μιν
+# (as before), σφέτερος/ὅσος/ἡμέτερος/οὐδείς (all confirmed by Morpheus to
+# be regular adjective- or pronoun_lexicon-shaped words, but the course
+# TSVs tag them pos=pronoun where the data would need to live under a
+# different pos or lemma -- same routing-mismatch shape as αὐτός, left
+# alone rather than unilaterally deciding a new architecture routing).
+# Two genuine TSV lemma errors also found and left alone (not "fixed" with
+# invented data): θεός/θεά (Morpheus does not recognize θεά as a form of
+# θεός at all -- a real, distinct lemma) and σύ/τοι (Morpheus confirms τοι
+# as the ordinary particle; the σύ-dative reading it also returns is
+# Doric-only, inappropriate for Epic and vanishingly unlikely in context).
+νοῦς:
+  forms:
+    ASM: νόον
+θυμός:
+  forms:
+    ASM: θυμόν
+ἀτασθαλία:
+  forms:
+    DPF: ἀτασθαλίῃσιν
+θεά:
+  forms:
+    GPF: θεάων
+ἐνιαυτός:
+  forms:
+    GPM: ἐνιαυτῶν
+ἄεθλος:
+  forms:
+    GPM: ἀέθλων
+τοκεύς:
+  forms:
+    GPM: τοκήων
+ἠέλιος:
+  forms:
+    ASM: ἠέλιον
+    NSM: ἠέλιος
+πούς:
+  forms:
+    DSM: ποδὶ
+λαῖλαψ:
+  forms:
+    DSF: λαίλαπι
+ῥόος:
+  forms:
+    NSM: ῥόος
+ποτής:
+  forms:
+    GSF: ποτῆτος
+χθών:
+  forms:
+    DSF: χθονὶ
+λωτός:
+  forms:
+    ASM: λωτὸν
