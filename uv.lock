@@ -22,7 +22,7 @@ wheels = [
 
 [[package]]
 name = "greek-inflexion-eee"
-version = "0.6.3"
+version = "0.8.0"
 source = { editable = "." }
 dependencies = [
     { name = "greek-accentuation" },

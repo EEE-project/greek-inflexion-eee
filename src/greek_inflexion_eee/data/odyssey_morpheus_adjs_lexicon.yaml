@@ -347,3 +347,52 @@
 ἐΰσσελμος:
   forms:
     APF: ἐϋσσέλμους
+
+# 2026_07_13 gap-mining pass (2026-07-27) -- see the matching header in
+# odyssey_morpheus_nouns_lexicon.yaml for the skipped-lemma list and why
+# (σφεῖς/μιν/ὁ/ἕκαστος/ὑλήεσσα). εὔσελμος below is a genuinely separate
+# entry from ἐΰσσελμος above, not a duplicate: this lesson's own vocab TSV
+# spells the lemma with a single sigma (the other lesson's TSV uses a
+# double sigma) -- grc_lexicon_sources looks up the TSV's own claimed
+# spelling exactly, so both citation forms need their own entry even
+# though they're etymologically the same word and share this one cell's
+# surface form.
+ὑπερφίαλος:
+  forms:
+    GPM: ὑπερφιάλων
+ἀθέμιστος:
+  forms:
+    GPM: ἀθεμίστων
+ἄσπαρτος:
+  forms:
+    NPN: ἄσπαρτα
+ἀνήροτος:
+  forms:
+    NPN: ἀνήροτα
+ἐριστάφυλος:
+  forms:
+    ASM: ἐριστάφυλον
+βουληφόρος:
+  forms:
+    NPF: βουληφόροι
+ὑψηλός:
+  forms:
+    GPN: ὑψηλῶν
+λάχεια:
+  forms:
+    NSF: λάχεια
+ἀπειρέσιος:
+  forms:
+    NPF: ἀπειρέσιαι
+ἄγριος:
+  forms:
+    NPF: ἄγριαι
+μηκάς:
+  forms:
+    APF: μηκάδας
+μιλτοπάρηος:
+  forms:
+    NPF: μιλτοπάρῃοι
+εὔσελμος:
+  forms:
+    APF: ἐϋσσέλμους

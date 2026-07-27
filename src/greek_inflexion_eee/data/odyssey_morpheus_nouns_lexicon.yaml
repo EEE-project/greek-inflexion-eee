@@ -111,7 +111,9 @@
     APF: νῆας
     DPF: νηυσί
     GSF: νηός
-    NPF: νῆες
+    NPF:
+    - νῆες
+    - νέες
     VPF: νῆες
 νεφεληγερέτα:
   forms:
@@ -190,6 +192,7 @@
     DPM: ἀνθρώποισι
 ἄστυ:
   forms:
+    APN: ἄστε'
     NPN: ἄστεα
     VPN: ἄστεα
 ἅλς:
@@ -239,6 +242,7 @@
 ὄρος:
   forms:
     ASN: ὄρος
+    GPN: ὀρέων
     NSN: ὄρος
     VSN: ὄρος
 ὕδωρ:
@@ -308,3 +312,46 @@
 ῥηγμίν:
   forms:
     DSM: ῥηγμῖνι
+
+# 2026_07_13 gap-mining pass (2026-07-27) -- same methodology as the
+# 2026_07_20 pass above. Skipped as documented non-fixes, not oversights:
+# σφεῖς/μιν (3rd-person personal pronouns -- pronoun_lexicon.yaml's own
+# header explicitly scopes these out, "3rd person routes through αὐτός");
+# ὁ (the article -- never given standalone paradigm data anywhere in this
+# package, validated contextually against its noun instead, not an
+# independently quizzable lexeme); ἕκαστος (both cells -- TSV tags it
+# pronoun here, but its existing cells already live under adjective in
+# this file, same false-gap shape as αὐτός -- a routing/TSV-tagging
+# question, not a lexicon-data gap); ὑλήεσσα/ὑλήεις (Morpheus confirms
+# only for Doric dial -- same exclusion already applied once to this
+# exact word, see test_dialect_mismatched_cells_excluded).
+Κύκλωψ:
+  forms:
+    GPM: Κυκλώπων
+χείρ:
+  forms:
+    DPF: χερσὶν
+πυρός:
+  forms:
+    NPM: πυροὶ
+θέμις:
+  forms:
+    NPF: θέμιστες
+κάρηνον:
+  forms:
+    APN: κάρηνα
+παίς:
+  forms:
+    GPM: παίδων
+πάτος:
+  forms:
+    NSM: πάτος
+κυνηγέτης:
+  forms:
+    NPM: κυνηγέται
+ποίμνη:
+  forms:
+    DPF: ποίμνῃσιν
+ἄροτος:
+  forms:
+    DPM: ἀρότοισιν

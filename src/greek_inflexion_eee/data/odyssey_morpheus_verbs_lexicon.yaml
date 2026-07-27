@@ -1,10 +1,10 @@
 # odyssey_morpheus_verbs_lexicon.yaml — verbatim attested verb forms for
 # lemmas appearing in the created_with_eee Odyssey course vocabulary
 # (lessons 2026_06_01 through 2026_07_06, 508 distinct word forms across
-# 520 form+lemma+pos triples; a second pass on 2026-07-27 added 2026_07_20,
-# which had never been through a coverage pass — 2026_07_13 remains
-# unmined as of that pass), confirmed via the Perseids Morpheus analyzer.
-# Every entry is a `forms:` block, never `stems:`.
+# 520 form+lemma+pos triples; two follow-up passes on 2026-07-27 added
+# 2026_07_20 then 2026_07_13, neither of which had ever been through a
+# coverage pass), confirmed via the Perseids Morpheus analyzer. Every
+# entry is a `forms:` block, never `stems:`.
 #
 # Distinct provenance from "morpheus" (see that lexicon's own header):
 # "morpheus" sources (form, UD-feats) pairs from the UD_Ancient_Greek
@@ -168,6 +168,7 @@
   forms:
     AAI.1S: τέλεσ᾽
     AAI.3S: τέλεσ᾽
+    PAO.3P: τελέοιεν
     AMD.2S: τέλεσ᾽
 τύπτω:
   forms:
@@ -299,3 +300,31 @@
 κέλλω:
   forms:
     AAP.DPF: κελσάσηισι
+
+# 2026_07_13 gap-mining pass (2026-07-27) -- see the matching header in
+# odyssey_morpheus_nouns_lexicon.yaml for the skipped-lemma list and why.
+# Indicative-mood readings below whose Morpheus dial tag happens to
+# include Doric alongside epic (ἀρόω, ναίω, ἀλέγω, περόω) are kept -- the
+# exclusion precedent only removes Doric-ONLY readings, not readings
+# valid in epic too.
+ἀρόω:
+  forms:
+    PAI.3P: ἀρόωσιν
+ναίω:
+  forms:
+    PAI.3P: ναίουσι
+ἀλέγω:
+  forms:
+    PAI.3P: ἀλέγουσι
+τανύω:
+  forms:
+    XMI.3S: τετάνυσται
+κατίσχω:
+  forms:
+    PPI.3S: καταΐσχεται
+εἰσοιχνέω:
+  forms:
+    PAI.3P: εἰσοιχνεῦσι
+περόω:
+  forms:
+    PAI.3P: περόωσι
