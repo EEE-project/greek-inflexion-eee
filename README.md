@@ -211,6 +211,11 @@ for the upstream documentation.
 pip install greek-inflexion-eee
 ```
 
+Development version (latest, from Codeberg):
+```bash
+pip install "greek-inflexion-eee @ git+https://codeberg.org/EEE-project/greek-inflexion-eee.git"
+```
+
 Or from source:
 
 ```bash
