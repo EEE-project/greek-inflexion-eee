@@ -1,13 +1,25 @@
 [project]
 name = "greek-inflexion-eee"
-version = "1.0.1"
+version = "1.0.2"
+description = "Ancient Greek inflexion engine (EEE fork of jtauber/greek-inflexion)"
 readme = "README.md"
+license = "MIT"
+authors = [
+    {name = "James Tauber"},
+    {name = "Nathan Smith"},
+    {name = "Ethan Yates"},
+]
+maintainers = [{name = "Oleg Sadov", email = "oleg.sadov@gmail.com"}]
 requires-python = ">=3.12"
 dependencies = [
     "greek-accentuation",
     "inflexion>=0.8.0",
     "pyyaml",
 ]
+
+[project.urls]
+Homepage = "https://github.com/EEE-project/greek-inflexion-eee"
+Repository = "https://github.com/EEE-project/greek-inflexion-eee"
 
 [build-system]
 requires = ["hatchling"]
