@@ -36,9 +36,11 @@ def test_spot_check(gi, lemma, key, expected):
     assert expected in forms, f"{lemma} {key}: got {set(forms)!r}, expected {expected!r}"
 
 
-def test_unknown_lexicon_name_ignored():
-    gi = load_adj_lexicons(["pratt", "nonexistent"])
-    assert "ἀγαθός" in gi.generate("ἀγαθός", "NSM")
+def test_unknown_lexicon_name_raises():
+    """2026-07-31: previously silently skipped (see the module-level
+    _resolve_lexicon_name() docstring for why that changed)."""
+    with pytest.raises(ValueError, match="nonexistent"):
+        load_adj_lexicons(["pratt", "nonexistent"])
 
 
 @pytest.mark.parametrize("names", ["pratt", ["pratt"]])

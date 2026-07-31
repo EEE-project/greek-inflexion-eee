@@ -290,10 +290,10 @@ def test_interrogative_and_indefinite_are_distinct_entries(pronoun_data):
 
 def test_pron_lexicon_loads_without_error():
     """Name-resolution smoke test. lexicon_map is empty for
-    load_pron_lexicons (no named variants exist yet) -- default_file is
-    always included regardless of what's in names, matching
-    _load_pos_lexicons's existing behavior for noun/adjective."""
-    gi = load_pron_lexicons("pronoun")
+    load_pron_lexicons (no named variants exist yet), so the only names
+    that don't raise are [] and absolute paths -- default_file is always
+    included regardless."""
+    gi = load_pron_lexicons([])
     assert "ἐγώ" in gi.generate("ἐγώ", "NS1")
 
 
@@ -301,7 +301,7 @@ def test_pron_lexicon_has_no_stemming_ruleset():
     """Pronoun forms are all forms:-overrides (see the module docstring's
     structural guard above) -- load_pron_lexicons() passes an empty
     stemming-file list, so .ruleset is None, not a real StemmingRuleSet."""
-    gi = load_pron_lexicons("pronoun")
+    gi = load_pron_lexicons([])
     assert gi.ruleset is None
 
 
@@ -310,9 +310,19 @@ def test_parse_raises_clear_error_without_a_ruleset():
     has none (see test_pron_lexicon_has_no_stemming_ruleset above), so
     calling it must raise a clear, actionable error instead of leaking an
     AttributeError from deep inside the upstream inflexion.parse()."""
-    gi = load_pron_lexicons("pronoun")
+    gi = load_pron_lexicons([])
     with pytest.raises(ValueError, match="stemming rule set"):
         gi.parse("ἐγώ")
+
+
+def test_unknown_lexicon_name_raises():
+    """2026-07-31: no named pronoun lexicons have ever existed, so a bare
+    name here was always inapplicable -- previously silently ignored
+    (falling through to just the always-included default file), now
+    raises like verb/noun/adjective (see fileformat.py's
+    _resolve_lexicon_name() docstring)."""
+    with pytest.raises(ValueError, match="nonexistent"):
+        load_pron_lexicons(["nonexistent"])
 
 
 def test_absolute_path_custom_lexicon_loaded(tmp_path):
@@ -329,5 +339,5 @@ def test_absolute_path_custom_lexicon_loaded(tmp_path):
     custom_yaml.write_text(
         "ἑαυτοῦ:\n    forms:\n        GSM: ἑαυτοῦ\n", encoding="utf-8",
     )
-    gi = load_pron_lexicons(["pronoun", str(custom_yaml)])
+    gi = load_pron_lexicons([str(custom_yaml)])
     assert "ἑαυτοῦ" in gi.generate("ἑαυτοῦ", "GSM")

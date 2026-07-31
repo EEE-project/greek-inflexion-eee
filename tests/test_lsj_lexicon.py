@@ -7,12 +7,12 @@ documents the intended output and guards against stemming regressions.
 """
 import unicodedata
 import pytest
-from greek_inflexion_eee import load_default, load_lexicons, load_noun_lexicons
+from greek_inflexion_eee import load_default, load_verb_lexicons, load_noun_lexicons
 
 
 @pytest.fixture(scope="module")
 def gi_verbs():
-    return load_lexicons("lsj")
+    return load_verb_lexicons("lsj")
 
 
 @pytest.fixture(scope="module")
@@ -34,7 +34,7 @@ def test_lsj_nouns_name_resolves(gi_nouns):
 # (these load merged bundles, so they build their own engines rather than the fixtures)
 
 def test_lsj_verbs_merge_with_pratt_ltrg():
-    gi = load_lexicons(["pratt", "ltrg", "lsj"])
+    gi = load_verb_lexicons(["pratt", "ltrg", "lsj"])
     assert "μένω" in gi.generate("μένω", "PAI.1S").keys()   # from lsj
     assert gi.generate("λύω", "PAI.1S").keys()               # still from pratt/ltrg
 
@@ -57,8 +57,8 @@ def test_merge_conflict_is_additive(tmp_path):
     p = tmp_path / "custom_verbs.yaml"
     p.write_text(yaml.dump(custom, allow_unicode=True), encoding="utf-8")
 
-    forms_ab = set(load_lexicons(["pratt", str(p)]).generate("λύω", "PAI.1S").keys())
-    forms_ba = set(load_lexicons([str(p), "pratt"]).generate("λύω", "PAI.1S").keys())
+    forms_ab = set(load_verb_lexicons(["pratt", str(p)]).generate("λύω", "PAI.1S").keys())
+    forms_ba = set(load_verb_lexicons([str(p), "pratt"]).generate("λύω", "PAI.1S").keys())
 
     assert forms_ab == forms_ba          # order-independent
     assert "παύω" in forms_ab            # custom stem survived (additive, not overridden)
@@ -131,7 +131,7 @@ def test_no_macron_in_verb_citations_pratt_ltrg():
     # stems carry a macron for vowel-length-sensitive accentuation
     # (participles, infinitives, some imperatives need it for circumflex
     # placement), so PAI.1S must come out clean rather than λῡ́ω-style.
-    gi = load_lexicons(["pratt", "ltrg"])
+    gi = load_verb_lexicons(["pratt", "ltrg"])
     verbs = ["λύω", "φύω", "νικάω", "δείκνυμι"]
     for lem in verbs:
         for form in gi.generate(lem, "PAI.1S").keys():

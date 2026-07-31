@@ -19,15 +19,15 @@ for the upstream documentation.
   ```python
   from greek_inflexion_eee import (
       load_default, load_noun_default, load_adj_default,
-      load_lexicons, load_noun_lexicons, load_adj_lexicons,
+      load_verb_lexicons, load_noun_lexicons, load_adj_lexicons,
   )
 
   gi = load_default()                          # verb inflection (Pratt lexicon)
   gi = load_noun_default()                     # noun inflection (Pratt lexicon)
   gi = load_adj_default()                      # adjective inflection (Pratt lexicon)
-  gi = load_lexicons("homer")                  # verb inflection — Homeric corpus
-  gi = load_lexicons(["homer", "lxx"])         # merge two corpora
-  gi = load_lexicons(["pratt", "/my.yaml"])    # Pratt + custom file
+  gi = load_verb_lexicons("homer")                  # verb inflection — Homeric corpus
+  gi = load_verb_lexicons(["homer", "lxx"])         # merge two corpora
+  gi = load_verb_lexicons(["pratt", "/my.yaml"])    # Pratt + custom file
   gi = load_noun_lexicons("homer")             # noun inflection — Homeric corpus
   gi = load_noun_lexicons(["homer"])           # merge noun lexicons
   gi = load_adj_lexicons("pratt")              # adjective inflection — Pratt lexicon
@@ -35,7 +35,7 @@ for the upstream documentation.
 
 - **Bundled corpus lexicons** — named lexicons for verbs and nouns:
 
-  **Verbs** (`load_lexicons`):
+  **Verbs** (`load_verb_lexicons`):
 
   | Name | Verbs | Source | Period / dialect |
   |------|------:|--------|-----------------|
@@ -133,7 +133,7 @@ for the upstream documentation.
   already-known classical paradigm (e.g. "3rd plural sometimes ends in -αν
   instead of -ασι"), not a self-contained stemming engine — there's no
   principal-parts information here, only citations for individual already-
-  inflected cells. Standalone (`load_lexicons("byzantine")`), the lexicon
+  inflected cells. Standalone (`load_verb_lexicons("byzantine")`), the lexicon
   therefore only covers its own 61 lemmas with 1-2 cells each. Merged with
   `lxx`/`morphgnt`/`lsj` as the base, it inherits their combined ~3000+
   lemma paradigm coverage and the `byzantine` override silently wins
@@ -144,7 +144,7 @@ for the upstream documentation.
   exactly where (and only where) it actually diverges.
 
   ```python
-  gi = load_lexicons(["lxx", "morphgnt", "pratt", "ltrg", "lsj", "byzantine"])
+  gi = load_verb_lexicons(["lxx", "morphgnt", "pratt", "ltrg", "lsj", "byzantine"])
   gi.generate("γιγνώσκω", "XAI.3P")   # {'ἔγνωκαν': [...]} (byzantine override)
   gi.generate("πάσχω", "AAI.3P")      # {'ἔπαθον': [...]}  (plain Koine, no override)
   ```
@@ -163,6 +163,29 @@ for the upstream documentation.
   incrementally per lesson. Pass an absolute file path in `lexicons=[...]`
   instead of a registered name to use them (same mechanism as any other
   custom YAML lexicon file, see "Absolute file paths" above).
+
+- **Unrecognized lexicon names now raise, and `load_lexicons` is renamed
+  (2026-07-31)** — an unrecognized bare (non-absolute-path) name passed to
+  `load_verb_lexicons`/`load_noun_lexicons`/`load_adj_lexicons`/`load_pron_lexicons`
+  now raises `ValueError` naming the bad lexicon, instead of the previous
+  split behavior: the noun/adj/pronoun loaders silently dropped an unknown
+  name with no signal anything went wrong, while the verb loader (worse)
+  fell through to opening it as a literal package-resource filename and
+  crashed with a confusing raw `FileNotFoundError`. Both were real
+  problems in practice, not theoretical — removing `"odyssey_morpheus"`
+  above is exactly the kind of change the silent-skip path was built to
+  hide. New `known_verb_lexicons()` / `known_noun_lexicons()` /
+  `known_adj_lexicons()` / `known_pron_lexicons()` return each POS's
+  registered name set, for a caller (e.g. `ancient_greek_backend_eee`,
+  which shares one general-purpose `lexicons=[...]` list across every
+  part of speech) to filter a shared list down to what's actually valid
+  for a given POS before calling its loader — a bare name irrelevant to
+  one POS is not a mistake in general, only when it's not registered
+  *anywhere*. Also: `load_lexicons()` (verbs) is renamed to
+  `load_verb_lexicons()`, matching `load_noun_lexicons`/`load_adj_lexicons`/
+  `load_pron_lexicons` — it predated that naming convention (added when
+  verbs were the library's only part of speech) and was never
+  retroactively renamed until now.
 
 - **Adjective morphology** — `adj_stemming.yaml` + `pratt_adjs_lexicon.yaml` covering
   2-1-2 uncontracted/contracted, two-termination, 3-1-3 participial and υ-stem,
@@ -221,7 +244,7 @@ pip install -e .
 ```python
 from greek_inflexion_eee import (
     load_default, load_noun_default, load_adj_default,
-    load_lexicons, load_noun_lexicons, load_adj_lexicons,
+    load_verb_lexicons, load_noun_lexicons, load_adj_lexicons,
 )
 
 # Verbs — Pratt lexicon (20 verbs, teaching vocabulary)
@@ -229,12 +252,12 @@ gi = load_default()
 gi.generate("λύω", "AAN")               # {'λῦσαι': [...]}
 
 # Verbs — corpus lexicon by name
-gi = load_lexicons("homer")
+gi = load_verb_lexicons("homer")
 gi.generate("λέγω", "PAD.2S")           # {'λέγε'}
 gi.generate("ἀκούω", "PAD.2S")          # {'ἄκουε'}
 
 # Verbs — merge corpora
-gi = load_lexicons(["homer", "lxx"])
+gi = load_verb_lexicons(["homer", "lxx"])
 gi.generate("παύω", "PAD.2P")           # {'παύετε'}
 
 # Nouns — Pratt paradigm words only
@@ -254,7 +277,7 @@ gi.generate("Ζεύς", "GSM")              # {'Διός': [...]} (suppletive, n
 gi.generate("θεός", "GSM")              # {'θεοῖο': [...]} (Epic genitive, not Attic -ου)
 
 # Verbs — Byzantine-period attested divergence (merge alongside a Koine lexicon)
-gi = load_lexicons(["morphgnt", "byzantine"])
+gi = load_verb_lexicons(["morphgnt", "byzantine"])
 gi.generate("γιγνώσκω", "XAI.3P")       # {'ἔγνωκαν': [...]} (not ἐγνώκᾱσι(ν))
 
 # Adjectives

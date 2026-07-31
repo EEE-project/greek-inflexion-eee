@@ -10,17 +10,17 @@ how that was confirmed) -- the merge test below also documents that: without
 -ασι(ν)/-ομεν/-ον-style endings, never the attested innovative ones.
 """
 import pytest
-from greek_inflexion_eee import load_lexicons
+from greek_inflexion_eee import load_verb_lexicons
 
 
 @pytest.fixture(scope="module")
 def gi():
-    return load_lexicons("byzantine")
+    return load_verb_lexicons("byzantine")
 
 
 @pytest.fixture(scope="module")
 def gi_ltrg_byzantine():
-    return load_lexicons(["ltrg", "byzantine"])
+    return load_verb_lexicons(["ltrg", "byzantine"])
 
 
 # --- name resolution ---------------------------------------------------------
@@ -33,12 +33,12 @@ def test_byzantine_name_resolves(gi):
 # --- classically-generated form for the same slot ----------------------------
 
 def test_byzantine_merge_with_morphgnt_overrides_classical_ending():
-    gi_base = load_lexicons("morphgnt")
+    gi_base = load_verb_lexicons("morphgnt")
     # morphgnt has γιγνώσκω only under the Koine spelling, and even then only
     # the classical -ασι(ν) ending -- documents the gap byzantine fills.
     assert "ἔγνωκαν" not in gi_base.generate("γινώσκω", "XAI.3P").keys()
 
-    gi_merged = load_lexicons(["morphgnt", "byzantine"])
+    gi_merged = load_verb_lexicons(["morphgnt", "byzantine"])
     assert "ἔγνωκαν" in gi_merged.generate("γιγνώσκω", "XAI.3P").keys()
 
 
@@ -216,7 +216,7 @@ def test_esthio_has_both_slots_from_separate_patterns():
     extended in the seventh (FMI.2S) -- a duplicate top-level YAML key for
     the same lemma would have YAML silently keep only the last one, dropping
     AAI.3P. Caught once during authoring; guarded here so it can't regress."""
-    from greek_inflexion_eee import load_lexicons
-    gi = load_lexicons("byzantine")
+    from greek_inflexion_eee import load_verb_lexicons
+    gi = load_verb_lexicons("byzantine")
     assert gi.form_override.get(("ἐσθίω", "AAI.3P")) == "ἐφάγοσαν"
     assert gi.form_override.get(("ἐσθίω", "FMI.2S")) == "φάγεσαι"

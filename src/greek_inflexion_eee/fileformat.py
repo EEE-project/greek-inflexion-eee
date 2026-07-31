@@ -51,6 +51,42 @@ _ADJ_LEXICONS: dict[str, str] = {
     "pratt": "pratt_adjs_lexicon.yaml",
 }
 
+# No named pronoun lexicons exist yet -- see load_pron_lexicons()'s own
+# docstring for why an empty registry here is a real, current fact, not a
+# placeholder.
+_PRON_LEXICONS: dict[str, str] = {}
+
+
+def _resolve_lexicon_name(n: str, lexicon_map: dict[str, str]) -> str:
+    """Resolve one lexicon name/absolute-path entry to a loadable filename.
+
+    Absolute paths pass through unchanged (custom/course-local lexicons).
+    A bare name must be a registered key in lexicon_map.
+
+    Raises:
+        ValueError: *n* is not an absolute path and not a key in
+            lexicon_map. This used to silently degrade coverage instead
+            (an unrecognized name was dropped with no signal) -- changed
+            2026-07-31 after that exact behavior masked a real breakage:
+            removing "odyssey_morpheus" from the registry left every
+            caller still passing that name silently losing the lexicon's
+            coverage, with no error anywhere to reveal it. A courtesy
+            fallback for verb-lexicon lookups was worse still: an
+            unrecognized name fell through to _load_lexicon_yaml() as a
+            literal package-resource filename and crashed with a raw,
+            confusing FileNotFoundError instead of a clear one.
+    """
+    if os.path.isabs(n):
+        return n
+    try:
+        return lexicon_map[n]
+    except KeyError:
+        raise ValueError(
+            f"Unknown lexicon: {n!r}. Expected an absolute file path or one "
+            f"of {sorted(lexicon_map)}."
+        ) from None
+
+
 _PARTNUM_TO_KEY_REGEX = {
     "1-": "P",
     "1-A": "PA",
@@ -272,11 +308,15 @@ def load_adj_default() -> "GreekInflexion":
     return _make_gi(["noun_stemming.yaml", "adj_stemming.yaml"], "pratt_adjs_lexicon.yaml")
 
 
-def load_lexicons(names: "str | list[str]") -> "GreekInflexion":
+def load_verb_lexicons(names: "str | list[str]") -> "GreekInflexion":
     """Return a GreekInflexion for verb inflection using one or more lexicons merged.
 
     Args:
         names: a lexicon name or list of names / absolute file paths.
+
+    Raises:
+        ValueError: a name is not an absolute path and not a registered
+            lexicon name (see the list below).
 
     Named lexicons (corpus / period)::
 
@@ -306,13 +346,13 @@ def load_lexicons(names: "str | list[str]") -> "GreekInflexion":
 
     Examples::
 
-        load_lexicons("homer")
-        load_lexicons(["homer", "lxx"])
-        load_lexicons(["pratt", "/path/to/my_course.yaml"])
+        load_verb_lexicons("homer")
+        load_verb_lexicons(["homer", "lxx"])
+        load_verb_lexicons(["pratt", "/path/to/my_course.yaml"])
     """
     if isinstance(names, str):
         names = [names]
-    filenames = [_VERB_LEXICONS.get(n, n) for n in names]
+    filenames = [_resolve_lexicon_name(n, _VERB_LEXICONS) for n in names]
     return _make_gi("stemming.yaml", filenames)
 
 
@@ -326,13 +366,9 @@ def _load_pos_lexicons(
         names = [names]
     filenames = [default_file]
     for n in names:
-        if os.path.isabs(n):
-            if n not in filenames:
-                filenames.append(n)
-        else:
-            fname = lexicon_map.get(n)
-            if fname and fname not in filenames:
-                filenames.append(fname)
+        fname = _resolve_lexicon_name(n, lexicon_map)
+        if fname not in filenames:
+            filenames.append(fname)
     return _make_gi(stemming_yaml, filenames)
 
 
@@ -343,7 +379,11 @@ def load_noun_lexicons(names: "str | list[str]") -> "GreekInflexion":
     are merged additively when available.
 
     Args:
-        names: a lexicon name or list of names. Unknown names are silently skipped.
+        names: a lexicon name or list of names.
+
+    Raises:
+        ValueError: a name is not an absolute path and not a registered
+            lexicon name (see the list below).
 
     Named lexicons::
 
@@ -375,7 +415,11 @@ def load_adj_lexicons(names: "str | list[str]") -> "GreekInflexion":
     are merged additively when available.
 
     Args:
-        names: a lexicon name or list of names. Unknown names are silently skipped.
+        names: a lexicon name or list of names.
+
+    Raises:
+        ValueError: a name is not an absolute path and not a registered
+            lexicon name (see the list below).
 
     Named lexicons::
 
@@ -403,18 +447,30 @@ def load_pron_lexicons(names: "str | list[str]") -> "GreekInflexion":
     """Return a GreekInflexion for pronoun inflection using one or more lexicons merged.
 
     Always includes the base pronoun lexicon (`pronoun_lexicon.yaml`). No
-    named variants exist yet -- any non-absolute-path name in `names`
-    currently resolves to nothing beyond the always-included default file
-    (mirrors `_load_pos_lexicons`'s "unknown names are silently skipped"
-    behavior already used for noun/adjective).
+    named variants exist yet, so the only accepted `names` entries are
+    absolute file paths (custom/course-local pronoun lexicons) -- any bare
+    name raises, same as verb/noun/adjective, since none would ever
+    resolve to anything (there is no registry to be a legitimate member
+    of yet).
+
+    A caller that shares ONE general-purpose lexicons=[...] list across
+    every part of speech (e.g. `AncientGreekBackend`, whose lexicons=[...]
+    is meaningful for verbs/nouns/adjectives but not pronouns) is
+    responsible for filtering that list down to the absolute paths (plus
+    whatever this POS actually recognizes) before calling here -- this
+    function itself no longer does that filtering silently.
 
     Args:
         names: a lexicon name or list of names / absolute file paths.
 
+    Raises:
+        ValueError: a name is not an absolute path (nothing else is
+            registered here yet).
+
     Examples::
 
-        load_pron_lexicons("pronoun")
-        load_pron_lexicons(["pronoun", "/path/to/my_pronouns.yaml"])
+        load_pron_lexicons([])
+        load_pron_lexicons("/path/to/my_course_pronouns.yaml")
     """
     # Pronouns have no stemming ruleset: every entry is forms:-only (no
     # stems:), so generate() always returns from the forms:-override
@@ -424,4 +480,31 @@ def load_pron_lexicons(names: "str | list[str]") -> "GreekInflexion":
     # lemmas alike). Passing [] instead of a real-but-irrelevant file
     # means a lemma that ever needs actual stemming fails loudly rather
     # than silently applying the wrong (noun) declension rules.
-    return _load_pos_lexicons([], {}, "pronoun_lexicon.yaml", names)
+    return _load_pos_lexicons([], _PRON_LEXICONS, "pronoun_lexicon.yaml", names)
+
+
+def known_verb_lexicons() -> "frozenset[str]":
+    """Return the set of registered verb-lexicon names (see load_verb_lexicons())."""
+    return frozenset(_VERB_LEXICONS)
+
+
+def known_noun_lexicons() -> "frozenset[str]":
+    """Return the set of registered noun-lexicon names (see load_noun_lexicons())."""
+    return frozenset(_NOUN_LEXICONS)
+
+
+def known_adj_lexicons() -> "frozenset[str]":
+    """Return the set of registered adjective-lexicon names (see load_adj_lexicons())."""
+    return frozenset(_ADJ_LEXICONS)
+
+
+def known_pron_lexicons() -> "frozenset[str]":
+    """Return the set of registered pronoun-lexicon names (see load_pron_lexicons()).
+
+    Always empty today -- no named pronoun lexicons exist yet. A caller
+    that shares one general-purpose lexicons=[...] list across every part
+    of speech (e.g. AncientGreekBackend) should still call this rather
+    than assume it's empty: it exists precisely so that fact lives in one
+    place, not duplicated/hardcoded in every consumer.
+    """
+    return frozenset(_PRON_LEXICONS)

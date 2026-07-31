@@ -5,7 +5,7 @@ import pytest
 import yaml
 
 from greek_accentuation.characters import strip_length
-from greek_inflexion_eee import load_default, load_lexicons
+from greek_inflexion_eee import load_default, load_verb_lexicons
 
 _TEST_DATA = Path(__file__).parent / "test_data" / "pratt_test.yaml"
 
@@ -52,7 +52,7 @@ def test_generate_never_returns_unsubstituted_template_marker():
     rules for plural persons but not singular. No legitimate Greek form
     ever contains "{"; generate() must never surface one. βαίνω lives in
     the homer lexicon, not the small pratt one load_default() loads."""
-    gi_homer = load_lexicons("homer")
+    gi_homer = load_verb_lexicons("homer")
     generated = gi_homer.generate("βαίνω", "YAI.1S")
     assert generated
     assert all("{" not in form for form in generated)
@@ -70,7 +70,7 @@ def test_generate_skips_a_form_the_syllabifier_cannot_accent():
     that one form rather than losing the whole cell -- the properly
     augmented "ἔτλην" and the alternate "ἐτάλασσα" stem for the same cell
     are both unaffected and must still come through."""
-    gi_homer = load_lexicons("homer")
+    gi_homer = load_verb_lexicons("homer")
     generated = gi_homer.generate("τλάω", "AAI.1S")
     assert generated
     got = {strip_length(w) for w in generated}

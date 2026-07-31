@@ -9,12 +9,12 @@ that exact attested spelling; it both documents the intended output and
 guards against a future re-generation accidentally changing it.
 """
 import pytest
-from greek_inflexion_eee import load_lexicons, load_noun_lexicons
+from greek_inflexion_eee import load_verb_lexicons, load_noun_lexicons
 
 
 @pytest.fixture(scope="module")
 def gi_verbs():
-    return load_lexicons("morpheus")
+    return load_verb_lexicons("morpheus")
 
 
 @pytest.fixture(scope="module")
@@ -35,7 +35,7 @@ def test_morpheus_nouns_name_resolves(gi_nouns):
 # --- additive merge with the corpus/teaching lexicons -------------------------
 
 def test_morpheus_verbs_merge_with_homer():
-    gi = load_lexicons(["homer", "morpheus"])
+    gi = load_verb_lexicons(["homer", "morpheus"])
     assert "αἱρέει" in gi.generate("αἱρέω", "PAI.3S").keys()   # from morpheus
     assert gi.generate("μένω", "PAI.1S").keys()                 # still from homer
 
@@ -62,8 +62,8 @@ def test_form_override_is_last_loaded_wins(tmp_path):
     a.write_text(yaml.dump({"φημί": {"forms": {"PAI.1S": "ΑΠΟ-Α"}}}, allow_unicode=True), encoding="utf-8")
     b.write_text(yaml.dump({"φημί": {"forms": {"PAI.1S": "ΑΠΟ-Β"}}}, allow_unicode=True), encoding="utf-8")
 
-    gi_ab = load_lexicons([str(a), str(b)])
-    gi_ba = load_lexicons([str(b), str(a)])
+    gi_ab = load_verb_lexicons([str(a), str(b)])
+    gi_ba = load_verb_lexicons([str(b), str(a)])
     assert gi_ab.generate("φημί", "PAI.1S").keys() == {"ΑΠΟ-Β"}
     assert gi_ba.generate("φημί", "PAI.1S").keys() == {"ΑΠΟ-Α"}
 
