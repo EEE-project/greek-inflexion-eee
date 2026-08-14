@@ -87,6 +87,15 @@
 #     so a lone byzantine form would be an isolated island rather than an
 #     exceptions-layer entry merging with a real base paradigm — doesn't fit
 #     this lexicon's "merge with a Koine/Attic base" design (see README).
+#   - Gap closed 2026-08-14: ἔρχομαι's own -οσαν aorist (ἤλθοσαν, Ex. 15,27 /
+#     Ps. 78,1) was in Sophocles' source list from the start but wasn't
+#     added during the original mining pass above -- a real miss, not a
+#     deliberate exclusion (unlike the compound-only/zero-coverage
+#     exclusions already documented here). Confirmed not already
+#     producible via the classical dual-stem 2nd-aorist generation (see
+#     test_byzantine_erchomai_osan_not_reachable_without_override). The
+#     compound ἐξήλθοσαν (Gen. 8,19/12,5) remains excluded, same
+#     compound-exclusion policy as αἱρέω/βάλλω/λείπω above.
 #
 # --- Third pattern, added 2026-07-11: contract-verb imperfect 3rd plural
 # in -αοσαν→-ῶσαν / -εοσαν,-οοσαν→-ουσαν --- the contract-verb-specific
@@ -400,6 +409,7 @@
 
 ἔρχομαι:
   forms:
+    AAI.3P: ἤλθοσαν
     AAO.3P: ἔλθοισαν
 
 ὄλλυμι:

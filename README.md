@@ -149,6 +149,12 @@ for the upstream documentation.
   gi.generate("πάσχω", "AAI.3P")      # {'ἔπαθον': [...]}  (plain Koine, no override)
   ```
 
+- **Byzantine lexicon: ἔρχομαι -οσαν gap closed (2026-08-14)** — the
+  -οσαν pattern's own entry for `ἔρχομαι` (`ἤλθοσαν`, AAI.3P) was in
+  Sophocles' source list from the start of that pattern's mining pass but
+  was missed; added now. Still 61 lemmas (no new lemma key — `ἔρχομαι`
+  already had an `AAO.3P` entry from a different pattern).
+
 - **Course-specific lexicons moved out (2026-07-31)** — `"odyssey_morpheus"`
   and `"palaestra_morpheus"` (`forms:`-only lexicons covering gaps in the
   created_with_eee Odyssey and Palaestra course vocabularies, verified

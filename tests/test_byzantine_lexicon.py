@@ -57,6 +57,21 @@ def test_byzantine_merge_does_not_disturb_lexicon_own_other_slots(gi_ltrg_byzant
     assert gi_ltrg_byzantine.generate("ἄγω", "PAI.1S").keys()  # still ltrg's own
 
 
+def test_byzantine_erchomai_osan_not_reachable_without_override():
+    """False-gap guard for ἔρχομαι's -οσαν aorist (AAI.3P): confirm
+    ἤλθοσαν is not already produced by the classical dual-stem
+    2nd-aorist generation (e.g. morphgnt's stems: {3+: ἠλθ/ἠλθ{2nd}}
+    for ἔρχομαι, which regularly produces ἦλθον for AAI.3P) before
+    trusting it as a genuine byzantine override -- same discipline
+    already applied to ὁράω/εὑρίσκω/πίνω when this pattern was first
+    mined (see the lexicon file's own header)."""
+    gi_base = load_verb_lexicons("morphgnt")
+    assert "ἤλθοσαν" not in gi_base.generate("ἔρχομαι", "AAI.3P").keys()
+
+    gi_merged = load_verb_lexicons(["morphgnt", "byzantine"])
+    assert "ἤλθοσαν" in gi_merged.generate("ἔρχομαι", "AAI.3P").keys()
+
+
 # --- correctness gate: exact attested forms -----------------------------------
 # --- (see the lexicon file's own header for the verification discipline) -----
 
@@ -99,6 +114,9 @@ BYZANTINE_VERB_FORMS = [
     # both checked as separate rows, same (lemma, code) pair.
     ("ὁράω", "AAI.3P", "ἴδοσαν"),
     ("ὁράω", "AAI.3P", "εἴδοσαν"),
+    # Gap closed 2026-08-14: ἔρχομαι's own -οσαν aorist (Ex. 15,27 / Ps. 78,1),
+    # in Sophocles' source list from the start but missed in the original pass.
+    ("ἔρχομαι", "AAI.3P", "ἤλθοσαν"),
     ("πίνω", "AAI.3P", "ἐπίοσαν"),
     ("φαίνω", "IAI.3P", "ἐφαίνοσαν"),
     ("φέρω", "IAI.3P", "ἐφέροσαν"),
