@@ -23,6 +23,16 @@ def gi_ltrg_byzantine():
     return load_verb_lexicons(["ltrg", "byzantine"])
 
 
+@pytest.fixture(scope="module")
+def gi_morphgnt():
+    return load_verb_lexicons("morphgnt")
+
+
+@pytest.fixture(scope="module")
+def gi_morphgnt_byzantine():
+    return load_verb_lexicons(["morphgnt", "byzantine"])
+
+
 # --- name resolution ---------------------------------------------------------
 
 def test_byzantine_name_resolves(gi):
@@ -32,14 +42,11 @@ def test_byzantine_name_resolves(gi):
 # --- additive merge: byzantine's override wins over the base lexicon's own ---
 # --- classically-generated form for the same slot ----------------------------
 
-def test_byzantine_merge_with_morphgnt_overrides_classical_ending():
-    gi_base = load_verb_lexicons("morphgnt")
+def test_byzantine_merge_with_morphgnt_overrides_classical_ending(gi_morphgnt, gi_morphgnt_byzantine):
     # morphgnt has γιγνώσκω only under the Koine spelling, and even then only
     # the classical -ασι(ν) ending -- documents the gap byzantine fills.
-    assert "ἔγνωκαν" not in gi_base.generate("γινώσκω", "XAI.3P").keys()
-
-    gi_merged = load_verb_lexicons(["morphgnt", "byzantine"])
-    assert "ἔγνωκαν" in gi_merged.generate("γιγνώσκω", "XAI.3P").keys()
+    assert "ἔγνωκαν" not in gi_morphgnt.generate("γινώσκω", "XAI.3P").keys()
+    assert "ἔγνωκαν" in gi_morphgnt_byzantine.generate("γιγνώσκω", "XAI.3P").keys()
 
 
 def test_byzantine_merge_with_ltrg(gi_ltrg_byzantine):
@@ -57,7 +64,7 @@ def test_byzantine_merge_does_not_disturb_lexicon_own_other_slots(gi_ltrg_byzant
     assert gi_ltrg_byzantine.generate("ἄγω", "PAI.1S").keys()  # still ltrg's own
 
 
-def test_byzantine_erchomai_osan_not_reachable_without_override():
+def test_byzantine_erchomai_osan_not_reachable_without_override(gi_morphgnt, gi_morphgnt_byzantine):
     """False-gap guard for ἔρχομαι's -οσαν aorist (AAI.3P): confirm
     ἤλθοσαν is not already produced by the classical dual-stem
     2nd-aorist generation (e.g. morphgnt's stems: {3+: ἠλθ/ἠλθ{2nd}}
@@ -65,11 +72,8 @@ def test_byzantine_erchomai_osan_not_reachable_without_override():
     trusting it as a genuine byzantine override -- same discipline
     already applied to ὁράω/εὑρίσκω/πίνω when this pattern was first
     mined (see the lexicon file's own header)."""
-    gi_base = load_verb_lexicons("morphgnt")
-    assert "ἤλθοσαν" not in gi_base.generate("ἔρχομαι", "AAI.3P").keys()
-
-    gi_merged = load_verb_lexicons(["morphgnt", "byzantine"])
-    assert "ἤλθοσαν" in gi_merged.generate("ἔρχομαι", "AAI.3P").keys()
+    assert "ἤλθοσαν" not in gi_morphgnt.generate("ἔρχομαι", "AAI.3P").keys()
+    assert "ἤλθοσαν" in gi_morphgnt_byzantine.generate("ἔρχομαι", "AAI.3P").keys()
 
 
 # --- correctness gate: exact attested forms -----------------------------------
