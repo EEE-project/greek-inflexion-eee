@@ -33,6 +33,12 @@ class GreekInflexion:
         return self.lexicon.find_stems(
             lemma, key, tags, stem_post_processor=rebreath)
 
+    def known_lemmas(self):
+        """Lemmas with stems or form overrides, skipping find_stems()'s empty phantom entries."""
+        lemmas = {lemma for lemma, stems in self.lexicon.lemma_to_stems.items() if stems}
+        lemmas.update(lemma for lemma, _key in self.form_override)
+        return lemmas
+
     def generate(self, lemma, key, tags=None):
         overrides = self.form_override.get((lemma, key))
         if overrides:

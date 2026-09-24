@@ -149,6 +149,13 @@ for the upstream documentation.
   gi.generate("πάσχω", "AAI.3P")      # {'ἔπαθον': [...]}  (plain Koine, no override)
   ```
 
+- **`GreekInflexion.known_lemmas()` (2026-09-24)** — the set of lemmas an
+  instance's lexicon actually defines, through `stems:` or `forms:`. Use it
+  instead of `gi.lexicon.lemma_to_stems.keys()`: upstream
+  `Lexicon.find_stems()` reads that `defaultdict` with `[]`, so every
+  `generate()` call for a lemma the lexicon lacks leaves an empty entry
+  behind for it.
+
 - **Byzantine lexicon: ἔρχομαι -οσαν gap closed (2026-08-14)** — the
   -οσαν pattern's own entry for `ἔρχομαι` (`ἤλθοσαν`, AAI.3P) was in
   Sophocles' source list from the start of that pattern's mining pass but

@@ -75,3 +75,23 @@ def test_absolute_path_custom_lexicon_loaded(tmp_path):
     gi = load_noun_lexicons(["pratt", str(custom_yaml)])
     forms = gi.generate("ἀγρός", "NSM")
     assert "ἀγρός" in forms
+
+
+def test_known_lemmas_covers_homer_nouns(gi):
+    assert set(HOMER_NOUNS) <= gi.known_lemmas()
+
+
+def test_known_lemmas_ignores_lemma_only_queried():
+    gi = load_noun_lexicons("homer")
+    before = gi.known_lemmas()
+    assert "φάντασμα" not in before
+    gi.generate("φάντασμα", "NSN")
+    assert "φάντασμα" in gi.lexicon.lemma_to_stems  # upstream's phantom entry
+    assert gi.known_lemmas() == before
+
+
+def test_known_lemmas_includes_forms_only_lemma(tmp_path):
+    custom_yaml = tmp_path / "forms_only.yaml"
+    custom_yaml.write_text("ψευδολῆμμα:\n    forms:\n        NSN: ψευδολῆμμα\n", encoding="utf-8")
+    gi = load_noun_lexicons(["pratt", str(custom_yaml)])
+    assert "ψευδολῆμμα" in gi.known_lemmas()
