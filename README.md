@@ -300,6 +300,15 @@ gi.generate("ἀγαθός", "NSF")            # {'ἀγαθή': [...]}
 gi.generate("ἀγαθός", "NSN")            # {'ἀγαθόν': [...]}
 ```
 
+The lexicon and stemming YAML files are read with PyYAML's libyaml loader where
+PyYAML has one (it builds the same data as `yaml.safe_load`, about 7 times
+faster); otherwise with the pure-Python safe loader.
+
+A form is the same in every process. The accent of an active participle cell
+(`AAP`, `PAP`) follows the stem that makes the form, so a lemma with two stems
+(for example `λέγω`: `εἴπαντας` and `εἰπόντας`) gives the same forms whatever
+`PYTHONHASHSEED` is.
+
 
 ## Origin
 

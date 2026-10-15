@@ -32,6 +32,12 @@ def _find_accent_override(lemma, parse, accent_override):
     return None
 
 
+def _nsm_forms(inflexion, lemma, key, stem):
+    """The nominative singular masculine forms that *stem* makes (the order of the engine's output depends on the hash seed when a lemma has several stems)."""
+    generated = inflexion.generate(lemma, key)
+    return [form for form, details in generated.items() if any(d["stem"] == stem for d in details)] or sorted(generated)
+
+
 def calculate_accent(w, parse, lemma, segmented_lemma, stem, inflexion,
                      accent_override):
     if accent(w):
@@ -76,7 +82,7 @@ def calculate_accent(w, parse, lemma, segmented_lemma, stem, inflexion,
                     calculate_accent(
                         w, "AAP.NSM", lemma, segmented_lemma, stem, inflexion,
                         accent_override
-                    ) for w in inflexion.generate(lemma, "AAP.NSM")
+                    ) for w in _nsm_forms(inflexion, lemma, "AAP.NSM", stem)
                 ]
                 for nsm, _ in nsms:
                     if nsm.endswith(("ών", "ούς")):
@@ -109,7 +115,7 @@ def calculate_accent(w, parse, lemma, segmented_lemma, stem, inflexion,
                     calculate_accent(
                         w, "PAP.NSM", lemma, segmented_lemma, stem, inflexion,
                         accent_override
-                    ) for w in inflexion.generate(lemma, "PAP.NSM")
+                    ) for w in _nsm_forms(inflexion, lemma, "PAP.NSM", stem)
                 ]
 
                 for nsm, _ in nsms:
