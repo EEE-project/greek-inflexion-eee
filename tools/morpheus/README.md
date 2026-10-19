@@ -58,7 +58,7 @@ sharing that dictionary headword).
   same lemma).
 
 - **`cache/`** — every raw JSON response fetched while building/auditing
-  the current lexicons (~1,600 files, ~6 MB). Committed so the whole pipeline
+  the current lexicons and the dual forms (~1,700 files, ~7 MB). Committed so the whole pipeline
   is reproducible without hitting the live service again; safe to delete
   and let `query_morpheus.py` regenerate on demand.
 

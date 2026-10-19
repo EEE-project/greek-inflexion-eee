@@ -1,0 +1,333 @@
+# Dual forms of nouns and adjectives (written by tools/pages_renewal/noun_checks/make_dual_test_data.py from the engine's output, 2026-10-14).
+# Every form was checked against Perseids Morpheus, or against the Wiktionary table where the `source` says so, before it was written here.
+# `null` means: the cell must stay empty. Several accepted forms are joined with /.
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # 2nd declension; A and V equal N, D equals G
+    lemma: λόγος
+
+    NDM: λόγω
+    GDM: λόγοιν
+    ADM: λόγω
+    VDM: λόγω
+    DDM: λόγοιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # oxytone: the nominative dual keeps the acute, the genitive-dative takes the circumflex
+    lemma: θεός
+
+    NDM: θεώ
+    GDM: θεοῖν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # 2nd declension feminine
+    lemma: νόσος
+
+    NDF: νόσω
+    GDF: νόσοιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # 2nd declension neuter
+    lemma: δεῖπνον
+
+    NDN: δείπνω
+    GDN: δείπνοιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # 1st declension in -η, oxytone
+    lemma: ψυχή
+
+    NDF: ψυχά
+    GDF: ψυχαῖν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # 1st declension in -η, oxytone
+    lemma: σπονδή
+
+    NDF: σπονδά
+    GDF: σπονδαῖν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # 1st declension in -ια, the stem carries the accent
+    lemma: σοφία
+
+    NDF: σοφία
+    GDF: σοφίαιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # 1st declension in short -α
+    lemma: τόλμα
+
+    NDF: τόλμα
+    GDF: τόλμαιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # 1st declension masculine in -ης, oxytone
+    lemma: ὑβριστής
+
+    NDM: ὑβριστά
+    GDM: ὑβρισταῖν
+
+-
+    source: Perseids Morpheus (under its Ionic lemma), checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # 1st declension masculine in -ας
+    lemma: νεανίας
+
+    NDM: νεανία
+    GDM: νεανίαιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # 3rd declension, ρ-stem
+    lemma: μάρτυς
+
+    NDM: μάρτυρε
+    GDM: μαρτύροιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # ρ-stem with its own accent pattern (stem override for the nominative dual)
+    lemma: ἀνήρ
+
+    NDM: ἄνδρε
+    GDM: ἀνδροῖν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # κτ-stem, monosyllable: the genitive-dual ending carries the accent
+    lemma: νύξ
+
+    NDF: νύκτε
+    GDF: νυκτοῖν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # 3rd declension neuter, -ματ- stem
+    lemma: σῶμα
+
+    NDN: σώματε
+    GDN: σωμάτοιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # 3rd declension neuter, -ατ- stem
+    lemma: ὕδωρ
+
+    NDN: ὕδατε
+    GDN: ὑδάτοιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # σ-stem
+    lemma: τριήρης
+
+    NDF: τριήρει
+    GDF: τριήροιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # σ-stem neuter: the contracted genitive-dual ending carries the circumflex
+    lemma: ἔτος
+
+    NDN: ἔτει
+    GDN: ἐτοῖν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # ι-stem
+    lemma: πόλις
+
+    NDF: πόλει
+    GDF: πολέοιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # υ-stem
+    lemma: πρέσβυς
+
+    NDM: πρέσβει
+    GDM: πρεσβέοιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # υ-stem neuter
+    lemma: ἄστυ
+
+    NDN: ἄστει
+    GDN: ἀστέοιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # stem in -ευ, oxytone: the contracted nominative dual keeps its circumflex
+    lemma: βασιλεύς
+
+    NDM: βασιλῆ
+    GDM: βασιλέοιν
+
+-
+    source: Wiktionary inflection table, checked 2026-10-14 (Morpheus has no dual reading of the form)
+    kind: noun
+    lexicon: default
+    # υ-stem in -υ (not -ευ, -αυ)
+    lemma: ἰχθύς
+
+    NDM: ἰχθύε
+    GDM: ἰχθύοιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: default
+    # stem in -αυ
+    lemma: ναῦς
+
+    NDF: νῆε
+    GDF: νεοῖν
+
+-
+    source: singular only; no dual exists
+    kind: noun
+    lexicon: default
+    # a stem in -ευ is not an ιχθυς-type υ-stem: no dual is generated
+    lemma: Ζεύς
+
+    NDM: null
+    NDF: null
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: noun
+    lexicon: homer
+    # long -α marked in the rule: the circumflex of the nominative singular cannot stay on a penult before a long ending
+    lemma: αἶσα
+
+    NDF: αἴσα
+    GDF: αἴσαιν
+
+-
+    source: attested form kept as a form override
+    kind: noun
+    lexicon: morpheus
+    # an override wins over the rules
+    lemma: κῆρυξ
+
+    NDM: κήρυκε
+
+-
+    source: attested form kept as a form override
+    kind: noun
+    lexicon: morpheus
+    # an override wins over the rules
+    lemma: πούς
+
+    GDM: ποδοῖιν
+    DDM: ποδοῖιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: adj
+    lexicon: default
+    # 2-1-2 adjective: the noun rules apply
+    lemma: ἀγαθός
+
+    NDM: ἀγαθώ
+    NDF: ἀγαθά
+    NDN: ἀγαθώ
+    GDM: ἀγαθοῖν
+    GDF: ἀγαθαῖν
+    GDN: ἀγαθοῖν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: adj
+    lexicon: default
+    # long -α marked in the rule: the accent moves to the penult, no override needed
+    lemma: δίκαιος
+
+    NDF: δικαία
+    GDF: δικαίαιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: adj
+    lexicon: default
+    # σ-stem adjective: contracted -ει keeps its circumflex
+    lemma: ἀληθής
+
+    NDM: ἀληθεῖ
+    GDM: ἀληθοῖν
+    NDF: ἀληθεῖ
+    GDF: ἀληθοῖν
+    NDN: ἀληθεῖ
+    GDN: ἀληθοῖν
+
+-
+    source: Wiktionary inflection table, checked 2026-10-14 (Morpheus has no dual reading of the form)
+    kind: adj
+    lexicon: default
+    # υ-stem adjective: curated forms
+    lemma: ταχύς
+
+    NDM: ταχεῖ
+    GDM: ταχέοιν
+
+-
+    source: Perseids Morpheus, checked 2026-10-14
+    kind: adj
+    lexicon: default
+    # 2-1-2 adjective
+    lemma: αὐτός
+
+    NDM: αὐτώ
+    NDF: αὐτά

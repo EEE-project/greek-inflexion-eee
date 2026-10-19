@@ -208,3 +208,69 @@ APN:
 
 VSM:
     - "|ο>ε<|"  # 2aM (θεός → θεέ)
+
+# Dual. N, A and V share one form (ADx and VDx refer to NDx), G and D share one (DDx refers to GDx).
+# Endings: 2nd declension -ω / -οιν; 1st declension -α / -αιν (also for stems in -η); 3rd declension -ε (contracted -ει) / -οιν (-εοιν).
+# Accents come from the lemma like the singular rules' do; an explicit accent only where a contraction decides it.
+NDM:
+    - "|η>ᾱ<|"       # 1d
+    - "ί|α>ᾱ<|"      # 1e
+    - "|ο>ω<|"       # 2aM
+    - "ρ|><|ε"       # 3aM
+    - "|{u}>ει<|"    # 3eM
+    - "|ε{u2}>ῆ<|"   # 3g
+    - "[^αε]υ|><|ε"  # 3h
+ADM:
+    ref: NDM
+VDM:
+    ref: NDM
+GDM:
+    - "|η>αιν<|"       # 1d
+    - "ία|><|ιν"       # 1e
+    - "|ο>οιν<|"       # 2aM
+    - "ρ|><|οιν"       # 3aM
+    - "|{u}>εοιν<|"    # 3eM
+    - "|ε{u2}>εοιν<|"  # 3g
+    - "[^αε]υ|><|οιν"  # 3h
+DDM:
+    ref: GDM
+
+NDF:
+    - "|η>ᾱ<|"     # 1a
+    - "|α>ᾱ<|"     # 1b, 1c
+    - "|ο>ω<|"     # 2aF
+    - "κτ|><|ε"    # 3aF
+    - "|εσ>ει<|"   # 3cF
+    - "|{i}>ει<|"  # 3eF
+    - "|αυ>ῆ<|ε"   # ναῦς
+ADF:
+    ref: NDF
+VDF:
+    ref: NDF
+GDF:
+    - "|η>αιν<|"     # 1a
+    - "α|><|ιν"      # 1b, 1c
+    - "|ο>οιν<|"     # 2aF
+    - "κτ|><|οῖν"    # 3aF
+    - "|εσ>οιν<|"    # 3cF
+    - "|{i}>εοιν<|"  # 3eF
+    - "|αυ>εοῖν<|"   # ναῦς
+DDF:
+    ref: GDF
+
+NDN:
+    - "|ο>ω<|"       # 2b
+    - "[^οσ}]|><|ε"  # 3b
+    - "|εσ>ει<|"     # 3dN
+    - "|{u}>ει<|"    # 3f
+ADN:
+    ref: NDN
+VDN:
+    ref: NDN
+GDN:
+    - "|ο>οιν<|"       # 2b
+    - "[^οσ}]|><|οιν"  # 3b
+    - "|εσ>οῖν<|"      # 3dN
+    - "|{u}>εοιν<|"    # 3f
+DDN:
+    ref: GDN

@@ -63,6 +63,7 @@
     stem_overrides:
         - ["NPM", "ἄνδρ"]  # just for accent
         - ["A[SP]M", "ἄνδρ"]  # just for accent
+        - ["[NAV]DM", "ἄνδρ"]  # dual, just for accent
     forms:
         GPM: ἀνδρῶν  # just for accent @@@
 

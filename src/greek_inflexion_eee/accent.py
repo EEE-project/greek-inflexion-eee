@@ -7,17 +7,23 @@ from greek_accentuation.accentuation import (
     syllable_length, add_accent, LONG, PERISPOMENON)
 
 _ACUTE = '́'
+_NAV_DUAL = {f"{case}D{gender}" for case in "NAV" for gender in "MFN"}   # the nominative, accusative and vocative dual cells
 
 
 def clean(w):
     return strip_length(rebreath(w).replace("|", "").replace("-", ""))
 
 
-def _fix_nominal_oxytone(w_bare, accented, lemma_ultima):
+def _fix_nominal_oxytone(w_bare, accented, lemma_ultima, parse):
     # Greek rule: acute on long ultima → circumflex, but only when the
     # ultima changed through inflection (contracted/inflected long, not native).
+    # In the dual only the genitive-dative takes it: an oxytone's nominative-
+    # accusative-vocative dual (an omega ending) keeps the acute, except the
+    # contracted -ει.
     s_acc = syllabify(accented)
     ul_acc = strip_accents(s_acc[-1])
+    if parse in _NAV_DUAL and not ul_acc.endswith("ει"):
+        return accented
     if accent(s_acc[-1]) != _ACUTE or syllable_length(s_acc[-1]) != LONG:
         return accented
     if ul_acc == lemma_ultima:  # native long ultima (e.g. βασιλεύς NSM) keeps acute
@@ -50,12 +56,12 @@ def calculate_accent(w, parse, lemma, segmented_lemma, stem, inflexion,
         lemma_ultima = strip_accents(syllabify(accent_ref)[-1])
         if base_accent:
             return (
-                clean(_fix_nominal_oxytone(w, persistent(w, base_accent), lemma_ultima)),
+                clean(_fix_nominal_oxytone(w, persistent(w, base_accent), lemma_ultima, parse)),
                 "nominal: persistent from override {}".format(base_accent)
             )
         else:
             return (
-                clean(_fix_nominal_oxytone(w, persistent(w, lemma), lemma_ultima)),
+                clean(_fix_nominal_oxytone(w, persistent(w, lemma), lemma_ultima, parse)),
                 "nominal: persistent from lemma"
             )
     else:
@@ -155,7 +161,7 @@ def calculate_accent(w, parse, lemma, segmented_lemma, stem, inflexion,
             if base_accent:
                 lemma_ultima = strip_accents(syllabify(base_accent)[-1])
                 return (
-                    clean(_fix_nominal_oxytone(w, persistent(w, base_accent), lemma_ultima)),
+                    clean(_fix_nominal_oxytone(w, persistent(w, base_accent), lemma_ultima, parse)),
                     f"nominal: persistent from override {base_accent}"
                 )
             return (

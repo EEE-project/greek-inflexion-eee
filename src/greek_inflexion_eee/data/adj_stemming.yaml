@@ -14,3 +14,15 @@ DPM:
     - "ε|σ>σ<σ|ι(ν)"    # 3c sigma-stem adjective M
 APM:
     - "|εσ>ει<@|ς"    # 3c sigma-stem adjective M
+
+# Dual of the sigma-stem adjectives, masculine (the feminine and neuter dual come from noun_stemming.yaml): N, A and V share one form, G and D share one.
+NDM:
+    - "[^ε]|εσ>ει<|"    # 3c sigma-stem adjective M
+ADM:
+    ref: NDM
+VDM:
+    ref: NDM
+GDM:
+    - "[^ε]|εσ>οιν<|"   # 3c sigma-stem adjective M
+DDM:
+    ref: GDM

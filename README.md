@@ -233,6 +233,21 @@ for the upstream documentation.
   previously it leaked into acute-accented forms as a stray combining mark
   (`λύω` → `λῡ́ω`).
 
+- **Dual of nouns and adjectives** — `noun_stemming.yaml` has dual rules for the 1st, 2nd and 3rd declension: keys `NDM`/`NDF`/`NDN` and
+  `GDM`/`GDF`/`GDN`; the accusative and vocative dual (`ADx`, `VDx`) refer to the nominative, the dative dual (`DDx`) to the genitive.
+  Endings: 2nd declension -ω / -οιν; 1st declension -α / -αιν (also for stems in -η); 3rd declension -ε (contracted -ει) / -οιν. A `noun:` stem in any
+  lexicon file, a course YAML too, now reaches the dual keys; before, it reached only singular and plural. The adjectives share the rules, so
+  their dual cells exist as well. Three details matter. The long -α of the 1st-declension dual is written with a macron in the rule
+  output, so the accent engine moves αἶσα's circumflex to an acute (αἴσα) and δίκαιος's feminine accent to the penult
+  (δικαία), with no override. In `accent.py`, the nominative, accusative and vocative dual of an oxytone keeps its acute (θεώ),
+  while the genitive-dual takes the circumflex (θεοῖν); the contracted -ει keeps its circumflex (ἀληθεῖ). The 3rd-declension
+  -υ rule leaves out stems in -ευ and -αυ, so Ζεύς, which has no dual, gets none. Small data entries cover ἀνήρ (an accent
+  override for the nominative dual) and ταχύς (two curated forms). Not covered: the -ας neuters such as γῆρας, the proper names in
+  -κλῆς such as Περικλῆς, and the ντ-stems. Perseids Morpheus confirmed every dual form generated for a lemma's own gender in the bundled lexicons and in the course noun and
+  adjective files (the Wiktionary tables confirmed three more); the answers are in `tools/morpheus/cache/`, and
+  `tests/test_data/noun_dual_test.yaml` holds the frozen forms. The dual forms come out of `generate()` and of the backend's `paradigm()`;
+  `analyze()` and the paradigm tables do not show them, because the tag tables have no dual rows.
+
 
 ## Installation
 
@@ -298,6 +313,13 @@ gi = load_adj_default()
 gi.generate("ἀγαθός", "NSM")            # {'ἀγαθός': [...]}
 gi.generate("ἀγαθός", "NSF")            # {'ἀγαθή': [...]}
 gi.generate("ἀγαθός", "NSN")            # {'ἀγαθόν': [...]}
+
+# Dual of nouns and adjectives (the accusative and vocative equal the nominative, the dative equals the genitive)
+gi = load_noun_default()
+gi.generate("θεός", "NDM")              # {'θεώ': [...]}
+gi.generate("θεός", "GDM")              # {'θεοῖν': [...]}
+gi = load_adj_default()
+gi.generate("ἀγαθός", "NDF")            # {'ἀγαθά': [...]}
 ```
 
 The lexicon and stemming YAML files are read with PyYAML's libyaml loader where

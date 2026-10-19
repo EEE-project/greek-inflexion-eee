@@ -117,7 +117,7 @@ _PARTNUM_TO_KEY_REGEX = {
     "M": "..M",
     "F": "..F",
     "N": "..N",
-    "noun": "[NGDAV][SP][MFN]",
+    "noun": "[NGDAV][SPD][MFN]",
 }
 
 
