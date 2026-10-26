@@ -3,13 +3,12 @@
 The expected forms are in tests/test_data/noun_dual_test.yaml. Each one was checked against Perseids Morpheus, or against the Wiktionary
 inflection table where the entry's `source` says so. The rule file itself is checked too: A and V refer to N, D refers to G.
 """
-import unicodedata
 from pathlib import Path
 
 import pytest
 import yaml
 
-from greek_accentuation.characters import strip_length
+from greek_accentuation.characters import strip_accents, strip_length
 from greek_inflexion_eee import load_adj_default, load_noun_default, load_noun_lexicons
 from greek_inflexion_eee.accent import _NAV_DUAL
 from greek_inflexion_eee.fileformat import _load_lexicon_yaml
@@ -67,7 +66,7 @@ def test_accent_dual_keys_match_the_rule_file():
 def test_custom_lexicon_noun_stem_gets_dual_forms(tmp_path):
     """A `noun:` stem in a lexicon file of the user (a course YAML) reaches the dual keys, not only singular and plural."""
     entry = next(e for e in _ENTRIES if e["kind"] == "noun" and e["lexicon"] == "default" and "ADM" in e)
-    unaccented = "".join(c for c in unicodedata.normalize("NFD", entry["lemma"]) if unicodedata.category(c) != "Mn")
+    unaccented = strip_accents(entry["lemma"])
     fake, stem = "β" + entry["lemma"][1:], "β" + unaccented[1:-1]   # a made-up lemma, so Pratt's own entry plays no part
     path = tmp_path / "course.yaml"
     path.write_text(yaml.safe_dump({fake: {"stems": {"noun": stem}}}, allow_unicode=True), encoding="utf-8")
